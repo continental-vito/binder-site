@@ -23,9 +23,12 @@ const CANDIDATES = [process.env.CHROME, '/Applications/Google Chrome.app/Content
 const chromePath = CANDIDATES.find((p) => existsSync(p));
 if (!chromePath) { console.error('smoke: no Chrome found — set CHROME=/path/to/chrome'); process.exit(1); }
 
-// Steps on the landing page and the screen each must put the phone on.
-// Kept here, not imported from the page, so a change to either side is caught.
-const STEP_PAGES = ['preferences', 'discover', 'match', 'booking', 'confirmed'];
+// Each walkthrough section and the screen each of its steps must put the phone
+// on. Kept here, not imported from the page, so a change to either is caught.
+const WALKTHROUGHS = [
+  { id: 'founders', frame: 'founderFrame', role: 'founder', pages: ['financials', 'discover', 'match', 'conversation', 'booking'] },
+  { id: 'investors', frame: 'investorFrame', role: 'vc', pages: ['financials', 'preferences', 'discover', 'match', 'booking'] },
+];
 const DEMO_PAGES = ['discover', 'match', 'conversation', 'connection', 'meeting-detail', 'booking', 'confirmed',
   'profile', 'edit', 'preferences', 'financials', 'visibility', 'calendar'];
 
@@ -128,21 +131,26 @@ try {
       const after = await evaluate(`document.getElementById('heroFrame').contentDocument.getElementById('binder-color').dataset.page`);
       if (after !== 'match') failures.push(`landing hero: Connect in the live demo led to "${after}", expected "match"`);
     }
-    // The steps' phone is lazy-loaded; bring it on screen as a visitor would.
-    await evaluate(`document.documentElement.style.scrollBehavior='auto'; document.getElementById('how').scrollIntoView(); 1`);
-    for (let i = 0; i < 40; i++) {
-      await sleep(150);
-      if (await evaluate(`!!(document.getElementById('howFrame').contentWindow.binderGo && document.getElementById('howFrame').contentDocument.querySelector('#binder-color main').children.length)`)) break;
-    }
-    for (const role of ['founder', 'vc']) {
-      await evaluate(`document.querySelector('.toggle button[data-role=${role}]').click()`);
-      for (let i = 0; i < STEP_PAGES.length; i++) {
-        await evaluate(`document.querySelectorAll('#dots button')[${i}].click()`);
-        await sleep(900);
-        const got = await evaluate(`(() => { const d = document.getElementById('howFrame').contentDocument.getElementById('binder-color'); return d && (d.dataset.role + '/' + d.dataset.page); })()`);
-        if (got !== `${role}/${STEP_PAGES[i]}`) failures.push(`landing ${label}: step ${i + 1} as ${role} shows ${got}, expected ${role}/${STEP_PAGES[i]}`);
-        if (role === 'founder' || i === 1) await shot(`landing-${label}-${role}-step${i + 1}`);
+    for (const w of WALKTHROUGHS) {
+      const frameJs = `document.getElementById('${w.frame}')`;
+      // The section phones are lazy-loaded; bring each on screen as a visitor would.
+      await evaluate(`document.documentElement.style.scrollBehavior='auto'; document.getElementById('${w.id}').scrollIntoView(); 1`);
+      for (let i = 0; i < 40; i++) {
+        await sleep(150);
+        if (await evaluate(`!!(${frameJs}.contentWindow.binderGo && ${frameJs}.contentDocument.querySelector('#binder-color main').children.length)`)) break;
       }
+      for (let i = 0; i < w.pages.length; i++) {
+        await evaluate(`document.querySelectorAll('#${w.id} .dots button')[${i}].click()`);
+        await sleep(900);
+        const got = await evaluate(`(() => { const d = ${frameJs}.contentDocument.getElementById('binder-color'); return d && (d.dataset.role + '/' + d.dataset.page); })()`);
+        if (got !== `${w.role}/${w.pages[i]}`) failures.push(`landing ${label} #${w.id}: step ${i + 1} shows ${got}, expected ${w.role}/${w.pages[i]}`);
+        await shot(`landing-${label}-${w.id}-step${i + 1}`);
+      }
+      // A locked phone must not switch sides, even if the picker is changed.
+      const other = w.role === 'vc' ? 'founder' : 'vc';
+      const after = await evaluate(`(() => { const d = ${frameJs}.contentDocument; const sel = d.querySelector('#binder-color header select');
+        sel.value = '${other}'; sel.dispatchEvent(new Event('change', { bubbles: true })); return d.getElementById('binder-color').dataset.role; })()`);
+      if (after !== w.role) failures.push(`landing ${label} #${w.id}: locked phone switched to ${after}`);
     }
     const overflow = await evaluate('document.documentElement.scrollWidth - innerWidth');
     if (overflow > 0) failures.push(`landing ${label}: page scrolls sideways by ${overflow}px`);
@@ -156,5 +164,5 @@ if (failures.length) {
   console.error(`smoke: ${failures.length} problem(s)\n  - ` + failures.join('\n  - '));
   await cleanup(1);
 }
-console.log(`smoke: ok — ${DEMO_PAGES.length * 2} demo screens, ${STEP_PAGES.length * 2 * 2} landing steps${shots ? `, screenshots in ${shots}` : ''}`);
+console.log(`smoke: ok — ${DEMO_PAGES.length * 2} demo screens, ${WALKTHROUGHS.reduce((n, w) => n + w.pages.length, 0) * 2} landing steps${shots ? `, screenshots in ${shots}` : ''}`);
 await cleanup(0);

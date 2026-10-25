@@ -29,6 +29,8 @@ how the app works and to collect demo and call requests.
   Northlight) are illustrative — the portraits are AI-generated — and the page
   says so under the phone and on `/demo/`.
 - The form must never claim success for a request that was not delivered.
+- Only the hero phone is a free demo. The "For founders" / "For investors"
+  phones stay locked to their side (`?lock`); smoke.mjs fails if one switches.
 - Visual design follows the app mock: system font (Inter elsewhere), coral
   `#D95440`, accent background `#FFF1ED`, text `#1D1D1F` / `#515154`, the
   lowercase `binder.` wordmark.

@@ -128,12 +128,10 @@ section{position:relative}
 .pcell p{color:var(--ink-2);margin-top:10px;font-size:16px}
 @media (max-width:880px){.problem{grid-template-columns:1fr}}
 
-/* How it works */
+/* Founder / investor walkthroughs. Each has its own phone, locked to its side,
+   so a visitor reading "For investors" can only ever see the investor app. */
 .how{background:var(--bg-2)}
-.how-top{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap}
-.toggle{display:inline-flex;background:#fff;border-radius:999px;padding:4px;gap:4px;box-shadow:var(--shadow)}
-.toggle button{border:0;background:transparent;height:42px;padding:0 20px;border-radius:999px;font-weight:600;font-size:15px;color:var(--ink-2);cursor:pointer;transition:background .2s,color .2s}
-.toggle button[aria-pressed="true"]{background:var(--coral);color:#fff}
+.how.alt{background:var(--bg)}
 .how-grid{display:grid;grid-template-columns:1fr 380px;gap:72px;margin-top:40px}
 .steps{list-style:none;margin:0;padding:0}
 .step{min-height:74vh;display:flex;flex-direction:column;justify-content:center;padding:24px 0;opacity:.3;transition:opacity .4s ease}
@@ -144,7 +142,6 @@ section{position:relative}
 .step ul{margin:20px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px}
 .step li{display:flex;gap:10px;align-items:flex-start;font-size:16px}
 .step li .ic{color:var(--coral);margin-top:4px;stroke-width:2.6}
-[data-mode="founder"] .vc-only,[data-mode="vc"] .f-only{display:none!important}
 .stick{position:sticky;top:calc(50vh - 360px);height:max-content;display:flex;flex-direction:column;align-items:center;gap:18px}
 .stick .device{--pw:330}
 /* The phone must fit under the nav with its dots on a 13" laptop, or the
@@ -164,20 +161,22 @@ section{position:relative}
   .steps{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;padding:0 4px 8px;margin:0 -4px;scrollbar-width:none}
   .steps::-webkit-scrollbar{display:none}
   .step{min-height:0;flex:0 0 88%;scroll-snap-align:center;background:#fff;border-radius:22px;padding:24px;justify-content:flex-start;opacity:.5}
+  .how.alt .step{background:var(--bg-2)}
   .step h3{font-size:26px}
   .step p{font-size:16px}
 }
 
 /* Principles */
 .rules{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:56px}
-.rule{padding:30px;border-radius:var(--radius);background:var(--bg-2)}
+#why{background:var(--bg-2)}
+.rule{padding:30px;border-radius:var(--radius);background:#fff}
 .rule .ico{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;background:var(--coral-soft);color:var(--coral);font-size:22px}
 .rule h3{margin-top:22px}
 .rule p{color:var(--ink-2);margin-top:10px;font-size:16px}
 @media (max-width:880px){.rules{grid-template-columns:1fr}}
 
 /* Compare */
-.compare{margin-top:20px;border-radius:var(--radius);overflow:hidden;border:1px solid var(--line)}
+.compare{margin-top:20px;border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);background:#fff}
 .crow{display:grid;grid-template-columns:1fr 1.2fr 1.2fr}
 .crow > div{padding:18px 24px;border-top:1px solid var(--line);font-size:15.5px}
 .crow:first-child > div{border-top:0;font-weight:600;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding-top:22px}
@@ -193,22 +192,24 @@ section{position:relative}
   .crow:first-child > div{padding-top:20px}
 }
 
-/* Pilot */
-.pilot{background:var(--night);color:#fff;overflow:hidden}
-.pilot::before{content:"";position:absolute;left:50%;top:-260px;width:960px;height:620px;transform:translateX(-50%);background:radial-gradient(closest-side,rgba(217,84,64,.32),rgba(217,84,64,0));pointer-events:none}
-.pilot .eyebrow{color:#FF8E78}
-.pilot .lede{color:rgba(255,255,255,.72)}
-.pilot-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:64px;align-items:center;position:relative}
+/* Pilot: a flat coral block. Everything on it is white or a white tint, so
+   the section reads as one surface rather than a gradient with cards on it. */
+.pilot{background:var(--coral);color:#fff}
+.pilot .eyebrow{color:rgba(255,255,255,.78)}
+.pilot .lede{color:rgba(255,255,255,.9)}
+.pilot-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:64px;align-items:center}
 .nums{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.nums .eyebrow{grid-column:1/-1;color:rgba(255,255,255,.5)}
-.num{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:22px;padding:24px}
+.nums .eyebrow{grid-column:1/-1}
+.num{background:rgba(255,255,255,.14);border-radius:22px;padding:24px}
 .num b{font-weight:700;font-size:50px;line-height:1;display:block;letter-spacing:-.04em}
-.num span{color:rgba(255,255,255,.65);font-size:14.5px;display:block;margin-top:8px}
+.num span{color:rgba(255,255,255,.88);font-size:14.5px;display:block;margin-top:8px}
 .measure{margin-top:30px;display:flex;flex-direction:column;gap:12px}
-.measure div{display:flex;gap:12px;align-items:flex-start;font-size:16px;color:rgba(255,255,255,.85)}
-.measure .ic{color:#FF8E78;margin-top:5px}
+.measure div{display:flex;gap:12px;align-items:flex-start;font-size:16px}
+.measure .ic{margin-top:5px;stroke-width:2.6}
 .pilot-ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:34px}
-.pilot .btn-ghost{color:#fff;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.28)}
+.pilot .btn-white{background:#fff;color:var(--coral-ink)}
+.pilot .btn-white:hover{background:var(--coral-soft)}
+.pilot .btn-ghost{color:#fff;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.6)}
 .pilot .btn-ghost:hover{box-shadow:inset 0 0 0 1.5px #fff}
 @media (max-width:960px){.pilot-grid{grid-template-columns:1fr;gap:40px}}
 
@@ -297,7 +298,8 @@ footer a:hover{color:var(--ink)}
   <div class="wrap">
     <a class="brand wordmark" href="#top" aria-label="binder. home">binder.</a>
     <nav class="nav-links" aria-label="Sections">
-      <a href="#how">How it works</a>
+      <a href="#founders">For founders</a>
+      <a href="#investors">For investors</a>
       <a href="#why">Why Binder</a>
       <a href="#pilot">Pilot</a>
       <a href="#faq">FAQ</a>
@@ -320,7 +322,7 @@ footer a:hover{color:var(--ink)}
       <p class="lede">Binder matches founders with investors on sector, stage, ticket and geography. Swipe on fit, connect only on mutual interest, and book a 20-minute coffee chat that lands on both calendars.</p>
       <div class="hero-ctas">
         <a class="btn btn-coral" href="#contact" data-intent="demo" data-book>Book a 20-min demo <svg class="ic"><use href="#i-arrow"/></svg></a>
-        <a class="btn btn-ghost" href="#how">See how it works</a>
+        <a class="btn btn-ghost" href="#founders">See how it works</a>
       </div>
       <p class="trust"><svg class="ic"><use href="#i-badge"/></svg> Verified profiles · mutual interest only · no cold outreach</p>
     </div>
@@ -352,46 +354,40 @@ footer a:hover{color:var(--ink)}
   </div>
 </section>
 
-<!-- ================= HOW IT WORKS ================= -->
-<section class="sec how" id="how" data-mode="founder">
+<!-- ================= FOR FOUNDERS / FOR INVESTORS =================
+     One walkthrough per side. data-role locks that section's phone to its
+     side of the app; STEPS in the script says which screen each step shows. -->
+<section class="sec how" id="founders" data-role="founder">
   <div class="wrap">
-    <div class="how-top">
-      <div class="sec-head rv">
-        <span class="eyebrow">How it works</span>
-        <h2>One app, both sides of the table.</h2>
-      </div>
-      <div class="toggle rv" role="group" aria-label="Show the app as">
-        <button type="button" aria-pressed="true" data-role="founder">I'm a founder</button>
-        <button type="button" aria-pressed="false" data-role="vc">I'm an investor</button>
-      </div>
+    <div class="sec-head rv">
+      <span class="eyebrow">For founders</span>
+      <h2>Raise from investors who actually write your cheque.</h2>
+      <p class="lede">From profile to coffee chat in five steps. The phone is the founder app — tap around.</p>
     </div>
-
     <div class="how-grid">
-      <ol class="steps" id="steps">
+      <ol class="steps">
         <li class="step on" data-step="0">
           <span class="n">01</span>
-          <h3>Say what you're looking for.</h3>
-          <p class="f-only">Your sectors, your stage, the markets you want investors to cover — and what matters most to you. Specific beats impressive: it drives every match.</p>
-          <p class="vc-only">The sectors, stages and markets you invest in, with your ticket and role. Only founders inside those lines ever reach you.</p>
+          <h3>Show what you're raising.</h3>
+          <p>Target round, capital committed, ARR, growth and team size — the numbers investors filter on, in one place. Specific beats impressive.</p>
           <ul>
-            <li><svg class="ic"><use href="#i-check"/></svg>Matching preferences you can change any time</li>
+            <li><svg class="ic"><use href="#i-check"/></svg>Edit any time; your matches update with it</li>
             <li><svg class="ic"><use href="#i-check"/></svg>Choose who sees you: relevant matches, connections only, or paused</li>
           </ul>
         </li>
         <li class="step" data-step="1">
           <span class="n">02</span>
-          <h3>Swipe on fit, not on hype.</h3>
-          <p>Every card shows <b>why you match</b> — shared focus, stage, market — next to the numbers that decide it. Drag right to connect, left to pass.</p>
+          <h3>See who actually invests in you.</h3>
+          <p>Every investor card leads with <b>why you match</b> — shared focus, your stage, your market — next to ticket, role, companies backed and fund size. Drag right to connect, left to pass.</p>
           <ul>
-            <li class="f-only"><svg class="ic"><use href="#i-check"/></svg>Ticket, investment role, companies backed and fund size, up front</li>
-            <li class="vc-only"><svg class="ic"><use href="#i-check"/></svg>Round size, committed capital, ARR and growth, up front</li>
-            <li><svg class="ic"><use href="#i-check"/></svg>Verified profiles on both sides</li>
+            <li><svg class="ic"><use href="#i-check"/></svg>Only investors whose ticket and thesis include you</li>
+            <li><svg class="ic"><use href="#i-check"/></svg>Verified profiles</li>
           </ul>
         </li>
         <li class="step" data-step="2">
           <span class="n">03</span>
           <h3>Mutual interest only.</h3>
-          <p>You're connected only when both sides said yes. No cold DMs, no ignored intros — and a pass stays private.</p>
+          <p>You're connected only when the investor said yes too. No cold emails, no ignored intros — and a pass stays private.</p>
           <ul>
             <li><svg class="ic"><use href="#i-check"/></svg>Book a 20-minute coffee chat in one tap</li>
             <li><svg class="ic"><use href="#i-check"/></svg>Or send a message first</li>
@@ -399,34 +395,103 @@ footer a:hover{color:var(--ink)}
         </li>
         <li class="step" data-step="3">
           <span class="n">04</span>
-          <h3>Pick a time that works for both.</h3>
-          <p>Binder shows only the slots you both have free, in your time zone, with an agenda drawn from both profiles.</p>
+          <h3>Say hello before you meet.</h3>
+          <p>The conversation opens with the connection. Answer the first question, add context, and arrive at the call already warm.</p>
           <ul>
-            <li><svg class="ic"><use href="#i-check"/></svg>Google Meet link and agenda included</li>
-            <li><svg class="ic"><use href="#i-check"/></svg>Calendar sync, call length and buffers set once in your profile</li>
+            <li><svg class="ic"><use href="#i-check"/></svg>One thread per connection</li>
+            <li><svg class="ic"><use href="#i-check"/></svg>Schedule the meeting straight from the chat</li>
           </ul>
         </li>
         <li class="step" data-step="4">
           <span class="n">05</span>
-          <h3>You're all set.</h3>
-          <p>The call is on both calendars and in Meetings, next to the conversation. Plans change? Move it in a tap — no email chain.</p>
+          <h3>Pick a time that works for both.</h3>
+          <p>Binder shows only the slots you both have free, with an agenda drawn from both profiles. Confirm, and it's on both calendars.</p>
           <ul>
-            <li><svg class="ic"><use href="#i-check"/></svg>Connections, messages and meetings in one place</li>
-            <li><svg class="ic"><use href="#i-check"/></svg>Reschedule without starting over</li>
+            <li><svg class="ic"><use href="#i-check"/></svg>Google Meet link and agenda included</li>
+            <li><svg class="ic"><use href="#i-check"/></svg>Reschedule in a tap</li>
           </ul>
         </li>
       </ol>
-
       <div class="stick">
         <div class="device">
           <div class="viewport">
-            <iframe id="howFrame" src="/demo/?embed&amp;role=founder&amp;page=preferences" title="Binder app, showing the current step" loading="lazy"></iframe>
+            <iframe class="how-frame" id="founderFrame" src="/demo/?embed&amp;lock&amp;role=founder&amp;page=financials" title="Binder founder app, showing the current step" loading="lazy"></iframe>
           </div>
         </div>
-        <div class="dots" id="dots" role="tablist" aria-label="Steps">
+        <div class="dots" role="tablist" aria-label="Founder steps">
           <button class="on" aria-label="Step 1"></button><button aria-label="Step 2"></button><button aria-label="Step 3"></button><button aria-label="Step 4"></button><button aria-label="Step 5"></button>
         </div>
-        <p class="demo-note">This is the working prototype — tap around. Profiles and photos are illustrative.</p>
+        <p class="demo-note">Founder app, working prototype. Profiles and photos are illustrative.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec how alt" id="investors" data-role="vc">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="eyebrow">For investors</span>
+      <h2>Deal flow inside your thesis — and nothing else.</h2>
+      <p class="lede">The same app from the other side of the table. The phone is the investor app.</p>
+    </div>
+    <div class="how-grid">
+      <ol class="steps">
+        <li class="step on" data-step="0">
+          <span class="n">01</span>
+          <h3>Set your ticket and fund.</h3>
+          <p>Ticket range, investment role, fund size and number of investments. Founders see exactly what you write — and only those who fit reach you.</p>
+          <ul>
+            <li><svg class="ic"><use href="#i-check"/></svg>Lead, co-lead or follow</li>
+            <li><svg class="ic"><use href="#i-check"/></svg>Change it whenever your fund does</li>
+          </ul>
+        </li>
+        <li class="step" data-step="1">
+          <span class="n">02</span>
+          <h3>Decide what reaches you.</h3>
+          <p>The sectors, stages and markets you invest in, and what matters most. That's the filter between you and an inbox full of decks.</p>
+          <ul>
+            <li><svg class="ic"><use href="#i-check"/></svg>Balanced fit, or weight what matters most to you</li>
+            <li><svg class="ic"><use href="#i-check"/></svg>Pause discovery when you're not deploying</li>
+          </ul>
+        </li>
+        <li class="step" data-step="2">
+          <span class="n">03</span>
+          <h3>Swipe on founders that fit.</h3>
+          <p>Each card shows round size, committed capital, ARR and growth next to <b>why you match</b>. Decide on fit in seconds; read the deck after.</p>
+          <ul>
+            <li><svg class="ic"><use href="#i-check"/></svg>Shared focus, stage and geography, checked for you</li>
+            <li><svg class="ic"><use href="#i-check"/></svg>Verified founders</li>
+          </ul>
+        </li>
+        <li class="step" data-step="3">
+          <span class="n">04</span>
+          <h3>Meet only when both say yes.</h3>
+          <p>A connection needs your yes and theirs. Founders you pass never find out, and nobody can cold-pitch you.</p>
+          <ul>
+            <li><svg class="ic"><use href="#i-check"/></svg>Intros unlock only on mutual interest</li>
+            <li><svg class="ic"><use href="#i-check"/></svg>Message first, or book straight away</li>
+          </ul>
+        </li>
+        <li class="step" data-step="4">
+          <span class="n">05</span>
+          <h3>Your calendar, handled.</h3>
+          <p>Binder overlays both calendars and offers only shared slots, in your time zone and call length. One tap books it for both.</p>
+          <ul>
+            <li><svg class="ic"><use href="#i-check"/></svg>Calendar sync, buffers and call length set once</li>
+            <li><svg class="ic"><use href="#i-check"/></svg>Agenda drawn from both profiles</li>
+          </ul>
+        </li>
+      </ol>
+      <div class="stick">
+        <div class="device">
+          <div class="viewport">
+            <iframe class="how-frame" id="investorFrame" src="/demo/?embed&amp;lock&amp;role=vc&amp;page=financials" title="Binder investor app, showing the current step" loading="lazy"></iframe>
+          </div>
+        </div>
+        <div class="dots" role="tablist" aria-label="Investor steps">
+          <button class="on" aria-label="Step 1"></button><button aria-label="Step 2"></button><button aria-label="Step 3"></button><button aria-label="Step 4"></button><button aria-label="Step 5"></button>
+        </div>
+        <p class="demo-note">Investor app, working prototype. Profiles and photos are illustrative.</p>
       </div>
     </div>
   </div>
@@ -470,7 +535,7 @@ footer a:hover{color:var(--ink)}
         <div><svg class="ic"><use href="#i-check"/></svg>Who comes back for a second match</div>
       </div>
       <div class="pilot-ctas">
-        <a class="btn btn-coral" href="#contact" data-intent="pilot" data-role="founder">Apply as a founder</a>
+        <a class="btn btn-white" href="#contact" data-intent="pilot" data-role="founder">Apply as a founder</a>
         <a class="btn btn-ghost" href="#contact" data-intent="pilot" data-role="investor">Join as an investor</a>
       </div>
     </div>
@@ -574,7 +639,7 @@ footer a:hover{color:var(--ink)}
 <footer>
   <div class="wrap">
     <a class="brand wordmark" href="#top" style="font-size:22px">binder.</a>
-    <nav aria-label="Footer"><a href="#how">How it works</a><a href="/demo/">Live demo</a><a href="#pilot">Pilot</a><a href="#faq">FAQ</a><a href="#contact">Contact</a></nav>
+    <nav aria-label="Footer"><a href="#founders">For founders</a><a href="#investors">For investors</a><a href="/demo/">Live demo</a><a href="#pilot">Pilot</a><a href="#faq">FAQ</a><a href="#contact">Contact</a></nav>
     <span>© 2026 Binder</span>
   </div>
 </footer>
@@ -591,16 +656,25 @@ const SITE = {
   CONTACT_EMAIL: '',
 };
 
-// The screen each "How it works" step puts the prototype on. Booking and
-// confirmation need a contact and a slot, or the prototype has nothing to show.
+// The screen each step puts that section's phone on, per side of the app.
+// Booking needs a contact and a slot, or the prototype has nothing to show.
 const SLOT = { activeContact: 'marco', day: '2026-10-27', dateStart: '2026-10-27', slot: '10:30' };
-const STEPS = [
-  { page: 'preferences' },
-  { page: 'discover', index: 0 },
-  { page: 'match', matchTab: 'new' },
-  { page: 'booking', ...SLOT },
-  { page: 'confirmed', ...SLOT },
-];
+const STEPS = {
+  founder: [
+    { page: 'financials' },
+    { page: 'discover', index: 0 },
+    { page: 'match', matchTab: 'new' },
+    { page: 'conversation', activeContact: 'marco' },
+    { page: 'booking', ...SLOT },
+  ],
+  vc: [
+    { page: 'financials' },
+    { page: 'preferences' },
+    { page: 'discover', index: 0 },
+    { page: 'match', matchTab: 'new' },
+    { page: 'booking', ...SLOT },
+  ],
+};
 
 (() => {
   const $ = (s, r = document) => r.querySelector(s);
@@ -616,72 +690,61 @@ const STEPS = [
   }), { rootMargin: '0px 0px -8% 0px' });
   $$('.rv').forEach((el) => rvIO.observe(el));
 
-  // ---- How it works: steps drive the embedded prototype ----
-  const how = $('#how');
-  const frame = $('#howFrame');
-  const steps = $$('.step', how);
-  const dots = $$('#dots button');
-  let current = 0;
-  let frameReady = false;
-
-  // The prototype re-renders instantly; a short fade makes the change read as
-  // a new screen rather than a glitch.
-  let fadeTimer = 0;
-  function drive() {
-    if (!frameReady) return;
-    const go = frame.contentWindow.binderGo;
-    if (typeof go !== 'function') { console.error('[binder] demo loaded without boot.js — the steps cannot move the phone'); return; }
-    const state = { role: how.dataset.mode, ...STEPS[current] };
-    if (reduced) { go(state); return; }
-    clearTimeout(fadeTimer);
-    frame.classList.add('swap');
-    fadeTimer = setTimeout(() => { go(state); frame.classList.remove('swap'); }, 160);
-  }
-  frame.addEventListener('load', () => { frameReady = true; drive(); });
-
-  function show(i) {
-    if (i === current && frameReady) return;
-    current = i;
-    steps.forEach((s, k) => s.classList.toggle('on', k === i));
-    dots.forEach((d, k) => { d.classList.toggle('on', k === i); d.setAttribute('aria-selected', k === i); });
-    drive();
-  }
-
-  function setMode(role, fromPhone) {
-    how.dataset.mode = role;
-    $$('.toggle button', how).forEach((x) => x.setAttribute('aria-pressed', x.dataset.role === role));
-    if (!fromPhone) drive();
-  }
-  $$('.toggle button', how).forEach((b) => b.addEventListener('click', () => setMode(b.dataset.role)));
-
-  // Flipping Founder/Investor inside the phone updates the toggle, so the next
-  // step does not silently flip it back.
-  addEventListener('message', (e) => {
-    if (e.origin !== location.origin || !e.data || e.data.binder !== 'role') return;
-    if (e.source === frame.contentWindow) setMode(e.data.role, true);
-  });
-
+  // ---- For founders / For investors: steps drive each section's phone ----
   // Desktop: the step nearest the viewport centre drives the phone.
   // Mobile: steps are a horizontal snap row, so the observer's root is the row.
-  const stepsEl = $('#steps');
   const wide = matchMedia('(min-width: 961px)');
-  let stepIO;
-  function observeSteps() {
-    if (stepIO) stepIO.disconnect();
-    stepIO = new IntersectionObserver((es) => {
-      es.forEach((e) => { if (e.isIntersecting) show(+e.target.dataset.step); });
-    }, wide.matches ? { rootMargin: '-48% 0px -48% 0px' } : { root: stepsEl, threshold: 0.6 });
-    steps.forEach((s) => stepIO.observe(s));
-  }
-  observeSteps();
-  wide.addEventListener('change', observeSteps);
 
-  dots.forEach((d, i) => d.addEventListener('click', () => {
-    const s = steps[i];
-    if (wide.matches) s.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'center' });
-    else stepsEl.scrollTo({ left: s.offsetLeft - stepsEl.offsetLeft - (stepsEl.clientWidth - s.clientWidth) / 2, behavior: reduced ? 'auto' : 'smooth' });
-    show(i);
-  }));
+  function walkthrough(section) {
+    const role = section.dataset.role;
+    const frame = $('.how-frame', section);
+    const steps = $$('.step', section);
+    const dots = $$('.dots button', section);
+    const stepsEl = $('.steps', section);
+    const table = STEPS[role];
+    let current = 0, frameReady = false, fadeTimer = 0;
+
+    // The prototype re-renders instantly; a short fade makes the change read
+    // as a new screen rather than a glitch.
+    function drive() {
+      if (!frameReady) return;
+      const go = frame.contentWindow.binderGo;
+      if (typeof go !== 'function') { console.error(`[binder] ${role} demo loaded without boot.js — the steps cannot move the phone`); return; }
+      const state = { role, ...table[current] };
+      if (reduced) { go(state); return; }
+      clearTimeout(fadeTimer);
+      frame.classList.add('swap');
+      fadeTimer = setTimeout(() => { go(state); frame.classList.remove('swap'); }, 160);
+    }
+    frame.addEventListener('load', () => { frameReady = true; drive(); });
+
+    function show(i) {
+      if (i === current && frameReady) return;
+      current = i;
+      steps.forEach((s, k) => s.classList.toggle('on', k === i));
+      dots.forEach((d, k) => { d.classList.toggle('on', k === i); d.setAttribute('aria-selected', k === i); });
+      drive();
+    }
+
+    let io;
+    function observe() {
+      if (io) io.disconnect();
+      io = new IntersectionObserver((es) => {
+        es.forEach((e) => { if (e.isIntersecting) show(+e.target.dataset.step); });
+      }, wide.matches ? { rootMargin: '-48% 0px -48% 0px' } : { root: stepsEl, threshold: 0.6 });
+      steps.forEach((s) => io.observe(s));
+    }
+    observe();
+    wide.addEventListener('change', observe);
+
+    dots.forEach((d, i) => d.addEventListener('click', () => {
+      const s = steps[i];
+      if (wide.matches) s.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'center' });
+      else stepsEl.scrollTo({ left: s.offsetLeft - stepsEl.offsetLeft - (stepsEl.clientWidth - s.clientWidth) / 2, behavior: reduced ? 'auto' : 'smooth' });
+      show(i);
+    }));
+  }
+  $$('section.how').forEach(walkthrough);
 
   // ---- CTAs: preselect what the visitor clicked, or open the calendar ----
   const form = $('#contactForm');

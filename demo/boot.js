@@ -5,12 +5,18 @@
 // "openai:set_globals" event carries a new state. Providing that interface is
 // all it takes to open it on a given screen (?role=vc&page=booking) and to let
 // the landing page drive it step by step — without editing the prototype.
+//
+// ?lock pins it to the role it opened with. The "For founders" and "For
+// investors" sections each embed one side of the app, and a visitor exploring
+// one of them should not be able to wander into the other.
 (function () {
   'use strict';
   var VERSION = window.BINDER_STATE_VERSION;
   var q = new URLSearchParams(location.search);
   var embedded = q.has('embed');
+  var locked = q.has('lock');
   if (embedded) document.documentElement.classList.add('embed');
+  if (locked) document.documentElement.classList.add('locked');
 
   var initial = { version: VERSION };
   if (q.get('role') === 'founder' || q.get('role') === 'vc') initial.role = q.get('role');
@@ -28,13 +34,21 @@
     window.dispatchEvent(new CustomEvent('openai:set_globals', { detail: { globals: { widgetState: { modelContent: state } } } }));
   };
 
-  // Tell the landing page when the visitor flips Founder/Investor inside the
-  // phone, so its own toggle does not flip it straight back on the next step.
-  document.addEventListener('change', function (e) {
-    if (window.parent !== window && e.target.matches && e.target.matches('#binder-color header select')) {
-      window.parent.postMessage({ binder: 'role', role: e.target.value }, location.origin);
-    }
-  });
+  if (locked) {
+    // The prototype listens for "change" on the picker itself; stopping the
+    // event while it is still capturing at the document means that listener
+    // never runs, so the role cannot change by keyboard either.
+    document.addEventListener('change', function (e) {
+      if (e.target.matches && e.target.matches('#binder-color header select')) {
+        e.stopPropagation();
+        e.target.value = initial.role || 'founder';
+      }
+    }, true);
+    document.addEventListener('DOMContentLoaded', function () {
+      var picker = document.querySelector('#binder-color header select');
+      if (picker) { picker.tabIndex = -1; picker.setAttribute('aria-disabled', 'true'); }
+    });
+  }
 
   if (!embedded) {
     document.addEventListener('DOMContentLoaded', function () {

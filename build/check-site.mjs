@@ -37,17 +37,27 @@ for (const f of ['boot.js', 'embed.css', 'icons.js']) {
 }
 if (demo.includes('lucide.js')) problems.push('demo/index.html still loads the full lucide.js bundle');
 if (!/BINDER_STATE_VERSION=\d+/.test(demo)) problems.push('demo/index.html has no BINDER_STATE_VERSION — boot.js cannot drive it');
-for (const id of ['heroFrame', 'howFrame']) {
-  if (!new RegExp(`id="${id}" src="/demo/\\?embed`).test(html)) problems.push(`#${id} must load /demo/?embed…`);
+if (!/id="heroFrame" src="\/demo\/\?embed&amp;role=/.test(html)) problems.push('#heroFrame must load /demo/?embed&role=…');
+// The section phones must be locked, or "For investors" can be flipped to the founder app.
+for (const id of ['founderFrame', 'investorFrame']) {
+  if (!new RegExp(`id="${id}" src="/demo/\\?embed&amp;lock&amp;role=`).test(html)) problems.push(`#${id} must load /demo/?embed&lock&role=…`);
 }
 
-// Each step in the copy needs an entry in the STEPS table that drives the
-// phone, or scrolling past it leaves the phone on the previous screen.
-const stepCount = (html.match(/class="step[^"]*" data-step=/g) || []).length;
-const stepsTable = html.match(/const STEPS = \[([\s\S]*?)\];/);
-const tableCount = stepsTable ? (stepsTable[1].match(/\{\s*page:/g) || []).length : 0;
-if (stepCount !== tableCount) problems.push(`${stepCount} steps in the copy but ${tableCount} entries in STEPS`);
-if (stepCount !== (html.match(/<button[^>]*aria-label="Step \d"/g) || []).length) problems.push('step dots do not match the number of steps');
+// Each walkthrough's steps need one entry each in STEPS[role], or scrolling
+// past a step leaves the phone on the previous screen.
+let stepCount = 0;
+const table = html.match(/const STEPS = \{([\s\S]*?)\n\};/);
+for (const m of html.matchAll(/<section class="sec how[^"]*" id="(\w+)" data-role="(\w+)">([\s\S]*?)<\/section>/g)) {
+  const [, id, role, body] = m;
+  const steps = (body.match(/class="step[^"]*" data-step=/g) || []).length;
+  const dots = (body.match(/<button[^>]*aria-label="Step \d"/g) || []).length;
+  const entries = table && table[1].match(new RegExp(`\\b${role}: \\[([\\s\\S]*?)\\]`));
+  const n = entries ? (entries[1].match(/\{\s*page:/g) || []).length : 0;
+  if (steps !== n) problems.push(`#${id}: ${steps} steps but ${n} entries in STEPS.${role}`);
+  if (steps !== dots) problems.push(`#${id}: ${steps} steps but ${dots} dots`);
+  stepCount += steps;
+}
+if (!stepCount) problems.push('no walkthrough sections found (section.how with data-role)');
 
 // 4. Weight budget for everything a visitor can download.
 const BUDGET = 1 * 1024 * 1024;

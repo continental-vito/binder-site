@@ -65,17 +65,23 @@ At the top of the `<script>` in `index.html`:
 
 ## The demo
 
-Both phones on the page are the real prototype from the mock export
+Every phone on the page is the real prototype from the mock export
 (`Binder-Export-mock-v2/prototype`), embedded at its native 390×844 and scaled.
-Visitors can swipe, connect, book and edit a profile; nothing leaves the
-browser. On touch screens the embedded phones are look-only, so the page still
+Nothing a visitor does in it leaves the browser.
+
+- **Hero** — the free demo: either side of the app, anywhere in it.
+- **For founders / For investors** — one walkthrough per side. Each phone is
+  opened with `?lock`, which pins it to its role: visitors can tap around that
+  side of the app, but the Founder/Investor picker is a label, not a control.
+
+ On touch screens the embedded phones are look-only, so the page still
 scrolls under a thumb, and a button opens `/demo/` full screen instead.
 
 The prototype was built as a ChatGPT widget: it restores its state from
 `window.openai.widgetState` and re-renders on an `openai:set_globals` event.
 `demo/boot.js` provides exactly that interface, which is how the page opens it
 on a given screen (`/demo/?role=vc&page=booking`) and moves it as you scroll
-through *How it works* — without editing the prototype itself.
+through each walkthrough — without editing the prototype itself.
 
 ### Importing a new mock
 
@@ -85,6 +91,7 @@ make shots                                  # check every screen in .shots/
 make icons                                  # refresh the social card
 ```
 
-If a step should land on a different screen, edit `STEPS` in `index.html`.
+If a step should land on a different screen, edit `STEPS.founder` or
+`STEPS.vc` in `index.html`; `make ci` checks each table matches its steps.
 The import stops with a reason if the export's shape has changed (script tag,
 state version, Lucide layout) rather than writing a half-working demo.
