@@ -112,7 +112,8 @@ p{margin:0}
 }
 
 /* ---------- Sections ---------- */
-section{position:relative}
+/* Anchor jumps land below the sticky nav, not under it. */
+section{position:relative;scroll-margin-top:64px}
 .sec{padding:120px 0}
 @media (max-width:700px){.sec{padding:80px 0}}
 .sec-head{max-width:760px}
@@ -132,9 +133,18 @@ section{position:relative}
    so a visitor reading "For investors" can only ever see the investor app. */
 .how{background:var(--bg-2)}
 .how.alt{background:var(--bg)}
-.how-grid{display:grid;grid-template-columns:1fr 380px;gap:72px;margin-top:40px}
+/* Desktop is a split screen: copy on the left, the phone on the right, both
+   centred on the viewport below the nav. Every step is one screen tall with
+   its text centred, so the step being read always sits level with the phone.
+   The section heading opens step 01 (.d-only) so it shares the first screen
+   with the phone instead of pushing the phone below the fold. */
+.how{--nav:64px}
+.how.sec{padding:0}
+.how-grid{display:grid;grid-template-columns:1fr 380px;gap:72px}
+.how .d-only{margin-bottom:48px}
+.how .m-only{display:none}
 .steps{list-style:none;margin:0;padding:0}
-.step{min-height:74vh;display:flex;flex-direction:column;justify-content:center;padding:24px 0;opacity:.3;transition:opacity .4s ease}
+.step{min-height:calc(100vh - var(--nav));display:flex;flex-direction:column;justify-content:center;padding:48px 0;opacity:.3;transition:opacity .4s ease}
 .step.on{opacity:1}
 .step .n{font-weight:700;color:var(--coral);font-size:15px;letter-spacing:.04em}
 .step h3{font-size:clamp(30px,3.3vw,42px);margin-top:10px;line-height:1.06;letter-spacing:-.035em}
@@ -142,20 +152,27 @@ section{position:relative}
 .step ul{margin:20px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px}
 .step li{display:flex;gap:10px;align-items:flex-start;font-size:16px}
 .step li .ic{color:var(--coral);margin-top:4px;stroke-width:2.6}
-.stick{position:sticky;top:calc(50vh - 360px);height:max-content;display:flex;flex-direction:column;align-items:center;gap:18px}
-.stick .device{--pw:330}
-/* The phone must fit under the nav with its dots on a 13" laptop, or the
-   bottom of every screen — where the CTAs are — is never seen. */
-@media (min-width:961px) and (max-height:860px){.stick{top:80px}.stick .device{--pw:300}}
-@media (min-width:961px) and (max-height:760px){.stick .device{--pw:260}}
+/* The phone (bezel included) is centred in the space under the nav. Its size
+   steps down with the window height so the phone and its dots always fit —
+   otherwise the bottom of each screen, where the CTAs are, is never seen. */
+/* No bottom margin: the dots and note below the phone use the space the
+   centring leaves, so the phone stays centred through the last step too. */
+.stick{--pw:330;--gap:calc((100vh - var(--nav) - (var(--pw) * 2.1641px + 20px)) / 2);position:sticky;top:calc(var(--nav) + var(--gap));height:max-content;display:flex;flex-direction:column;align-items:center;gap:16px;align-self:start;margin-top:var(--gap)}
+.stick .device{--pw:inherit}
+@media (min-width:961px) and (max-height:940px){.stick{--pw:300}}
+@media (min-width:961px) and (max-height:860px){.stick{--pw:270}}
+@media (min-width:961px) and (max-height:770px){.stick{--pw:240}}
+@media (min-width:961px) and (max-height:720px){.stick{--pw:215}}
 .dots{display:flex;gap:8px}
 .dots button{width:8px;height:8px;border-radius:4px;border:0;background:#D2D2D7;padding:0;cursor:pointer;transition:width .3s,background .3s}
 .dots button.on{width:24px;background:var(--coral)}
 .demo-note{font-size:12.5px;color:var(--muted);text-align:center;max-width:330px}
 @media (max-width:960px){
+  .how.sec{padding:80px 0}
+  .how .m-only{display:block}
+  .how .d-only{display:none}
   .how-grid{grid-template-columns:1fr;gap:24px;margin-top:32px}
-  .stick{position:relative;top:auto;order:-1}
-  .stick .device{--pw:250}
+  .stick{position:relative;top:auto;order:-1;margin:0;--pw:250}
   /* Below the two-column breakpoint the steps become a swipeable row under
      the phone — a sticky phone would cover most of a small screen. */
   .steps{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;padding:0 4px 8px;margin:0 -4px;scrollbar-width:none}
@@ -359,7 +376,7 @@ footer a:hover{color:var(--ink)}
      side of the app; STEPS in the script says which screen each step shows. -->
 <section class="sec how" id="founders" data-role="founder">
   <div class="wrap">
-    <div class="sec-head rv">
+    <div class="sec-head m-only rv">
       <span class="eyebrow">For founders</span>
       <h2>Raise from investors who actually write your cheque.</h2>
       <p class="lede">From profile to coffee chat in five steps. The phone is the founder app — tap around.</p>
@@ -367,6 +384,11 @@ footer a:hover{color:var(--ink)}
     <div class="how-grid">
       <ol class="steps">
         <li class="step on" data-step="0">
+          <div class="sec-head d-only">
+            <span class="eyebrow">For founders</span>
+            <h2>Raise from investors who actually write your cheque.</h2>
+            <p class="lede">From profile to coffee chat in five steps. The phone is the founder app — tap around.</p>
+          </div>
           <span class="n">01</span>
           <h3>Show what you're raising.</h3>
           <p>Target round, capital committed, ARR, growth and team size — the numbers investors filter on, in one place. Specific beats impressive.</p>
@@ -429,7 +451,7 @@ footer a:hover{color:var(--ink)}
 
 <section class="sec how alt" id="investors" data-role="vc">
   <div class="wrap">
-    <div class="sec-head rv">
+    <div class="sec-head m-only rv">
       <span class="eyebrow">For investors</span>
       <h2>Deal flow inside your thesis — and nothing else.</h2>
       <p class="lede">The same app from the other side of the table. The phone is the investor app.</p>
@@ -437,6 +459,11 @@ footer a:hover{color:var(--ink)}
     <div class="how-grid">
       <ol class="steps">
         <li class="step on" data-step="0">
+          <div class="sec-head d-only">
+            <span class="eyebrow">For investors</span>
+            <h2>Deal flow inside your thesis — and nothing else.</h2>
+            <p class="lede">The same app from the other side of the table. The phone is the investor app.</p>
+          </div>
           <span class="n">01</span>
           <h3>Set your ticket and fund.</h3>
           <p>Ticket range, investment role, fund size and number of investments. Founders see exactly what you write — and only those who fit reach you.</p>
@@ -691,8 +718,12 @@ const STEPS = {
   $$('.rv').forEach((el) => rvIO.observe(el));
 
   // ---- For founders / For investors: steps drive each section's phone ----
-  // Desktop: the step nearest the viewport centre drives the phone.
-  // Mobile: steps are a horizontal snap row, so the observer's root is the row.
+  // Desktop: on every scroll frame, the step whose centre is nearest the
+  // centre of the space under the nav drives the phone. An observer on a thin
+  // band at the centre was tried first and missed fast flicks entirely — a
+  // jump past every step left the phone on step 1 beside step 5's text.
+  // Mobile: steps are a horizontal snap row, which always settles on a card,
+  // so an observer rooted on the row is enough there.
   const wide = matchMedia('(min-width: 961px)');
 
   function walkthrough(section) {
@@ -726,12 +757,32 @@ const STEPS = {
       drive();
     }
 
+    const navH = () => $('#nav').getBoundingClientRect().height;
+    let ticking = false;
+    function onScrollFrame() {
+      ticking = false;
+      if (!wide.matches) return;
+      const r = section.getBoundingClientRect();
+      if (r.bottom < 0 || r.top > innerHeight) return;
+      const top = navH(), mid = top + (innerHeight - top) / 2;
+      let best = 0, bestD = Infinity;
+      steps.forEach((s, k) => {
+        const b = s.getBoundingClientRect();
+        const d = Math.abs(b.top + b.height / 2 - mid);
+        if (d < bestD) { bestD = d; best = k; }
+      });
+      show(best);
+    }
+    addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(onScrollFrame); } }, { passive: true });
+    addEventListener('resize', onScrollFrame);
+
     let io;
     function observe() {
-      if (io) io.disconnect();
+      if (io) { io.disconnect(); io = null; }
+      if (wide.matches) { onScrollFrame(); return; }
       io = new IntersectionObserver((es) => {
         es.forEach((e) => { if (e.isIntersecting) show(+e.target.dataset.step); });
-      }, wide.matches ? { rootMargin: '-48% 0px -48% 0px' } : { root: stepsEl, threshold: 0.6 });
+      }, { root: stepsEl, threshold: 0.6 });
       steps.forEach((s) => io.observe(s));
     }
     observe();

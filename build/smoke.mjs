@@ -146,6 +146,20 @@ try {
         if (got !== `${w.role}/${w.pages[i]}`) failures.push(`landing ${label} #${w.id}: step ${i + 1} shows ${got}, expected ${w.role}/${w.pages[i]}`);
         await shot(`landing-${label}-${w.id}-step${i + 1}`);
       }
+      // A fast flick that overshoots — the last step's centre already above the
+      // middle, its lower half still on screen — must still move the phone. The
+      // first version watched a thin band at the centre: no step was in it, so
+      // the phone stayed on step 1 beside step 5's text.
+      if (label === 'desktop') {
+        await evaluate(`document.querySelectorAll('#${w.id} .dots button')[0].click()`);
+        await sleep(900);
+        await evaluate(`(() => { const s = document.querySelectorAll('#${w.id} .step'); const last = s[s.length - 1].getBoundingClientRect();
+          scrollTo(0, scrollY + last.top - 64 + last.height * 0.6); return 1; })()`);
+        await sleep(900);
+        const jumped = await evaluate(`${frameJs}.contentDocument.getElementById('binder-color').dataset.page`);
+        const want = w.pages[w.pages.length - 1];
+        if (jumped !== want) failures.push(`landing #${w.id}: after a jump to the last step the phone shows "${jumped}", expected "${want}"`);
+      }
       // A locked phone must not switch sides, even if the picker is changed.
       const other = w.role === 'vc' ? 'founder' : 'vc';
       const after = await evaluate(`(() => { const d = ${frameJs}.contentDocument; const sel = d.querySelector('#binder-color header select');
