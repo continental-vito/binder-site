@@ -1,25 +1,25 @@
 <!doctype html>
-<!-- Source for assets/og-image.png (1200×630). Rendered by build/render-icons.sh. -->
+<!-- Source for assets/og-image.png (1200×630). Rendered by build/render-icons.sh.
+     The phone is the live prototype, so the card always matches the demo. -->
 <html><head><meta charset="utf-8">
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,600;1,9..144,600&display=block" rel="stylesheet">
 <style>
 html,body{margin:0;width:1200px;height:630px;overflow:hidden}
-body{background:#F3F0EA;font-family:"DM Sans",sans-serif;color:#141A21;position:relative}
-body::before{content:"";position:absolute;right:-160px;top:-200px;width:800px;height:800px;background:radial-gradient(closest-side,rgba(240,96,61,.24),rgba(240,96,61,0))}
-.l{position:absolute;left:80px;top:76px;width:640px}
-.brand{display:flex;align-items:center;gap:14px;font-family:Fraunces,serif;font-weight:600;font-size:38px;letter-spacing:-.02em}
-.brand img{width:54px;height:54px}
-h1{font-family:Fraunces,serif;font-weight:600;font-size:84px;line-height:.98;letter-spacing:-.03em;margin:54px 0 0}
-h1 i{color:#F0603D}
-p{font-size:26px;color:#4A5260;margin:28px 0 0;line-height:1.4}
-.ph{position:absolute;right:96px;top:60px;width:270px;padding:8px;border-radius:50px;background:linear-gradient(145deg,#2A3039,#0C0F13);box-shadow:0 40px 80px -30px rgba(20,26,33,.55)}
-.ph img{width:270px;border-radius:42px;display:block}
+body{background:#fff;font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",sans-serif;color:#1D1D1F;position:relative;letter-spacing:-.01em}
+body::before{content:"";position:absolute;right:-140px;top:-220px;width:820px;height:820px;background:radial-gradient(closest-side,rgba(217,84,64,.16),rgba(217,84,64,0))}
+.l{position:absolute;left:84px;top:84px;width:640px}
+.brand{font-weight:700;font-size:44px;letter-spacing:-.05em}
+h1{font-weight:700;font-size:82px;line-height:.98;letter-spacing:-.045em;margin:56px 0 0}
+h1 span{color:#D95440}
+p{font-size:26px;color:#515154;margin:28px 0 0;line-height:1.4}
+.ph{position:absolute;right:100px;top:58px;padding:9px;border-radius:52px;background:#1D1D1F;box-shadow:0 40px 80px -30px rgba(29,29,31,.5)}
+.vp{width:276px;height:597px;border-radius:43px;overflow:hidden;position:relative}
+iframe{position:absolute;left:0;top:0;width:390px;height:844px;border:0;transform:scale(.7077);transform-origin:0 0}
 </style></head>
 <body>
 <div class="l">
-  <div class="brand"><img src="../assets/binder-mark.svg">Binder</div>
-  <h1>Meet the capital that <i>actually fits.</i></h1>
-  <p>Founder ↔ investor matchmaking. Swipe on fit, double opt-in, auto-booked coffee chats.</p>
+  <div class="brand">binder.</div>
+  <h1>Meet the capital that <span>actually fits.</span></h1>
+  <p>Founder ↔ investor matchmaking. Swipe on fit, mutual interest only, coffee chats on both calendars.</p>
 </div>
-<div class="ph"><img src="../assets/video/discover-swipe-poster.jpg"></div>
+<div class="ph"><div class="vp"><iframe src="../demo/index.html?embed&role=founder"></iframe></div></div>
 </body></html>

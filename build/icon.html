@@ -1,7 +1,7 @@
 <!doctype html>
-<!-- Source for the PNG icons. iOS ignores SVG touch icons and masks transparency
-     to black, so the apple-touch icon needs an opaque background baked in. -->
-<html><head><style>
-html,body{margin:0;width:100vw;height:100vh;overflow:hidden;background:#F3F0EA;display:grid;place-items:center}
-img{width:82vw;height:82vw}
-</style></head><body><img src="../assets/binder-mark.svg"></body></html>
+<!-- Source for the PNG icons; ?size=N draws the icon N px square at the top
+     left. Viewport units are no use here: headless Chrome will not make a
+     window as small as 32 px, so 100vw is far wider than the capture. -->
+<html><head><style>html,body{margin:0;background:#D95440}img{display:block}</style></head>
+<body><img id="i" src="../assets/favicon.svg">
+<script>const n = +new URLSearchParams(location.search).get('size') || 180; i.width = n; i.height = n;</script></body></html>

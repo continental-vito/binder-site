@@ -1,0 +1,7 @@
+# Only the page, its assets, the demo and the API are deployed; the rest is tooling.
+build
+tests
+Makefile
+README.md
+CLAUDE.md
+.github

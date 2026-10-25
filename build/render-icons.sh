@@ -12,5 +12,5 @@ shot() { # html out w h
   echo "  $2 ($3×$4)"
 }
 shot build/og.html   assets/og-image.png       1200 630
-shot build/icon.html assets/apple-touch-icon.png 180 180
-shot build/icon.html assets/favicon-32.png      32  32
+shot "build/icon.html?size=180" assets/apple-touch-icon.png 180 180
+shot "build/icon.html?size=32"  assets/favicon-32.png      32  32

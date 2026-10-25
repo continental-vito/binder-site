@@ -14,5 +14,14 @@ node --test "tests/*.test.js" || fail=1
 echo "▸ site checks"
 node build/check-site.mjs || fail=1
 
+# Needs Chrome: present on GitHub's ubuntu runners and on the Mac. Set
+# SKIP_SMOKE=1 only on a machine without it — and say so when reporting.
+if [ "${SKIP_SMOKE:-0}" = "1" ]; then
+  echo "▸ browser smoke test SKIPPED (SKIP_SMOKE=1)"
+else
+  echo "▸ browser smoke test"
+  node build/smoke.mjs || fail=1
+fi
+
 if [ "$fail" -ne 0 ]; then echo "✗ ci failed"; exit 1; fi
 echo "✓ ci passed"

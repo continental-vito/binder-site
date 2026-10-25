@@ -6,8 +6,15 @@ how the app works and to collect demo and call requests.
 
 ## Shape
 
-- Static `index.html` + one Vercel function `api/contact.js`. No framework, no
-  bundler, no npm dependencies — keep it that way unless a real need appears.
+- Static `index.html` + one Vercel function `api/contact.js` + the imported
+  prototype in `demo/`. No framework, no bundler, no npm dependencies — keep it
+  that way unless a real need appears.
+- `demo/index.html` and `demo/icons.js` are **generated** by
+  `build/import-mock.mjs` from the mock export. Never hand-edit them; change
+  `demo/boot.js` / `demo/embed.css`, or re-import.
+- `build/smoke.mjs` drives both pages in headless Chrome and is part of
+  `make ci`. A step on the page that no longer reaches its screen, or an icon
+  missing from the subset, fails there and nowhere else.
 - Public repo `continental-vito/binder-site`. GitHub Actions runs `build/ci.sh`
   on `main` and `dev` (ubuntu runner, free on a public repo). `make ci` runs the
   same script locally — run it before every push.
@@ -18,16 +25,19 @@ how the app works and to collect demo and call requests.
 - **No fabricated traction.** No logos, testimonials, user counts or quotes
   that are not real. The pilot numbers (20 investors / 100 founders / 30 days)
   are the plan from the Idea Lab decision memo and are labelled as such.
-- Profiles in the demo (Lumen Grid, Giulia Russo, Marco Bellini, Northlight)
-  are illustrative and the page says so under the phone.
+- Profiles and photos in the demo (Lumen Grid, Giulia Russo, Marco Bellini,
+  Northlight) are illustrative — the portraits are AI-generated — and the page
+  says so under the phone and on `/demo/`.
 - The form must never claim success for a request that was not delivered.
-- Every screen in the demo exists for both the founder and the investor view;
-  `build/check-site.mjs` enforces it.
-- `assets/` stays under the 1.5 MB budget the check enforces.
+- Visual design follows the app mock: system font (Inter elsewhere), coral
+  `#D95440`, accent background `#FFF1ED`, text `#1D1D1F` / `#515154`, the
+  lowercase `binder.` wordmark.
+- Page + assets + demo stay under the 1 MB budget the check enforces.
 
 ## Source material (outside the repo, in `~/Claude/Binder/`)
 
-- `Figma mock.png` — overview of the 8 mock screens
-- `Binder_04_Discover_swipe.mp4`, `Binder_06_Match.mp4` — prototype exports
+- `Binder-Export-mock-v2/` — **current** mock: 42 screenshots, SVGs, and the
+  interactive prototype the site embeds (`LEGGIMI-FIGMA.md` describes it)
+- `Figma mock.png`, `Binder_0*.mp4` — the superseded v1 mock
 - `Binder_Decision_Memo.pdf` — internal memo (Italian); do not publish it
 - Figma file key `u5rxsOYi5t6d8QW90QqIWl`, prototype start node `19:228`
