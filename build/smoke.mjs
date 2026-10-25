@@ -5,7 +5,8 @@
 //   - the landing page's steps no longer moving the embedded phone
 //   - any uncaught exception or console error on either page
 //
-//   node build/smoke.mjs [--shots DIR]    CHROME=/path/to/chrome to override
+//   node build/smoke.mjs [--shots DIR] [--base https://binder.red]    CHROME=/path/to/chrome to override
+// --base runs the same checks against a deployed site instead of the repo.
 import { createServer } from 'node:http';
 import { readFile, mkdir, writeFile, rm, stat } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
@@ -58,12 +59,15 @@ const server = createServer(async (req, res) => {
   } catch { res.writeHead(404); res.end('not found'); }
 });
 await new Promise((r) => server.listen(0, '127.0.0.1', r));
-const base = `http://127.0.0.1:${server.address().port}`;
+const baseArg = process.argv.indexOf('--base');
+const base = baseArg > 0 ? process.argv[baseArg + 1].replace(/\/$/, '') : `http://127.0.0.1:${server.address().port}`;
 
 const port = 9400 + Math.floor(Math.random() * 400);
 const profile = join(tmpdir(), `binder-smoke-${port}`);
 const chrome = spawn(chromePath, ['--headless=new', '--disable-gpu', '--no-sandbox', '--hide-scrollbars', '--no-first-run',
-  `--remote-debugging-port=${port}`, `--user-data-dir=${profile}`, 'about:blank'], { stdio: 'ignore' });
+  `--remote-debugging-port=${port}`, `--user-data-dir=${profile}`,
+  // e.g. CHROME_ARGS='--host-resolver-rules=MAP binder.red 1.2.3.4' to test a domain before local DNS has it
+  ...(process.env.CHROME_ARGS ? [process.env.CHROME_ARGS] : []), 'about:blank'], { stdio: 'ignore' });
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const failures = [];
@@ -196,5 +200,5 @@ if (failures.length) {
   console.error(`smoke: ${failures.length} problem(s)\n  - ` + failures.join('\n  - '));
   await cleanup(1);
 }
-console.log(`smoke: ok — ${DEMO_PAGES.length * 2} demo screens, ${WALKTHROUGHS.reduce((n, w) => n + w.pages.length, 0) * 2} landing steps${shots ? `, screenshots in ${shots}` : ''}`);
+console.log(`smoke: ok (${base}) — ${DEMO_PAGES.length * 2} demo screens, ${WALKTHROUGHS.reduce((n, w) => n + w.pages.length, 0) * 2} landing steps${shots ? `, screenshots in ${shots}` : ''}`);
 await cleanup(0);

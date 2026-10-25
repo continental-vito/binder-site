@@ -1,7 +1,7 @@
 # One interface for every task. `make ci` is what GitHub Actions runs too.
 MOCK ?=
 
-.PHONY: ci serve dev import shots icons
+.PHONY: ci serve dev import shots live icons
 
 ci:
 	@build/ci.sh
@@ -21,6 +21,11 @@ import:
 # Smoke test with screenshots of every demo screen and landing step, for review.
 shots:
 	node build/smoke.mjs --shots .shots
+
+# The same browser test against the deployed site. Use LIVE=https://<preview> for a preview.
+LIVE ?= https://binder.red
+live:
+	node build/smoke.mjs --base $(LIVE)
 
 # Render the social card and PNG icons from build/*.html with headless Chrome.
 icons:

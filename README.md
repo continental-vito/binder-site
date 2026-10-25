@@ -34,10 +34,18 @@ make shots   # the smoke test, saving a screenshot of every screen to .shots/
 
 ## Deploy on Vercel
 
-1. vercel.com → **Add New → Project** → import `continental-vito/binder-site`.
-2. Framework preset **Other**, no build command, output directory `.` (the defaults).
-3. Production branch: `main`. Every push to `dev` gets its own preview URL.
-4. Add the environment variables below, then redeploy.
+Live at **https://binder.red** — Vercel project `binder-site` (team
+`vitodelcambios-projects`), domain registered through Vercel.
+
+- Production deploys from `main`; every push to `dev` gets a preview URL
+  (behind Vercel login). Merge `dev` → `main` to publish.
+- `www.binder.red` 308-redirects to `binder.red` (set on the project's domains).
+- `binder-site-six.vercel.app` serves the same production deployment.
+- `make live` runs the browser smoke test against the deployed site.
+
+Routing comes from `vercel.json`: `cleanUrls` + `trailingSlash: false` serve
+`demo/index.html` at `/demo`, so anything the demo loads must use an absolute
+`/demo/...` path. The smoke test's local server emulates this.
 
 ### Environment variables
 
