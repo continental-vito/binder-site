@@ -5,9 +5,16 @@ set -euo pipefail
 cd "$(dirname "$0")/.."
 CHROME="${CHROME:-/Applications/Google Chrome.app/Contents/MacOS/Google Chrome}"
 [ -x "$CHROME" ] || { echo "Chrome not found at $CHROME — set CHROME=/path/to/chrome"; exit 1; }
+# Served over HTTP, not file://: the demo inside the social card loads its
+# scripts from absolute /demo/... paths, as it must on Vercel.
+PORT=$(( 8800 + RANDOM % 500 ))
+python3 -m http.server "$PORT" --bind 127.0.0.1 >/dev/null 2>&1 &
+SERVER=$!
+trap 'kill $SERVER 2>/dev/null' EXIT
+for _ in $(seq 1 30); do curl -s -o /dev/null "http://127.0.0.1:$PORT/" && break; sleep 0.2; done
 shot() { # html out w h
   "$CHROME" --headless=new --disable-gpu --hide-scrollbars --force-device-scale-factor=1 \
-    --virtual-time-budget=6000 --window-size="$3,$4" --screenshot="$2" "file://$PWD/$1" 2>/dev/null
+    --virtual-time-budget=6000 --window-size="$3,$4" --screenshot="$2" "http://127.0.0.1:$PORT/$1" 2>/dev/null
   [ -s "$2" ] || { echo "render failed: $2"; exit 1; }
   echo "  $2 ($3×$4)"
 }

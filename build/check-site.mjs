@@ -20,6 +20,11 @@ for (const m of html.matchAll(/\b(?:src|href|poster|content)="(\/[^"#?]*)"/g)) {
   if (!existsSync(join(root, ref))) problems.push(`index.html references ${ref}, which does not exist`);
 }
 
+// 1b. The social card points at a real file on the production domain.
+const og = html.match(/property="og:image" content="([^"]+)"/);
+if (!og || !og[1].startsWith('https://binder.red/')) problems.push('og:image must be an absolute https://binder.red/ URL — link previews drop relative ones');
+else if (!existsSync(join(root, og[1].replace('https://binder.red/', '')))) problems.push(`og:image ${og[1]} has no matching file in the repo`);
+
 // 2. No third-party scripts. Fonts come from Google Fonts as a stylesheet;
 //    anything executable is inline so the page has no runtime dependency.
 for (const m of html.matchAll(/<script[^>]*\bsrc="([^"]+)"/g)) {
@@ -33,14 +38,15 @@ const demo = existsSync(join(root, 'demo/index.html')) ? readFileSync(join(root,
 if (!demo) problems.push('demo/index.html is missing — run node build/import-mock.mjs');
 for (const f of ['boot.js', 'embed.css', 'icons.js']) {
   if (!existsSync(join(root, 'demo', f))) problems.push(`demo/${f} is missing`);
-  if (demo && !demo.includes(`"${f}"`)) problems.push(`demo/index.html does not load ${f} — rerun build/import-mock.mjs`);
+  // Absolute, because Vercel serves the page at /demo, where relative paths resolve to the root.
+  if (demo && !demo.includes(`"/demo/${f}"`)) problems.push(`demo/index.html does not load /demo/${f} — rerun build/import-mock.mjs`);
 }
 if (demo.includes('lucide.js')) problems.push('demo/index.html still loads the full lucide.js bundle');
 if (!/BINDER_STATE_VERSION=\d+/.test(demo)) problems.push('demo/index.html has no BINDER_STATE_VERSION — boot.js cannot drive it');
-if (!/id="heroFrame" src="\/demo\/\?embed&amp;role=/.test(html)) problems.push('#heroFrame must load /demo/?embed&role=…');
+if (!/id="heroFrame" src="\/demo\?embed&amp;role=/.test(html)) problems.push('#heroFrame must load /demo?embed&role=…');
 // The section phones must be locked, or "For investors" can be flipped to the founder app.
 for (const id of ['founderFrame', 'investorFrame']) {
-  if (!new RegExp(`id="${id}" src="/demo/\\?embed&amp;lock&amp;role=`).test(html)) problems.push(`#${id} must load /demo/?embed&lock&role=…`);
+  if (!new RegExp(`id="${id}" src="/demo\\?embed&amp;lock&amp;role=`).test(html)) problems.push(`#${id} must load /demo?embed&lock&role=…`);
 }
 
 // Each walkthrough's steps need one entry each in STEPS[role], or scrolling

@@ -38,7 +38,9 @@ const ver = html.match(/saved\.version===(\d+)/);
 if (!ver) die('could not find the prototype state version (saved.version===N)');
 
 html = replaceOnce(html, '<script src="../assets/lucide.js"></script>',
-  `<link rel="stylesheet" href="embed.css"><script>window.BINDER_STATE_VERSION=${ver[1]}</script><script src="boot.js"></script><script src="icons.js"></script>`,
+  // Absolute paths: vercel.json's cleanUrls serves this page at /demo (no
+  // trailing slash), where a relative "boot.js" would resolve to /boot.js.
+  `<link rel="stylesheet" href="/demo/embed.css"><script>window.BINDER_STATE_VERSION=${ver[1]}</script><script src="/demo/boot.js"></script><script src="/demo/icons.js"></script>`,
   'Lucide script tag');
 html = replaceOnce(html, '<title>Binder</title>', '<title>Binder — interactive demo</title><meta name="robots" content="noindex">', 'title');
 

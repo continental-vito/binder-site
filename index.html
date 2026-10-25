@@ -12,7 +12,12 @@
 <meta property="og:type" content="website">
 <meta property="og:title" content="binder. — Meet the capital that actually fits">
 <meta property="og:description" content="Founder ↔ investor matchmaking. Swipe on fit, mutual interest only, 20-minute coffee chats booked on both calendars.">
-<meta property="og:image" content="/assets/og-image.png">
+<!-- Absolute: link previews (LinkedIn, X, Slack) ignore relative og:image URLs. -->
+<link rel="canonical" href="https://binder.red/">
+<meta property="og:url" content="https://binder.red/">
+<meta property="og:image" content="https://binder.red/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -346,8 +351,8 @@ footer a:hover{color:var(--ink)}
     <div class="hero-stage">
       <div class="device">
         <div class="viewport">
-          <iframe id="heroFrame" src="/demo/?embed&amp;role=founder" title="Binder interactive demo: swipe on investor profiles" loading="eager"></iframe>
-          <a class="btn btn-coral btn-sm tap-demo" href="/demo/?role=founder"><svg class="ic"><use href="#i-expand"/></svg>Open the live demo</a>
+          <iframe id="heroFrame" src="/demo?embed&amp;role=founder" title="Binder interactive demo: swipe on investor profiles" loading="eager"></iframe>
+          <a class="btn btn-coral btn-sm tap-demo" href="/demo?role=founder"><svg class="ic"><use href="#i-expand"/></svg>Open the live demo</a>
         </div>
       </div>
       <p class="hint desk"><svg class="ic"><use href="#i-pointer"/></svg>Live demo — drag the card or tap Connect.</p>
@@ -437,7 +442,7 @@ footer a:hover{color:var(--ink)}
       <div class="stick">
         <div class="device">
           <div class="viewport">
-            <iframe class="how-frame" id="founderFrame" src="/demo/?embed&amp;lock&amp;role=founder&amp;page=financials" title="Binder founder app, showing the current step" loading="lazy"></iframe>
+            <iframe class="how-frame" id="founderFrame" src="/demo?embed&amp;lock&amp;role=founder&amp;page=financials" title="Binder founder app, showing the current step" loading="lazy"></iframe>
           </div>
         </div>
         <div class="dots" role="tablist" aria-label="Founder steps">
@@ -512,7 +517,7 @@ footer a:hover{color:var(--ink)}
       <div class="stick">
         <div class="device">
           <div class="viewport">
-            <iframe class="how-frame" id="investorFrame" src="/demo/?embed&amp;lock&amp;role=vc&amp;page=financials" title="Binder investor app, showing the current step" loading="lazy"></iframe>
+            <iframe class="how-frame" id="investorFrame" src="/demo?embed&amp;lock&amp;role=vc&amp;page=financials" title="Binder investor app, showing the current step" loading="lazy"></iframe>
           </div>
         </div>
         <div class="dots" role="tablist" aria-label="Investor steps">
@@ -586,7 +591,7 @@ footer a:hover{color:var(--ink)}
       <div class="direct">
         <a id="bookDirect" href="#" target="_blank" rel="noopener" hidden><span class="ico"><svg class="ic"><use href="#i-cal"/></svg></span><span>Pick a time now<small>Opens our calendar in a new tab</small></span><svg class="ic go"><use href="#i-arrow"/></svg></a>
         <a id="mailDirect" href="#" hidden><span class="ico"><svg class="ic"><use href="#i-mail"/></svg></span><span id="mailLabel">Email us<small>We reply within one working day</small></span><svg class="ic go"><use href="#i-arrow"/></svg></a>
-        <a href="/demo/" target="_blank" rel="noopener"><span class="ico"><svg class="ic"><use href="#i-expand"/></svg></span><span>Try the prototype full screen<small>Best on a phone</small></span><svg class="ic go"><use href="#i-arrow"/></svg></a>
+        <a href="/demo" target="_blank" rel="noopener"><span class="ico"><svg class="ic"><use href="#i-expand"/></svg></span><span>Try the prototype full screen<small>Best on a phone</small></span><svg class="ic go"><use href="#i-arrow"/></svg></a>
       </div>
     </div>
 
@@ -639,7 +644,7 @@ footer a:hover{color:var(--ink)}
     </div>
     <div class="faq">
       <details><summary>Is Binder live?<svg class="ic"><use href="#i-plus"/></svg></summary><p>We're running a pilot with a founding cohort of founders and investors. The pilot follows the same flow you see above — stated intent, fit, mutual interest, a booked call — with our team reviewing every match. Book a demo to see where the product is today.</p></details>
-      <details><summary>Can I try it?<svg class="ic"><use href="#i-plus"/></svg></summary><p>Yes — the phones on this page run the actual prototype. Swipe, connect, book a slot, edit a profile. Nothing you do there is sent anywhere. <a href="/demo/">Open it full screen</a>; it works best on a phone.</p></details>
+      <details><summary>Can I try it?<svg class="ic"><use href="#i-plus"/></svg></summary><p>Yes — the phones on this page run the actual prototype. Swipe, connect, book a slot, edit a profile. Nothing you do there is sent anywhere. <a href="/demo">Open it full screen</a>; it works best on a phone.</p></details>
       <details><summary>Who can see my profile?<svg class="ic"><use href="#i-plus"/></svg></summary><p>Only people on the other side whose criteria you fit, and you choose the visibility: relevant matches, connections only, or paused. Founders appear only to investors whose ticket, stage and thesis include them.</p></details>
       <details><summary>Does anyone find out if I pass?<svg class="ic"><use href="#i-plus"/></svg></summary><p>No. A pass is private. The other side only ever hears about a mutual yes.</p></details>
       <details><summary>How is this different from an investor database?<svg class="ic"><use href="#i-plus"/></svg></summary><p>A database gives you names and leaves the outreach to you. Binder only surfaces people who fit, only connects you when both sides say yes, and turns that yes straight into a meeting on both calendars.</p></details>
@@ -666,7 +671,7 @@ footer a:hover{color:var(--ink)}
 <footer>
   <div class="wrap">
     <a class="brand wordmark" href="#top" style="font-size:22px">binder.</a>
-    <nav aria-label="Footer"><a href="#founders">For founders</a><a href="#investors">For investors</a><a href="/demo/">Live demo</a><a href="#pilot">Pilot</a><a href="#faq">FAQ</a><a href="#contact">Contact</a></nav>
+    <nav aria-label="Footer"><a href="#founders">For founders</a><a href="#investors">For investors</a><a href="/demo">Live demo</a><a href="#pilot">Pilot</a><a href="#faq">FAQ</a><a href="#contact">Contact</a></nav>
     <span>© 2026 Binder</span>
   </div>
 </footer>

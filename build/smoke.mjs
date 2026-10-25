@@ -7,7 +7,7 @@
 //
 //   node build/smoke.mjs [--shots DIR]    CHROME=/path/to/chrome to override
 import { createServer } from 'node:http';
-import { readFile, mkdir, writeFile, rm } from 'node:fs/promises';
+import { readFile, mkdir, writeFile, rm, stat } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import { spawn } from 'node:child_process';
 import { join, dirname, extname, normalize } from 'node:path';
@@ -33,12 +33,28 @@ const DEMO_PAGES = ['discover', 'match', 'conversation', 'connection', 'meeting-
   'profile', 'edit', 'preferences', 'financials', 'visibility', 'calendar'];
 
 const TYPES = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.svg': 'image/svg+xml', '.png': 'image/png', '.jpg': 'image/jpeg', '.webp': 'image/webp', '.json': 'application/json' };
+// Serve the way Vercel does with this vercel.json: cleanUrls + trailingSlash
+// false means /demo/ redirects to /demo and /demo serves demo/index.html. A
+// plain static server serves /demo/ directly, which hid a production bug:
+// relative script paths in the demo resolved against / and 404'd.
+const vercelCfg = JSON.parse(await readFile(join(root, 'vercel.json'), 'utf8'));
+if (vercelCfg.cleanUrls !== true || vercelCfg.trailingSlash !== false) {
+  console.error('smoke: vercel.json routing changed (cleanUrls/trailingSlash) — update the emulation in smoke.mjs to match');
+  process.exit(1);
+}
+const isFile = async (f) => { try { return (await stat(f)).isFile(); } catch { return false; } };
 const server = createServer(async (req, res) => {
-  let p = normalize(decodeURIComponent(new URL(req.url, 'http://x').pathname));
-  if (p.endsWith('/')) p += 'index.html';
+  const url = new URL(req.url, 'http://x');
+  let p = normalize(decodeURIComponent(url.pathname));
+  if (p.length > 1 && p.endsWith('/')) { res.writeHead(308, { Location: p.slice(0, -1) + url.search }); return res.end(); }
+  let file = join(root, p);
+  if (!extname(p)) {
+    if (await isFile(file + '.html')) file += '.html';
+    else if (await isFile(join(file, 'index.html'))) file = join(file, 'index.html');
+  }
   try {
-    const body = await readFile(join(root, p));
-    res.writeHead(200, { 'Content-Type': TYPES[extname(p)] || 'application/octet-stream' }); res.end(body);
+    const body = await readFile(file);
+    res.writeHead(200, { 'Content-Type': TYPES[extname(file)] || 'application/octet-stream' }); res.end(body);
   } catch { res.writeHead(404); res.end('not found'); }
 });
 await new Promise((r) => server.listen(0, '127.0.0.1', r));
@@ -101,8 +117,10 @@ try {
   await send('Runtime.enable'); await send('Page.enable');
 
   // 1. Every prototype screen, both roles, renders with all its icons.
-  await open(`${base}/demo/?embed`, 390, 844, 2);
+  await open(`${base}/demo?embed`, 390, 844, 2);
   if (!(await evaluate('typeof window.binderGo === "function"'))) failures.push('demo: boot.js did not load (window.binderGo missing)');
+  if (!(await evaluate('typeof window.lucide === "object"'))) failures.push('demo: icons.js did not load (window.lucide missing)');
+  if ((await evaluate(`getComputedStyle(document.getElementById('binder-color')).paddingTop`)) !== '0px') failures.push('demo: embed.css did not apply (prototype still has its own frame padding)');
   for (const role of ['founder', 'vc']) {
     for (const page of DEMO_PAGES) {
       await evaluate(`binderGo(${JSON.stringify({ role, page, index: 0, matchTab: 'new', activeContact: 'marco', activeMeeting: 'demo-1' })})`);
