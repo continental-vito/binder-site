@@ -1,0 +1,1160 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Binder — Meet the capital that actually fits</title>
+<meta name="description" content="Binder matches founders with investors on sector, stage, ticket and geography. Swipe on fit, double opt-in, and a 20-minute coffee chat books itself into both calendars.">
+<meta name="theme-color" content="#F3F0EA">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Binder — Meet the capital that actually fits">
+<meta property="og:description" content="Founder ↔ investor matchmaking. Swipe on fit, double opt-in, auto-booked 20-minute coffee chats.">
+<meta property="og:image" content="/assets/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500;1,9..144,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F3F0EA; --bg-2:#EBE6DD; --surface:#FFFFFF;
+  --ink:#141A21; --ink-2:#4A5260; --muted:#868C96; --line:#E3DED5;
+  --coral:#F0603D; --coral-hot:#FF7A45; --coral-soft:#FCE5DC; --coral-ink:#C8401F;
+  --green:#1E9A58; --green-soft:#DDF2E5;
+  --navy:#26386A; --night:#11161C; --night-2:#1B222B;
+  --gold:#F2B23A;
+  --serif:"Fraunces", Georgia, "Times New Roman", serif;
+  --sans:"DM Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --radius:22px;
+  --shadow:0 1px 2px rgba(20,26,33,.04), 0 12px 32px -12px rgba(20,26,33,.18);
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img,video,svg{display:block;max-width:100%}
+a{color:inherit}
+button{font:inherit;color:inherit}
+.wrap{max-width:1160px;margin:0 auto;padding:0 24px}
+@media (max-width:600px){.wrap{padding:0 16px}}
+.serif{font-family:var(--serif);font-optical-sizing:auto}
+em.hl{font-style:italic;color:var(--coral)}
+.eyebrow{font-size:12.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+h1,h2,h3{font-family:var(--serif);font-weight:600;letter-spacing:-.015em;margin:0;line-height:1.05;text-wrap:balance}
+h2{font-size:clamp(34px,4.6vw,54px)}
+h3{font-size:24px;line-height:1.15}
+p{margin:0}
+.lede{font-size:clamp(17px,1.6vw,20px);color:var(--ink-2);line-height:1.55;text-wrap:pretty}
+.ic{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
+/* Component display rules (.direct a{display:flex}) would otherwise beat the
+   hidden attribute and show links that have nowhere to go. */
+[hidden]{display:none!important}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* ---------- Buttons ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:54px;padding:0 26px;border-radius:999px;border:0;font-weight:600;font-size:16.5px;text-decoration:none;cursor:pointer;transition:transform .15s ease, background .15s ease, box-shadow .15s ease;white-space:nowrap}
+.btn:active{transform:translateY(1px) scale(.99)}
+.btn-coral{background:var(--coral);color:#fff;box-shadow:0 10px 24px -10px rgba(240,96,61,.7)}
+.btn-coral:hover{background:#E4502D}
+.btn-ink{background:var(--ink);color:#fff}
+.btn-ink:hover{background:#000}
+.btn-ghost{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--line)}
+.btn-ghost:hover{box-shadow:inset 0 0 0 1.5px var(--ink)}
+.btn-sm{height:42px;padding:0 18px;font-size:15px}
+:focus-visible{outline:2.5px solid var(--coral);outline-offset:3px;border-radius:8px}
+
+/* ---------- Nav ---------- */
+.nav{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:saturate(1.4) blur(14px);-webkit-backdrop-filter:saturate(1.4) blur(14px);border-bottom:1px solid transparent;transition:border-color .2s}
+.nav.scrolled{border-bottom-color:var(--line)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:70px;gap:16px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:var(--serif);font-weight:600;font-size:25px;letter-spacing:-.02em}
+.brand img{width:34px;height:34px}
+.nav-links{display:flex;gap:30px;font-size:15.5px;font-weight:500;color:var(--ink-2)}
+.nav-links a{text-decoration:none}
+.nav-links a:hover{color:var(--ink)}
+.nav-cta{display:flex;gap:10px;align-items:center}
+@media (max-width:880px){.nav-links{display:none}}
+@media (max-width:420px){.nav-cta .btn-ghost{display:none}}
+
+/* ---------- Hero ---------- */
+.hero{position:relative;padding:56px 0 40px;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:-20% -10% auto auto;width:780px;height:780px;background:radial-gradient(closest-side,rgba(240,96,61,.20),rgba(240,96,61,0));pointer-events:none}
+.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;position:relative}
+.hero h1{font-size:clamp(46px,6.6vw,84px);line-height:1;letter-spacing:-.025em}
+.hero .lede{margin-top:24px;max-width:540px}
+.hero-ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:34px}
+.trust{display:flex;align-items:center;gap:8px;margin-top:22px;font-size:14.5px;color:var(--ink-2)}
+.trust .ic{color:var(--green);font-size:18px}
+.pill-tag{display:inline-flex;align-items:center;gap:8px;padding:6px 14px 6px 8px;border-radius:999px;background:var(--surface);box-shadow:var(--shadow);font-size:14px;font-weight:500;color:var(--ink-2);margin-bottom:26px;text-decoration:none}
+.pill-tag b{background:var(--coral-soft);color:var(--coral-ink);font-weight:600;padding:3px 10px;border-radius:999px;font-size:12.5px}
+.hero-stage{position:relative;display:flex;justify-content:center;min-height:620px}
+.float{position:absolute;background:var(--surface);border-radius:18px;box-shadow:var(--shadow);padding:12px 16px;font-size:14px;display:flex;align-items:center;gap:10px;font-weight:500;animation:bob 6s ease-in-out infinite}
+.float .dot{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;color:#fff;font-size:15px}
+.float small{display:block;color:var(--muted);font-size:12px;font-weight:500}
+.f1{left:-4px;top:110px}
+.f2{right:-8px;top:300px;animation-delay:-2s}
+.f3{left:12px;bottom:70px;animation-delay:-4s}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@media (prefers-reduced-motion:reduce){.float{animation:none}}
+@media (max-width:960px){
+  .hero .wrap{grid-template-columns:1fr;gap:28px}
+  .hero{padding-top:36px}
+  .hero-stage{min-height:0}
+  .f1{left:0;top:70px}.f2{right:0;top:260px}.f3{display:none}
+}
+@media (max-width:420px){.float{font-size:12.5px;padding:9px 12px}.float .dot{width:24px;height:24px;font-size:12px}}
+
+/* ---------- Device ---------- */
+.device{--pw:300;position:relative;flex:none;padding:9px;border-radius:calc(var(--pw) * .145px + 9px);background:linear-gradient(145deg,#2A3039,#0C0F13);box-shadow:0 40px 80px -30px rgba(20,26,33,.55),0 0 0 1px rgba(255,255,255,.06) inset}
+.viewport{position:relative;width:calc(var(--pw) * 1px);height:calc(var(--pw) * 2.168px);border-radius:calc(var(--pw) * .145px);overflow:hidden;background:var(--bg);isolation:isolate}
+.viewport video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .5s ease}
+.viewport video.hidden{opacity:0}
+.canvas{position:absolute;left:0;top:0;width:393px;height:852px;transform-origin:0 0;transform:scale(calc(var(--pw) / 393))}
+.hero .device{--pw:300}
+@media (max-width:420px){.hero .device{--pw:262}}
+
+/* ================= App screens (393×852 design space) ================= */
+.scr{position:absolute;inset:0;background:var(--bg);font-family:var(--sans);color:var(--ink);font-size:14px;line-height:1.35;overflow:hidden;opacity:0;transform:translateY(14px) scale(.985);transition:opacity .45s ease, transform .55s cubic-bezier(.2,.8,.2,1);pointer-events:none}
+.scr.on{opacity:1;transform:none}
+.sb{height:54px;display:flex;align-items:center;justify-content:space-between;padding:6px 30px 0 36px;font-weight:600;font-size:16.5px;letter-spacing:-.01em}
+.sb-r{display:flex;gap:6px;align-items:center}
+.sb-r svg{height:12px;width:auto;fill:currentColor}
+.home-ind{position:absolute;bottom:8px;left:50%;width:134px;height:5px;border-radius:3px;background:var(--ink);transform:translateX(-50%);opacity:.9}
+.s-serif{font-family:var(--serif);font-weight:600;letter-spacing:-.01em}
+.s-sub{color:var(--ink-2);font-size:13.5px}
+.s-lbl{font-size:10.5px;font-weight:600;letter-spacing:.12em;color:var(--muted);text-transform:uppercase}
+.s-card{background:#fff;border-radius:20px;padding:16px}
+.s-cta{position:absolute;left:20px;right:20px;bottom:42px;height:54px;border-radius:16px;background:var(--coral);color:#fff;font-weight:600;font-size:16px;display:grid;place-items:center}
+.s-fade{position:absolute;left:0;right:0;bottom:0;height:170px;background:linear-gradient(rgba(243,240,234,0),var(--bg) 45%)}
+.s-top{display:flex;align-items:center;gap:12px;padding:6px 20px 0}
+.s-prog{flex:1;display:flex;gap:6px}
+.s-prog i{flex:1;height:3px;border-radius:2px;background:var(--ink)}
+.s-prog i:last-child{background:var(--line)}
+.s-h{font-size:27px;padding:20px 22px 0;line-height:1.12}
+.s-p{padding:8px 22px 0;color:var(--ink-2);font-size:13.5px;line-height:1.45}
+.s-stack{display:flex;flex-direction:column;gap:12px;padding:16px 20px 0}
+.s-row{display:flex;align-items:center;gap:12px}
+.s-tile{width:46px;height:46px;border-radius:12px;display:grid;place-items:center;color:#fff;font-family:var(--serif);font-weight:600;font-size:22px;flex:none}
+.s-tile.lumen{background:linear-gradient(135deg,#FF9147,#EE5A3A)}
+.s-av{border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:700;flex:none;letter-spacing:.01em}
+.s-av.mb{background:radial-gradient(circle at 30% 25%,#4C67B0,#1C2B57)}
+.s-av.gr{background:radial-gradient(circle at 30% 25%,#FF9A4D,#EE5534)}
+.s-name{font-weight:600;font-size:15px;display:flex;align-items:center;gap:5px}
+.s-name .ic{color:var(--green);width:15px;height:15px}
+.seg{display:flex;background:var(--bg-2);border-radius:12px;padding:3px;margin-top:10px}
+.seg span{flex:1;text-align:center;padding:8px 0;font-size:13px;color:var(--ink-2);border-radius:9px}
+.seg span.on{background:#fff;color:var(--ink);font-weight:600;box-shadow:0 1px 2px rgba(0,0,0,.06)}
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}
+.chip{padding:6px 13px;border-radius:999px;font-size:12.5px;border:1px solid var(--line);color:var(--ink);font-weight:500}
+.chip.on{background:var(--ink);border-color:var(--ink);color:#fff}
+.gchip{display:inline-flex;align-items:center;gap:5px;padding:5px 11px;border-radius:999px;background:var(--green-soft);color:var(--green);font-size:12.5px;font-weight:500}
+.gchip .ic{width:12px;height:12px;stroke-width:3}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
+.stat{background:var(--bg);border-radius:12px;padding:9px 11px}
+.stat b{display:block;font-size:17px;font-weight:700;letter-spacing:-.01em}
+.stat span{font-size:11px;color:var(--ink-2)}
+.bar{height:5px;border-radius:3px;background:var(--line);overflow:hidden}
+.bar i{display:block;height:100%;background:var(--green);border-radius:3px}
+
+/* Discover */
+.d-head{display:flex;justify-content:space-between;align-items:flex-start;padding:10px 20px 0 20px}
+.d-head h4{font-family:var(--serif);font-weight:600;font-size:29px;margin:0;line-height:1}
+.d-head p{font-size:13px;color:var(--ink-2);margin-top:4px}
+.round{width:44px;height:44px;border-radius:50%;background:#fff;display:grid;place-items:center;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.round .ic{width:19px;height:19px}
+.deck{position:absolute;left:20px;right:20px;top:118px}
+.deck::before,.deck::after{content:"";position:absolute;left:10px;right:10px;bottom:-10px;height:40px;border-radius:24px;background:#fff;opacity:.6;z-index:-1}
+.deck::after{left:20px;right:20px;bottom:-19px;opacity:.35}
+.pcard{background:#fff;border-radius:26px;overflow:hidden;box-shadow:0 18px 40px -18px rgba(20,26,33,.35);transform-origin:50% 120%}
+.scr.on .pcard{animation:nudge 4.2s ease-in-out 1s infinite}
+@keyframes nudge{0%,70%,100%{transform:none}80%{transform:translateX(16px) rotate(2.2deg)}90%{transform:translateX(-6px) rotate(-.8deg)}}
+@media (prefers-reduced-motion:reduce){.scr.on .pcard{animation:none}}
+.p-hero{height:175px;position:relative;padding:16px;overflow:hidden}
+.p-hero.warm{background:linear-gradient(120deg,#F6A04C,#EE6440 55%,#E9573C)}
+.p-hero.night{background:linear-gradient(120deg,#2A3C6E,#1A2238 60%,#141922)}
+.p-hero::before{content:"";position:absolute;right:-60px;top:-50px;width:230px;height:230px;border-radius:50%;background:rgba(255,255,255,.12)}
+.p-hero::after{content:"";position:absolute;left:-50px;bottom:-70px;width:160px;height:160px;border-radius:50%;background:rgba(255,255,255,.08)}
+.fit{position:absolute;left:16px;top:16px;background:#fff;border-radius:999px;padding:5px 11px;font-size:12.5px;font-weight:600;display:flex;align-items:center;gap:5px;z-index:1}
+.fit svg{width:11px;height:11px;fill:var(--ink)}
+.stage{position:absolute;right:16px;top:16px;background:rgba(0,0,0,.22);color:#fff;border-radius:999px;padding:5px 12px;font-size:12.5px;font-weight:500;z-index:1}
+.p-hero .logo{position:absolute;left:20px;bottom:22px;width:64px;height:64px;border-radius:16px;background:#fff;display:grid;place-items:center;font-family:var(--serif);font-size:34px;font-weight:600;color:var(--coral);z-index:1}
+.p-hero .s-av{position:absolute;left:20px;bottom:22px;width:72px;height:72px;font-size:22px;border:3px solid rgba(255,255,255,.85);z-index:1}
+.p-body{padding:16px 20px 18px}
+.p-body h5{font-family:var(--serif);font-weight:600;font-size:25px;margin:0;display:flex;align-items:center;gap:7px;line-height:1.1}
+.p-body h5 .ic{color:var(--green);width:19px;height:19px}
+.p-tag{color:var(--ink-2);font-size:14px;margin-top:5px}
+.p-loc{display:flex;gap:6px;align-items:center;font-size:13px;color:var(--ink-2);margin-top:9px}
+.p-loc .ic{width:14px;height:14px}
+.p-why{margin-top:12px}
+.p-why .chips{gap:6px;margin-top:7px}
+.p-person{display:flex;gap:10px;align-items:center;margin-top:14px;font-size:13px}
+.p-person .s-av{width:32px;height:32px;font-size:11.5px}
+.p-person b{display:block;font-size:13.5px}
+.p-person span{color:var(--ink-2);font-size:12.5px}
+.p-next{margin-top:12px;background:var(--coral-soft);color:var(--coral-ink);border-radius:12px;padding:10px 12px;font-size:13px;font-weight:500;display:flex;gap:7px;align-items:center}
+.p-next .ic{width:15px;height:15px}
+.actions{position:absolute;left:0;right:0;top:684px;display:flex;justify-content:center;align-items:center;gap:16px}
+.actions span{border-radius:50%;background:#fff;display:grid;place-items:center;box-shadow:0 6px 16px -6px rgba(20,26,33,.25)}
+.a-undo{width:42px;height:42px;color:var(--muted)}
+.a-x{width:62px;height:62px}
+.a-x .ic{width:24px;height:24px;stroke-width:2.2}
+.a-star{width:46px;height:46px;color:var(--gold)}
+.a-star svg{width:18px;height:18px;fill:currentColor}
+.a-yes{width:64px;height:64px;background:var(--coral)!important;color:#fff}
+.a-yes .ic{width:26px;height:26px;stroke-width:2.6}
+.tabs{position:absolute;left:0;right:0;bottom:0;height:86px;background:#fff;display:grid;grid-template-columns:repeat(4,1fr);padding-top:10px;border-top:1px solid #EFEBE4}
+.tabs span{display:flex;flex-direction:column;align-items:center;gap:4px;font-size:11px;color:var(--muted);font-weight:500}
+.tabs span .ic{width:22px;height:22px;stroke-width:1.7}
+.tabs span.on{color:var(--coral)}
+
+/* Match */
+.scr.match{background:radial-gradient(120% 70% at 50% 40%,#4A2620 0%,#2A1A1A 40%,#12171D 75%);color:#fff}
+.scr.match .home-ind{background:#fff}
+.m-avs{position:relative;height:164px;margin-top:56px}
+.m-avs .s-av{position:absolute;top:0;width:128px;height:128px;font-size:34px;border:4px solid #12171D;letter-spacing:-.02em}
+.m-avs .a1{left:72px}.m-avs .a2{left:188px}
+.m-check{position:absolute;left:170px;top:96px;width:52px;height:52px;border-radius:50%;background:var(--green);border:4px solid #12171D;display:grid;place-items:center;z-index:2}
+.m-check .ic{width:22px;height:22px;stroke-width:3;color:#fff}
+.scr.on .m-avs .a1{animation:inL .7s cubic-bezier(.2,.9,.3,1.2) both}
+.scr.on .m-avs .a2{animation:inR .7s cubic-bezier(.2,.9,.3,1.2) both}
+.scr.on .m-check{animation:pop .45s .55s cubic-bezier(.3,1.6,.5,1) both}
+@keyframes inL{from{transform:translateX(-90px);opacity:0}}
+@keyframes inR{from{transform:translateX(90px);opacity:0}}
+@keyframes pop{from{transform:scale(0)}}
+.optin{margin:22px auto 0;width:max-content;display:flex;gap:6px;align-items:center;background:rgba(30,154,88,.2);color:#5BD08E;border-radius:999px;padding:6px 14px;font-size:11.5px;font-weight:600;letter-spacing:.12em}
+.optin .ic{width:14px;height:14px}
+.m-h{font-family:var(--serif);font-weight:600;font-size:52px;text-align:center;margin-top:12px;letter-spacing:-.02em}
+.m-h i{color:var(--coral-hot)}
+.m-p{text-align:center;color:rgba(255,255,255,.75);font-size:14.5px;padding:8px 36px 0;line-height:1.45}
+.m-fit{margin:18px 32px 0;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.06);border-radius:18px;padding:14px 16px}
+.m-fit .t{display:flex;justify-content:space-between;font-weight:600;font-size:14px}
+.m-fit .t b{color:var(--gold)}
+.m-fit .bar{background:rgba(255,255,255,.18);margin:10px 0}
+.m-fit .bar i{width:94%;background:linear-gradient(90deg,var(--coral),var(--gold))}
+.m-fit small{color:rgba(255,255,255,.6);font-size:12.5px}
+.m-keep{position:absolute;left:0;right:0;bottom:208px;text-align:center;color:rgba(255,255,255,.6);font-size:13.5px}
+.m-b1,.m-b2{position:absolute;left:32px;right:32px;height:54px;border-radius:16px;display:grid;place-items:center;font-weight:600;font-size:15.5px}
+.m-b1{bottom:126px;background:var(--coral)}
+.m-b2{bottom:58px;background:#232B33;border:1px solid rgba(255,255,255,.12)}
+.confetti i{position:absolute;width:7px;height:14px;border-radius:2px;opacity:0}
+.scr.on .confetti i{animation:fall 2.6s ease-in both}
+@keyframes fall{0%{opacity:0;transform:translateY(-40px) rotate(0)}15%{opacity:1}100%{opacity:1;transform:translateY(var(--y,60px)) rotate(var(--r,200deg))}}
+
+/* Booking */
+.b-head{display:flex;align-items:center;gap:12px;padding:6px 20px 0}
+.b-head .ic{width:22px;height:22px}
+.b-head b{font-size:16px;display:block}
+.b-head small{color:var(--ink-2);font-size:12px}
+.b-avs{margin-left:auto;display:flex}
+.b-avs .s-av{width:34px;height:34px;font-size:11.5px;border:2px solid var(--bg)}
+.b-avs .s-av+.s-av{margin-left:-12px}
+.days{display:grid;grid-template-columns:repeat(5,1fr);gap:7px;padding:16px 20px 0}
+.days span{background:#fff;border-radius:14px;padding:9px 0 7px;text-align:center;font-size:11.5px;color:var(--ink-2)}
+.days span b{display:block;font-size:19px;color:var(--ink);margin-top:2px}
+.days span.off b{color:var(--muted)}
+.days span i{display:block;width:5px;height:5px;border-radius:50%;margin:4px auto 0;background:var(--line)}
+.days span i.g{background:var(--green)}
+.days span.on{background:var(--ink);color:rgba(255,255,255,.75)}
+.days span.on b{color:#fff}
+.days span.on i{background:var(--coral)}
+.slots{display:flex;flex-direction:column;gap:9px;padding:8px 20px 0}
+.slot{background:#fff;border-radius:14px;height:52px;display:flex;align-items:center;gap:12px;padding:0 14px;font-weight:600;font-size:15.5px;border:1.5px solid transparent}
+.slot .r{width:19px;height:19px;border-radius:50%;border:1.5px solid #CFCAC1}
+.slot.on{background:var(--coral-soft);border-color:var(--coral)}
+.slot.on .r{border:5px solid var(--coral);background:#fff;box-shadow:inset 0 0 0 2px #fff}
+.slot .gchip{margin-left:auto;font-size:11.5px;padding:4px 9px}
+.dur{display:flex;align-items:center;gap:7px;padding:14px 20px 0;font-size:13px;color:var(--ink-2)}
+.dur .ic{width:17px;height:17px}
+.dur span{background:#fff;border-radius:999px;padding:6px 12px;font-size:12.5px;color:var(--ink);font-weight:500}
+.dur span.on{background:var(--ink);color:#fff}
+.agenda{margin:14px 20px 0;background:#fff;border-radius:16px;padding:13px 16px;font-size:12.5px;line-height:1.75}
+.agenda b{color:var(--coral);display:flex;gap:6px;align-items:center;font-size:12.5px}
+.agenda b svg{width:11px;height:11px;fill:currentColor}
+.agenda ul{margin:4px 0 0;padding-left:14px}
+
+/* Chat */
+.c-head{display:flex;align-items:center;gap:11px;padding:4px 20px 12px;border-bottom:1px solid #E9E4DB;background:var(--bg)}
+.c-head > .ic{width:22px;height:22px}
+.c-head .s-av{width:42px;height:42px;font-size:14px;position:relative}
+.c-head .s-av::after{content:"";position:absolute;right:0;bottom:0;width:10px;height:10px;border-radius:50%;background:#3CC37A;border:2px solid var(--bg)}
+.c-head b{font-size:16px;display:block}
+.c-head small{font-size:12px;color:var(--ink-2)}
+.c-head .round{margin-left:auto;width:40px;height:40px;background:var(--bg-2);box-shadow:none}
+.pinned{margin:12px 16px 0;background:var(--night);color:#fff;border-radius:18px;padding:12px 12px 12px 14px;display:flex;align-items:center;gap:11px}
+.pinned .cup{width:38px;height:38px;border-radius:11px;background:var(--coral);display:grid;place-items:center;flex:none}
+.pinned .cup .ic{width:19px;height:19px}
+.pinned b{font-size:13.5px;display:block}
+.pinned small{font-size:11px;color:rgba(255,255,255,.65)}
+.pinned .join{margin-left:auto;background:#fff;color:var(--ink);font-weight:600;font-size:13px;padding:7px 14px;border-radius:999px}
+.sys{display:flex;justify-content:center;align-items:center;gap:5px;font-size:11.5px;color:var(--muted);margin-top:12px}
+.sys .ic{width:13px;height:13px;color:var(--green)}
+.msgs{display:flex;flex-direction:column;gap:9px;padding:12px 16px 0}
+.bub{max-width:76%;padding:10px 14px;border-radius:18px;font-size:13.5px;line-height:1.4;background:#fff;align-self:flex-start;border-bottom-left-radius:6px}
+.bub small{display:block;font-size:10.5px;color:var(--muted);margin-top:4px}
+.bub.file{display:flex;align-items:center;gap:10px;padding:9px 14px 9px 9px}
+.bub.file .fi{width:34px;height:34px;border-radius:9px;background:var(--coral-soft);color:var(--coral);display:grid;place-items:center}
+.bub.file .fi .ic{width:17px;height:17px}
+.bub.file b{font-size:13px;display:block}
+.typing{align-self:flex-start;background:#fff;border-radius:16px;padding:12px 16px;display:flex;gap:4px}
+.typing i{width:7px;height:7px;border-radius:50%;background:#A7ACB3;animation:blink 1.2s infinite}
+.typing i:nth-child(2){animation-delay:.2s}.typing i:nth-child(3){animation-delay:.4s}
+@keyframes blink{0%,60%,100%{opacity:.35}30%{opacity:1}}
+.quick{position:absolute;left:16px;right:0;bottom:96px;display:flex;gap:8px;overflow:hidden}
+.quick span{background:#fff;border-radius:999px;padding:8px 14px;font-size:12.5px;white-space:nowrap;font-weight:500;border:1px solid #ECE7DF}
+.composer{position:absolute;left:16px;right:16px;bottom:36px;display:flex;gap:10px;align-items:center}
+.composer .plus{width:44px;height:44px;border-radius:50%;background:#fff;display:grid;place-items:center}
+.composer .field{flex:1;height:44px;border-radius:999px;background:#fff;display:flex;align-items:center;padding:0 16px;color:var(--muted);font-size:14px}
+.composer .send{width:44px;height:44px;border-radius:50%;background:var(--coral);color:#fff;display:grid;place-items:center}
+.composer .ic{width:19px;height:19px}
+
+/* Perspective: the same screens serve both sides of the table. In founder
+   mode the founder (Giulia) is "you"; in investor mode Marco is. */
+[data-mode="founder"] .i-only,[data-mode="investor"] .f-only{display:none!important}
+[data-mode="founder"] .bub.from-g,[data-mode="investor"] .bub.from-m{align-self:flex-end;background:var(--night);color:#fff;border-radius:18px;border-bottom-right-radius:6px}
+[data-mode="founder"] .bub.from-g small,[data-mode="investor"] .bub.from-m small{color:rgba(255,255,255,.55)}
+[data-mode="founder"] .bub.file.from-g .fi{background:rgba(255,255,255,.12);color:#fff}
+
+/* ---------- Sections ---------- */
+section{position:relative}
+.sec{padding:110px 0}
+@media (max-width:700px){.sec{padding:76px 0}}
+.sec-head{max-width:760px}
+.sec-head .lede{margin-top:18px}
+.sec-head .eyebrow{margin-bottom:16px;display:block}
+
+/* Problem */
+.problem{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:54px}
+.pcell{background:var(--surface);border-radius:var(--radius);padding:28px;box-shadow:var(--shadow)}
+.pcell .k{font-size:13px;font-weight:600;color:var(--coral-ink);text-transform:uppercase;letter-spacing:.1em}
+.pcell h3{margin-top:12px}
+.pcell p{color:var(--ink-2);margin-top:10px;font-size:16px}
+@media (max-width:880px){.problem{grid-template-columns:1fr}}
+
+/* How it works */
+.how{background:var(--surface);border-radius:40px;margin:0 12px}
+@media (max-width:600px){.how{border-radius:28px;margin:0 6px}}
+.how-top{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap}
+.toggle{display:inline-flex;background:var(--bg);border-radius:999px;padding:5px;gap:4px}
+.toggle button{border:0;background:transparent;height:44px;padding:0 20px;border-radius:999px;font-weight:600;font-size:15px;color:var(--ink-2);cursor:pointer;display:flex;align-items:center;gap:8px;transition:background .2s,color .2s}
+.toggle button .ic{font-size:17px}
+.toggle button[aria-pressed="true"]{background:var(--ink);color:#fff}
+.how-grid{display:grid;grid-template-columns:1fr 400px;gap:70px;margin-top:40px}
+.steps{list-style:none;margin:0;padding:0}
+.step{min-height:72vh;display:flex;flex-direction:column;justify-content:center;padding:24px 0;opacity:.32;transition:opacity .4s ease}
+.step.on{opacity:1}
+.step .n{font-family:var(--serif);font-style:italic;color:var(--coral);font-size:22px;font-weight:500}
+.step h3{font-size:clamp(28px,3.2vw,40px);margin-top:8px;line-height:1.08}
+.step p{color:var(--ink-2);margin-top:14px;max-width:480px;font-size:17.5px}
+.step ul{margin:18px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:9px}
+.step li{display:flex;gap:10px;align-items:flex-start;font-size:15.5px;color:var(--ink)}
+.step li .ic{color:var(--green);margin-top:4px;stroke-width:2.6}
+.stick{position:sticky;top:calc(50vh - 340px);height:max-content;display:flex;flex-direction:column;align-items:center;gap:20px}
+.stick .device{--pw:316}
+/* The phone must fit under the nav with its dots on a 13" laptop, or the
+   bottom of every screen — where the CTAs are — is never seen. */
+@media (min-width:961px) and (max-height:860px){.stick{top:84px}.stick .device{--pw:290}}
+@media (min-width:961px) and (max-height:760px){.stick .device{--pw:250}}
+.dots{display:flex;gap:8px}
+.dots button{width:9px;height:9px;border-radius:5px;border:0;background:var(--line);padding:0;cursor:pointer;transition:width .3s,background .3s}
+.dots button.on{width:26px;background:var(--coral)}
+.demo-note{font-size:12.5px;color:var(--muted);text-align:center}
+@media (max-width:960px){
+  .how-grid{grid-template-columns:1fr;gap:26px;margin-top:30px}
+  .stick{position:relative;top:auto;order:-1}
+  .stick .device{--pw:240}
+  /* Below the two-column breakpoint the steps become a swipeable row under
+     the phone — a sticky phone would cover most of a small screen. */
+  .steps{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;padding:0 4px 8px;margin:0 -4px;scrollbar-width:none}
+  .steps::-webkit-scrollbar{display:none}
+  .step{min-height:0;flex:0 0 88%;scroll-snap-align:center;background:var(--bg);border-radius:22px;padding:24px;justify-content:flex-start;opacity:.55}
+  .step h3{font-size:26px}
+  .step p{font-size:16px}
+}
+
+/* Principles */
+.rules{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:54px}
+.rule{padding:30px;border-radius:var(--radius);background:var(--surface);box-shadow:var(--shadow)}
+.rule .ico{width:48px;height:48px;border-radius:14px;display:grid;place-items:center;background:var(--coral-soft);color:var(--coral);font-size:22px}
+.rule h3{margin-top:22px}
+.rule p{color:var(--ink-2);margin-top:10px;font-size:16px}
+@media (max-width:880px){.rules{grid-template-columns:1fr}}
+
+/* Compare */
+.compare{margin-top:48px;border-radius:var(--radius);overflow:hidden;background:var(--surface);box-shadow:var(--shadow)}
+.crow{display:grid;grid-template-columns:1fr 1.2fr 1.2fr}
+.crow > div{padding:18px 24px;border-top:1px solid var(--line);font-size:15.5px}
+.crow:first-child > div{border-top:0;font-weight:600;font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding-top:22px}
+.crow > div:first-child{font-weight:600}
+.crow .old{color:var(--ink-2)}
+.crow .new{background:linear-gradient(90deg,rgba(240,96,61,.05),rgba(240,96,61,.02))}
+.crow:first-child .new{color:var(--coral-ink)}
+@media (max-width:700px){
+  .crow{grid-template-columns:1fr 1fr}
+  .crow > div:first-child{grid-column:1/-1;padding-bottom:0;border-top:1px solid var(--line)}
+  .crow > div:not(:first-child){border-top:0;font-size:14.5px;padding-top:8px}
+  .crow:first-child > div:first-child{display:none}
+  .crow:first-child > div{padding-top:20px}
+}
+
+/* Pilot */
+.pilot{background:var(--night);color:#fff;border-radius:40px;margin:0 12px;overflow:hidden}
+@media (max-width:600px){.pilot{border-radius:28px;margin:0 6px}}
+.pilot::before{content:"";position:absolute;left:50%;top:-240px;width:900px;height:600px;transform:translateX(-50%);background:radial-gradient(closest-side,rgba(240,96,61,.28),rgba(240,96,61,0));pointer-events:none}
+.pilot .eyebrow{color:rgba(255,255,255,.55)}
+.pilot .lede{color:rgba(255,255,255,.72)}
+.pilot-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:60px;align-items:center;position:relative}
+.nums{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.num{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:22px}
+.num b{font-family:var(--serif);font-weight:600;font-size:46px;line-height:1;display:block;letter-spacing:-.02em}
+.num span{color:rgba(255,255,255,.65);font-size:14.5px;display:block;margin-top:8px}
+.measure{margin-top:30px;display:flex;flex-direction:column;gap:12px}
+.measure div{display:flex;gap:12px;align-items:flex-start;font-size:16px;color:rgba(255,255,255,.85)}
+.measure .ic{color:var(--coral-hot);margin-top:5px}
+.pilot-ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:34px}
+.pilot .btn-ghost{color:#fff;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.25)}
+.pilot .btn-ghost:hover{box-shadow:inset 0 0 0 1.5px #fff}
+@media (max-width:960px){.pilot-grid{grid-template-columns:1fr;gap:40px}}
+
+/* Contact */
+.contact-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;align-items:start}
+.direct{margin-top:30px;display:flex;flex-direction:column;gap:12px}
+.direct a,.direct .row{display:flex;align-items:center;gap:14px;padding:16px 18px;border-radius:18px;background:var(--surface);box-shadow:var(--shadow);text-decoration:none;font-weight:500}
+.direct a:hover{box-shadow:0 0 0 1.5px var(--ink)}
+.direct .ico{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;background:var(--coral-soft);color:var(--coral);font-size:19px;flex:none}
+.direct small{display:block;color:var(--ink-2);font-weight:400;font-size:14px}
+.direct .go{margin-left:auto;color:var(--muted)}
+form.card{background:var(--surface);border-radius:28px;padding:32px;box-shadow:var(--shadow)}
+@media (max-width:600px){form.card{padding:22px;border-radius:22px}}
+.f-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.f-grid .full{grid-column:1/-1}
+@media (max-width:600px){.f-grid{grid-template-columns:1fr}}
+label.f{display:flex;flex-direction:column;gap:7px;font-size:14px;font-weight:600}
+label.f span.opt{font-weight:400;color:var(--muted)}
+.f input,.f textarea,.f select{font:inherit;font-weight:400;font-size:16px;color:var(--ink);background:var(--bg);border:1.5px solid transparent;border-radius:14px;padding:13px 15px;outline:none;transition:border-color .15s, background .15s;width:100%}
+.f textarea{min-height:110px;resize:vertical}
+.f input:focus,.f textarea:focus{border-color:var(--ink);background:#fff}
+.f input[aria-invalid="true"]{border-color:var(--coral)}
+fieldset{border:0;padding:0;margin:0;min-width:0}
+legend{font-size:14px;font-weight:600;margin-bottom:9px;padding:0}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opts label{position:relative;cursor:pointer}
+.opts input{position:absolute;opacity:0;inset:0;cursor:pointer}
+.opts span{display:inline-flex;align-items:center;gap:7px;padding:10px 16px;border-radius:999px;background:var(--bg);font-size:14.5px;font-weight:500;border:1.5px solid transparent;transition:background .15s,border-color .15s,color .15s}
+.opts input:checked + span{background:var(--ink);color:#fff}
+.opts input:focus-visible + span{outline:2.5px solid var(--coral);outline-offset:2px}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.submit-row{display:flex;align-items:center;gap:16px;margin-top:24px;flex-wrap:wrap}
+.form-msg{font-size:15px;color:var(--ink-2);flex:1;min-width:200px}
+.form-msg.err{color:var(--coral-ink)}
+.form-done{text-align:center;padding:40px 10px}
+.form-done .ico{width:64px;height:64px;border-radius:50%;background:var(--green-soft);color:var(--green);display:grid;place-items:center;margin:0 auto;font-size:30px}
+.form-done h3{margin-top:20px;font-size:30px}
+.form-done p{color:var(--ink-2);margin-top:10px}
+@media (max-width:960px){.contact-grid{grid-template-columns:1fr;gap:36px}}
+
+/* FAQ */
+.faq{max-width:820px;margin:44px auto 0}
+.faq details{border-top:1px solid var(--line);padding:4px 0}
+.faq details:last-child{border-bottom:1px solid var(--line)}
+.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:20px;align-items:center;padding:20px 0;font-weight:600;font-size:18.5px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary .ic{transition:transform .25s;color:var(--muted);font-size:20px}
+.faq details[open] summary .ic{transform:rotate(45deg)}
+.faq details p{color:var(--ink-2);padding:0 0 22px;max-width:700px}
+
+/* Final CTA + footer */
+.final{text-align:center}
+.final h2{font-size:clamp(38px,5.4vw,66px)}
+.final .lede{margin:20px auto 0;max-width:560px}
+.final .hero-ctas{justify-content:center}
+footer{padding:40px 0 50px;border-top:1px solid var(--line);font-size:14.5px;color:var(--ink-2)}
+footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
+footer nav{display:flex;gap:24px;flex-wrap:wrap}
+footer a{text-decoration:none}
+footer a:hover{color:var(--ink)}
+
+/* Reveal on scroll */
+.rv{opacity:0;transform:translateY(18px);transition:opacity .7s ease, transform .7s cubic-bezier(.2,.8,.2,1)}
+.rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+  <symbol id="i-back" viewBox="0 0 24 24"><path d="m12 19-7-7 7-7M19 12H5"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-chev" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M5 12h14M12 5v14"/></symbol>
+  <symbol id="i-undo" viewBox="0 0 24 24"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></symbol>
+  <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 2.5l2.2 6.7 6.8 2.3-6.8 2.3L12 20.5l-2.2-6.7L3 11.5l6.8-2.3z"/></symbol>
+  <symbol id="i-sliders" viewBox="0 0 24 24"><path d="M21 4h-7M10 4H3M21 12h-9M8 12H3M21 20h-5M12 20H3M14 2v4M8 10v4M16 18v4"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 5-5.5 10.2-7.4 11.8a1 1 0 0 1-1.2 0C9.5 20.2 4 15 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></symbol>
+  <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></symbol>
+  <symbol id="i-rocket" viewBox="0 0 24 24"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></symbol>
+  <symbol id="i-wallet" viewBox="0 0 24 24"><path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1"/><path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"/></symbol>
+  <symbol id="i-cards" viewBox="0 0 24 24"><rect x="8" y="8" width="13" height="13" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+  <symbol id="i-msg" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></symbol>
+  <symbol id="i-video" viewBox="0 0 24 24"><path d="m16 13 5.2 3.5a.5.5 0 0 0 .8-.4V7.9a.5.5 0 0 0-.75-.43L16 10.5"/><rect x="2" y="6" width="14" height="12" rx="2"/></symbol>
+  <symbol id="i-coffee" viewBox="0 0 24 24"><path d="M10 2v2M14 2v2M6 2v2M16 8a1 1 0 0 1 1 1v8a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V9a1 1 0 0 1 1-1h14a4 4 0 1 1 0 8h-1"/></symbol>
+  <symbol id="i-file" viewBox="0 0 24 24"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/></symbol>
+  <symbol id="i-send" viewBox="0 0 24 24"><path d="M14.5 21.7a.5.5 0 0 0 .94-.02l6.5-19a.5.5 0 0 0-.64-.64l-19 6.5a.5.5 0 0 0-.02.94l7.93 3.18a2 2 0 0 1 1.11 1.11zM21.85 2.15 10.9 13.1"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></symbol>
+  <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></symbol>
+  <symbol id="i-handshake" viewBox="0 0 24 24"><path d="m11 17 2 2a1 1 0 1 0 3-3"/><path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4"/><path d="m21 3 1 11h-2M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3M3 4h8"/></symbol>
+  <symbol id="i-signal" viewBox="0 0 18 12"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5.5" width="3" height="6.5" rx="1"/><rect x="10" y="3" width="3" height="9" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></symbol>
+  <symbol id="i-wifi" viewBox="0 0 16 12"><path d="M8 2.6c2.3 0 4.4.9 6 2.4l1.3-1.4A10.6 10.6 0 0 0 8 .6 10.6 10.6 0 0 0 .7 3.6L2 5a8.6 8.6 0 0 1 6-2.4zm0 3.6c1.3 0 2.6.5 3.5 1.4l1.3-1.4A6.9 6.9 0 0 0 8 4.2a6.9 6.9 0 0 0-4.8 2l1.3 1.4c.9-.9 2.2-1.4 3.5-1.4zm0 3.4c-.5 0-.9.2-1.2.5L8 11.5l1.2-1.4c-.3-.3-.7-.5-1.2-.5z"/></symbol>
+  <symbol id="i-batt" viewBox="0 0 27 12"><rect x=".5" y=".5" width="22" height="11" rx="3.5" fill="none" stroke="currentColor" opacity=".4"/><rect x="2.5" y="2.5" width="18" height="7" rx="2"/><path d="M24.5 4v4c.8-.3 1.3-1.1 1.3-2s-.5-1.7-1.3-2z" opacity=".4"/></symbol>
+</svg>
+
+<template id="statusbar">
+  <div class="sb"><span>9:41</span><span class="sb-r"><svg viewBox="0 0 18 12"><use href="#i-signal"/></svg><svg viewBox="0 0 16 12"><use href="#i-wifi"/></svg><svg viewBox="0 0 27 12" style="height:13px"><use href="#i-batt"/></svg></span></div>
+</template>
+
+<header class="nav" id="nav">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Binder home"><img src="/assets/binder-mark.svg" alt="" width="34" height="34">Binder</a>
+    <nav class="nav-links" aria-label="Sections">
+      <a href="#how">How it works</a>
+      <a href="#why">Why Binder</a>
+      <a href="#pilot">Pilot</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <div class="nav-cta">
+      <a class="btn btn-ghost btn-sm" href="#contact" data-intent="call">Talk to us</a>
+      <a class="btn btn-ink btn-sm" href="#contact" data-intent="demo" data-book>Book a demo</a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ================= HERO ================= -->
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <a class="pill-tag" href="#pilot"><b>Pilot</b> Founding cohort now forming</a>
+      <h1>Meet the capital that <em class="hl">actually fits.</em></h1>
+      <p class="lede">Binder matches founders with investors on sector, stage, ticket and geography. Swipe on fit, both sides opt in, and a 20-minute coffee chat books itself into both calendars.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-coral" href="#contact" data-intent="demo" data-book>Book a 20-min demo <svg class="ic"><use href="#i-arrow"/></svg></a>
+        <a class="btn btn-ghost" href="#how">See how it works</a>
+      </div>
+      <p class="trust"><svg class="ic"><use href="#i-shield"/></svg> Verified profiles · double opt-in · no cold outreach</p>
+    </div>
+    <div class="hero-stage" aria-label="Binder app: swiping on investor-fit founders and matching">
+      <div class="device">
+        <div class="viewport" id="heroVp">
+          <video id="vSwipe" src="/assets/video/discover-swipe.mp4" poster="/assets/video/discover-swipe-poster.jpg" muted playsinline preload="auto" aria-label="An investor swipes through founder cards, each showing why they match"></video>
+          <video id="vMatch" class="hidden" src="/assets/video/match.mp4" poster="/assets/video/match-poster.jpg" muted playsinline preload="auto" aria-label="Both sides said yes: it's a match"></video>
+        </div>
+      </div>
+      <div class="float f1" aria-hidden="true"><span class="dot" style="background:var(--green)"><svg class="ic"><use href="#i-check"/></svg></span><span>Ticket €250k fits<small>Why you match</small></span></div>
+      <div class="float f2" aria-hidden="true"><span class="dot" style="background:var(--coral)"><svg class="ic"><use href="#i-handshake"/></svg></span><span>Both said yes<small>Double opt-in</small></span></div>
+      <div class="float f3" aria-hidden="true"><span class="dot" style="background:var(--ink)"><svg class="ic"><use href="#i-cal"/></svg></span><span>Thu 30 Oct · 10:30<small>Booked on both calendars</small></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PROBLEM ================= -->
+<section class="sec" id="problem">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="eyebrow">The problem</span>
+      <h2>Fundraising still runs on <em class="hl">cold email.</em></h2>
+      <p class="lede">The information that decides whether a meeting is worth having — ticket, stage, sector, geography, timing — is the last thing either side finds out.</p>
+    </div>
+    <div class="problem">
+      <div class="pcell rv"><div class="k">Founders</div><h3>Hundreds of emails to find the few who write your cheque.</h3><p>Lists give you names, not intent. You learn an investor doesn't do your stage after the third follow-up.</p></div>
+      <div class="pcell rv"><div class="k">Investors</div><h3>An inbox of decks that sit outside the thesis.</h3><p>Sourcing means filtering noise. The companies that do fit arrive late, through whoever happened to forward them.</p></div>
+      <div class="pcell rv"><div class="k">Both sides</div><h3>Days of back-and-forth for a 20-minute call.</h3><p>Even when interest is mutual, the scheduling, the intro and the agenda are all done by hand.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= HOW IT WORKS ================= -->
+<section class="sec how" id="how" data-mode="founder">
+  <div class="wrap">
+    <div class="how-top">
+      <div class="sec-head rv">
+        <span class="eyebrow">How it works</span>
+        <h2>One app, two sides of the table.</h2>
+      </div>
+      <div class="toggle rv" role="group" aria-label="Show the app as">
+        <button type="button" aria-pressed="true" data-mode="founder"><svg class="ic"><use href="#i-rocket"/></svg>I'm a founder</button>
+        <button type="button" aria-pressed="false" data-mode="investor"><svg class="ic"><use href="#i-wallet"/></svg>I'm an investor</button>
+      </div>
+    </div>
+
+    <div class="how-grid">
+      <ol class="steps" id="steps">
+        <li class="step on" data-step="0">
+          <span class="n">01</span>
+          <h3><span class="f-only">Say what you're raising.</span><span class="i-only">Set your ticket and thesis.</span></h3>
+          <p class="f-only">Stage, amount, sector and traction on one card. Investors see exactly this — specific beats impressive, and it drives every match.</p>
+          <p class="i-only">Ticket range, lead or follow, stages and sectors. Only founders inside these lines ever reach your deck, and you can move them any time.</p>
+          <ul>
+            <li><svg class="ic"><use href="#i-check"/></svg>Explicit intent: what you want, what you offer, when you're free</li>
+            <li><svg class="ic"><use href="#i-check"/></svg>Verified profiles on both sides</li>
+          </ul>
+        </li>
+        <li class="step" data-step="1">
+          <span class="n">02</span>
+          <h3>Swipe on fit, not on hype.</h3>
+          <p>Every card leads with <em>why you match</em> — sector, stage, ticket, geography — before a word of pitch. Right is interested, left is pass.</p>
+          <ul>
+            <li><svg class="ic"><use href="#i-check"/></svg>A fit score you can read, not a black box</li>
+            <li class="f-only"><svg class="ic"><use href="#i-check"/></svg>See reply time, founder rating and next free slot up front</li>
+            <li class="i-only"><svg class="ic"><use href="#i-check"/></svg>ARR, growth and team on the card, deck after the match</li>
+          </ul>
+        </li>
+        <li class="step" data-step="2">
+          <span class="n">03</span>
+          <h3>Double opt&#8209;in. Nobody gets cold&#8209;pitched.</h3>
+          <p>A match only exists when both sides said yes. There are no cold DMs and no ignored intros — and nobody is ever told they were passed on.</p>
+          <ul>
+            <li><svg class="ic"><use href="#i-check"/></svg>Intros unlock only on mutual interest</li>
+            <li><svg class="ic"><use href="#i-check"/></svg>Binder already knows the slots you share</li>
+          </ul>
+        </li>
+        <li class="step" data-step="3">
+          <span class="n">04</span>
+          <h3>The call books itself.</h3>
+          <p>Binder overlays both calendars and shows only the times you're both free. Pick one and it lands on both calendars, with an agenda drawn from both profiles.</p>
+          <ul>
+            <li><svg class="ic"><use href="#i-check"/></svg>15, 20 or 30 minutes — a coffee chat, not a pitch marathon</li>
+            <li><svg class="ic"><use href="#i-check"/></svg>Google Meet link and agenda created for you</li>
+          </ul>
+        </li>
+        <li class="step" data-step="4">
+          <span class="n">05</span>
+          <h3>Follow up where the deal moves.</h3>
+          <p>Chat opens after the match, pinned to the booked call. Share the deck or the data room, bring in a co-investor, or reschedule — in one thread.</p>
+          <ul>
+            <li><svg class="ic"><use href="#i-check"/></svg>Deck shared only after both sides opted in</li>
+            <li><svg class="ic"><use href="#i-check"/></svg>Quick replies move the deal forward</li>
+          </ul>
+        </li>
+      </ol>
+
+      <div class="stick">
+        <div class="device">
+          <div class="viewport">
+            <div class="canvas" id="canvas">
+
+              <!-- 01 founder: raising -->
+              <div class="scr on f-only" data-screen="0">
+                <div data-sb></div>
+                <div class="s-top"><svg class="ic" style="width:22px;height:22px"><use href="#i-back"/></svg><div class="s-prog"><i></i><i></i><i></i></div><span style="font-size:13px;font-weight:600">2/3</span></div>
+                <div class="s-h s-serif">What are you raising?</div>
+                <div class="s-p">Investors see this card. Specific beats impressive — it drives your matches.</div>
+                <div class="s-stack">
+                  <div class="s-card s-row"><span class="s-tile lumen">L</span><div><div class="s-name">Lumen Grid <svg class="ic"><use href="#i-shield"/></svg></div><div class="s-sub">AI energy management for mid-size buildings</div></div></div>
+                  <div class="s-card">
+                    <div class="s-lbl">Stage</div>
+                    <div class="seg"><span>Pre-seed</span><span class="on">Seed</span><span>Series A</span></div>
+                    <div class="s-lbl" style="margin-top:14px">Raising</div>
+                    <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-top:2px">
+                      <span class="s-serif" style="font-size:34px;line-height:1">€1.5M</span>
+                      <span style="width:118px"><span style="display:block;text-align:right;color:var(--green);font-size:12.5px;font-weight:600;margin-bottom:6px">€500k committed</span><span class="bar" style="display:block"><i style="width:34%"></i></span></span>
+                    </div>
+                  </div>
+                  <div class="s-card">
+                    <div class="s-lbl">Sector</div>
+                    <div class="chips"><span class="chip on">Climate</span><span class="chip on">AI</span><span class="chip on">B2B SaaS</span><span class="chip">Proptech</span><span class="chip">Fintech</span><span class="chip">Deep tech</span></div>
+                  </div>
+                  <div class="s-card">
+                    <div class="s-lbl">Traction</div>
+                    <div class="stats"><div class="stat"><b>€240k</b><span>ARR</span></div><div class="stat"><b>+18%</b><span>MoM growth</span></div><div class="stat"><b>31</b><span>Buildings live</span></div></div>
+                  </div>
+                </div>
+                <div class="s-fade"></div>
+                <div class="s-cta">Find my investors</div>
+                <div class="home-ind"></div>
+              </div>
+
+              <!-- 01 investor: ticket & thesis -->
+              <div class="scr i-only" data-screen="0">
+                <div data-sb></div>
+                <div class="s-top"><svg class="ic" style="width:22px;height:22px"><use href="#i-back"/></svg><div class="s-prog"><i></i><i></i><i></i></div><span style="font-size:13px;font-weight:600">2/3</span></div>
+                <div class="s-h s-serif">Set your ticket &amp; thesis</div>
+                <div class="s-p">Only founders inside these lines reach your deck. You can change it any time.</div>
+                <div class="s-stack">
+                  <div class="s-card s-row"><span class="s-av mb" style="width:46px;height:46px;font-size:15px">MB</span><div><div class="s-name">Marco Bellini <svg class="ic"><use href="#i-shield"/></svg></div><div class="s-sub">Partner · Northlight Ventures (micro VC)</div></div></div>
+                  <div class="s-card">
+                    <div class="s-lbl">Ticket size</div>
+                    <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-top:6px"><span class="s-serif" style="font-size:31px;line-height:1">€250k – €750k</span><span class="s-sub" style="font-size:12.5px">per deal</span></div>
+                    <div style="position:relative;height:30px;margin-top:10px">
+                      <span style="position:absolute;left:0;right:0;top:13px;height:4px;border-radius:2px;background:var(--bg-2)"></span>
+                      <span style="position:absolute;left:24%;right:44%;top:13px;height:4px;background:var(--ink)"></span>
+                      <span style="position:absolute;left:calc(24% - 12px);top:3px;width:24px;height:24px;border-radius:50%;background:#fff;border:2.5px solid var(--ink)"></span>
+                      <span style="position:absolute;left:calc(56% - 12px);top:3px;width:24px;height:24px;border-radius:50%;background:#fff;border:2.5px solid var(--ink)"></span>
+                    </div>
+                    <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--muted)"><span>€50k</span><span>€500k</span><span>€2M+</span></div>
+                    <div class="seg"><span class="on">Lead</span><span class="on">Co-lead</span><span>Follow</span></div>
+                  </div>
+                  <div class="s-card">
+                    <div class="s-lbl">Stage &amp; thesis</div>
+                    <div class="chips"><span class="chip on">Pre-seed</span><span class="chip on">Seed</span><span class="chip">Series A</span><span class="chip on">Climate</span><span class="chip on">AI infra</span><span class="chip on">B2B SaaS</span><span class="chip on">Proptech</span><span class="chip">Consumer</span></div>
+                    <p class="s-serif" style="font-style:italic;font-weight:500;color:var(--ink-2);margin-top:12px;font-size:14px">“Software that cuts energy and carbon for real-world assets.”</p>
+                  </div>
+                </div>
+                <div class="s-fade"></div>
+                <div class="s-cta">Show me founders</div>
+                <div class="home-ind"></div>
+              </div>
+
+              <!-- 02 founder: discover investors -->
+              <div class="scr f-only" data-screen="1">
+                <div data-sb></div>
+                <div class="d-head"><div><h4>Discover</h4><p>8 investors write tickets your size</p></div><span class="round"><svg class="ic"><use href="#i-sliders"/></svg></span></div>
+                <div class="deck"><div class="pcard">
+                  <div class="p-hero night"><span class="fit"><svg viewBox="0 0 24 24"><use href="#i-spark"/></svg>91% fit</span><span class="stage" style="background:rgba(255,255,255,.14)">Leads · €250k–750k</span><span class="s-av mb">MB</span></div>
+                  <div class="p-body">
+                    <h5>Marco Bellini <svg class="ic"><use href="#i-shield"/></svg></h5>
+                    <div class="p-tag">Partner · Northlight Ventures (€40M fund)</div>
+                    <div class="p-loc"><svg class="ic"><use href="#i-pin"/></svg>Milan &amp; Zurich · 22 investments</div>
+                    <div class="p-why"><div class="s-lbl">Why you match</div><div class="chips"><span class="gchip"><svg class="ic"><use href="#i-check"/></svg>Climate</span><span class="gchip"><svg class="ic"><use href="#i-check"/></svg>Seed</span><span class="gchip"><svg class="ic"><use href="#i-check"/></svg>Writes €250k+</span><span class="gchip"><svg class="ic"><use href="#i-check"/></svg>Italy</span></div></div>
+                    <div class="stats"><div class="stat"><b>48h</b><span>Avg. reply</span></div><div class="stat"><b>4.8/5</b><span>Founder rating</span></div><div class="stat"><b>6 wks</b><span>To term sheet</span></div></div>
+                    <div class="p-next"><svg class="ic"><use href="#i-cal"/></svg>Next free: Thu 30 Oct · 10:30</div>
+                  </div>
+                </div></div>
+                <div class="actions"><span class="a-undo"><svg class="ic"><use href="#i-undo"/></svg></span><span class="a-x"><svg class="ic"><use href="#i-x"/></svg></span><span class="a-star"><svg viewBox="0 0 24 24"><use href="#i-spark"/></svg></span><span class="a-yes"><svg class="ic"><use href="#i-check"/></svg></span></div>
+                <div class="tabs"><span class="on"><svg class="ic"><use href="#i-cards"/></svg>Discover</span><span><svg class="ic"><use href="#i-users"/></svg>Matches</span><span><svg class="ic"><use href="#i-msg"/></svg>Chats</span><span><svg class="ic"><use href="#i-user"/></svg>Profile</span></div>
+                <div class="home-ind"></div>
+              </div>
+
+              <!-- 02 investor: discover founders -->
+              <div class="scr i-only" data-screen="1">
+                <div data-sb></div>
+                <div class="d-head"><div><h4>Discover</h4><p>12 founders fit your thesis today</p></div><span class="round"><svg class="ic"><use href="#i-sliders"/></svg></span></div>
+                <div class="deck"><div class="pcard">
+                  <div class="p-hero warm"><span class="fit"><svg viewBox="0 0 24 24"><use href="#i-spark"/></svg>94% fit</span><span class="stage">Seed · €1.5M</span><span class="logo">L</span></div>
+                  <div class="p-body">
+                    <h5>Lumen Grid <svg class="ic"><use href="#i-shield"/></svg></h5>
+                    <div class="p-tag">AI energy management for mid-size buildings</div>
+                    <div class="p-loc"><svg class="ic"><use href="#i-pin"/></svg>Milan, IT · Team 6</div>
+                    <div class="p-why"><div class="s-lbl">Why you match</div><div class="chips"><span class="gchip"><svg class="ic"><use href="#i-check"/></svg>Climate</span><span class="gchip"><svg class="ic"><use href="#i-check"/></svg>Seed</span><span class="gchip"><svg class="ic"><use href="#i-check"/></svg>Ticket €250k fits</span><span class="gchip"><svg class="ic"><use href="#i-check"/></svg>Italy</span></div></div>
+                    <div class="stats"><div class="stat"><b>€240k</b><span>ARR</span></div><div class="stat"><b>+18%</b><span>MoM</span></div><div class="stat"><b>31</b><span>Buildings</span></div></div>
+                    <div class="p-person"><span class="s-av gr">GR</span><div><b>Giulia Russo, CEO</b><span>ex-Enel X · 2nd-time founder</span></div></div>
+                  </div>
+                </div></div>
+                <div class="actions"><span class="a-undo"><svg class="ic"><use href="#i-undo"/></svg></span><span class="a-x"><svg class="ic"><use href="#i-x"/></svg></span><span class="a-star"><svg viewBox="0 0 24 24"><use href="#i-spark"/></svg></span><span class="a-yes"><svg class="ic"><use href="#i-check"/></svg></span></div>
+                <div class="tabs"><span class="on"><svg class="ic"><use href="#i-cards"/></svg>Discover</span><span><svg class="ic"><use href="#i-users"/></svg>Matches</span><span><svg class="ic"><use href="#i-msg"/></svg>Chats</span><span><svg class="ic"><use href="#i-user"/></svg>Profile</span></div>
+                <div class="home-ind"></div>
+              </div>
+
+              <!-- 03 match -->
+              <div class="scr match" data-screen="2">
+                <div data-sb></div>
+                <div class="confetti" aria-hidden="true">
+                  <i style="left:60px;top:150px;background:#F0603D;--y:40px;--r:160deg"></i>
+                  <i style="left:120px;top:110px;background:#F2B23A;--y:70px;--r:240deg"></i>
+                  <i style="left:205px;top:80px;background:#fff;--y:50px;--r:120deg"></i>
+                  <i style="left:262px;top:120px;background:#fff;--y:60px;--r:300deg"></i>
+                  <i style="left:340px;top:100px;background:#F0603D;--y:80px;--r:210deg"></i>
+                  <i style="left:30px;top:260px;background:#F2B23A;--y:30px;--r:90deg"></i>
+                  <i style="left:350px;top:240px;background:#3CC37A;--y:40px;--r:180deg"></i>
+                  <i style="left:40px;top:330px;background:#7C83F2;--y:20px;--r:250deg"></i>
+                  <i style="left:345px;top:320px;background:#F0603D;--y:30px;--r:140deg"></i>
+                </div>
+                <div class="m-avs">
+                  <span class="s-av a1 gr f-only">GR</span>
+                  <span class="s-av a2 mb f-only">MB</span>
+                  <span class="s-av a1 mb i-only">MB</span>
+                  <span class="s-av a2 gr i-only">GR</span>
+                  <span class="m-check"><svg class="ic"><use href="#i-check"/></svg></span>
+                </div>
+                <div class="optin"><svg class="ic"><use href="#i-shield"/></svg>DOUBLE OPT-IN</div>
+                <div class="m-h">It’s <i>a match</i>.</div>
+                <div class="m-p">You and <span class="f-only">Marco</span><span class="i-only">Giulia</span> both said yes. Binder found 3 slots you are both free this week.</div>
+                <div class="m-fit"><div class="t"><span>Lumen Grid × Northlight</span><b>94% fit</b></div><div class="bar"><i></i></div><small>Climate · Seed · €250k ticket · Italy</small></div>
+                <div class="m-keep">Keep swiping</div>
+                <div class="m-b1">Book a 20-min coffee chat</div>
+                <div class="m-b2">Send a message</div>
+                <div class="home-ind"></div>
+              </div>
+
+              <!-- 04 booking -->
+              <div class="scr" data-screen="3">
+                <div data-sb></div>
+                <div class="b-head"><svg class="ic"><use href="#i-back"/></svg><div><b>Coffee chat with <span class="f-only">Marco</span><span class="i-only">Giulia</span></b><small class="f-only">Northlight Ventures · Leads €250k–750k</small><small class="i-only">Lumen Grid · Seed €1.5M</small></div><span class="b-avs"><span class="s-av mb">MB</span><span class="s-av gr">GR</span></span></div>
+                <div class="s-h s-serif" style="padding-top:18px;font-size:26px">Pick a time. It books for both of you.</div>
+                <div class="s-p">Binder overlaid both calendars and only shows the slots you share.</div>
+                <div class="days"><span class="off">Mon<b>27</b><i></i></span><span>Tue<b>28</b><i class="g"></i></span><span class="off">Wed<b>29</b><i></i></span><span class="on">Thu<b>30</b><i></i></span><span>Fri<b>31</b><i class="g"></i></span></div>
+                <div class="s-lbl" style="padding:16px 22px 0">Thu 30 Oct · Both free</div>
+                <div class="slots">
+                  <div class="slot"><span class="r"></span>10:00 – 10:20<span class="gchip"><svg class="ic"><use href="#i-check"/></svg>Both free</span></div>
+                  <div class="slot on"><span class="r"></span>10:30 – 10:50<span class="gchip"><svg class="ic"><use href="#i-check"/></svg>Both free</span></div>
+                  <div class="slot"><span class="r"></span>11:30 – 11:50<span class="gchip"><svg class="ic"><use href="#i-check"/></svg>Both free</span></div>
+                </div>
+                <div class="dur"><svg class="ic"><use href="#i-video"/></svg>Google Meet · <span>15 min</span><span class="on">20 min</span><span>30 min</span></div>
+                <div class="agenda"><b><svg viewBox="0 0 24 24"><use href="#i-spark"/></svg>Suggested agenda, from both profiles</b><ul><li>5 min — Giulia: Lumen Grid, traction since July</li><li>10 min — Marco: thesis fit, how Northlight leads</li><li>5 min — next steps &amp; data room</li></ul></div>
+                <div class="s-cta" style="bottom:40px">Confirm Thu 30 Oct · 10:30</div>
+                <div class="home-ind"></div>
+              </div>
+
+              <!-- 05 chat -->
+              <div class="scr" data-screen="4">
+                <div data-sb></div>
+                <div class="c-head"><svg class="ic"><use href="#i-back"/></svg>
+                  <span class="s-av gr i-only">GR</span><span class="s-av mb f-only">MB</span>
+                  <div><b class="i-only">Giulia Russo</b><b class="f-only">Marco Bellini</b><small class="i-only">CEO · Lumen Grid · online</small><small class="f-only">Partner · Northlight · online</small></div>
+                  <span class="round"><svg class="ic"><use href="#i-video"/></svg></span></div>
+                <div class="pinned"><span class="cup"><svg class="ic"><use href="#i-coffee"/></svg></span><div><b>Coffee chat · Thu 30 Oct, 10:30</b><small>20 min · Google Meet · on both calendars</small></div><span class="join">Join</span></div>
+                <div class="sys"><svg class="ic"><use href="#i-shield"/></svg>Matched 25 Oct · both opted in · intro unlocked</div>
+                <div class="msgs">
+                  <div class="bub from-g">Hi Marco — thanks for the yes! Sending the deck ahead of Thursday.<small>09:12</small></div>
+                  <div class="bub file from-g"><span class="fi"><svg class="ic"><use href="#i-file"/></svg></span><div><b>Lumen Grid — Seed deck.pdf</b><small style="margin:0">14 pages · 2.1 MB</small></div></div>
+                  <div class="bub from-m">Great. I’d love the building-level savings data. Is the 18% MoM net of churn?<small>09:20 · Read</small></div>
+                  <div class="bub from-g">Net, yes. I’ll bring the cohort chart on Thursday.<small>09:24</small></div>
+                  <div class="typing"><i></i><i></i><i></i></div>
+                </div>
+                <div class="quick"><span>Share data room</span><span class="i-only">Invite a co-investor</span><span class="f-only">Send updated metrics</span><span>Reschedule</span></div>
+                <div class="composer"><span class="plus"><svg class="ic"><use href="#i-plus"/></svg></span><span class="field">Message <span class="i-only">&nbsp;Giulia…</span><span class="f-only">&nbsp;Marco…</span></span><span class="send"><svg class="ic"><use href="#i-send"/></svg></span></div>
+                <div class="home-ind"></div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <div class="dots" id="dots" role="tablist" aria-label="Steps">
+          <button class="on" aria-label="Step 1"></button><button aria-label="Step 2"></button><button aria-label="Step 3"></button><button aria-label="Step 4"></button><button aria-label="Step 5"></button>
+        </div>
+        <p class="demo-note">Screens from the Binder app design. Profiles are illustrative.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= WHY / PRINCIPLES ================= -->
+<section class="sec" id="why">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="eyebrow">Why Binder</span>
+      <h2>Fewer conversations. <em class="hl">Better ones.</em></h2>
+      <p class="lede">Binder is built on three rules. Each one removes a reason a fundraising conversation goes nowhere.</p>
+    </div>
+    <div class="rules">
+      <div class="rule rv"><span class="ico"><svg class="ic"><use href="#i-target"/></svg></span><h3>Intent, out loud.</h3><p>Everyone states what they raise or write, at what stage, in which sectors and places — and when they're free. No guessing from a LinkedIn bio.</p></div>
+      <div class="rule rv"><span class="ico"><svg class="ic"><use href="#i-spark"/></svg></span><h3>Fit before pitch.</h3><p>Every card shows why you match before it shows anything else. You decide on the criteria that would have killed the deal anyway.</p></div>
+      <div class="rule rv"><span class="ico"><svg class="ic"><use href="#i-handshake"/></svg></span><h3>Yes means a meeting.</h3><p>Two yeses unlock the intro and put a call in both calendars. The goal is a meeting actually held, not another message in an inbox.</p></div>
+    </div>
+
+    <div class="compare rv" role="table" aria-label="Cold outreach compared with Binder">
+      <div class="crow" role="row"><div role="columnheader"></div><div role="columnheader">Cold outreach</div><div class="new" role="columnheader">Binder</div></div>
+      <div class="crow" role="row"><div role="rowheader">Who you reach</div><div class="old" role="cell">Whoever is on the list</div><div class="new" role="cell">Only people inside your ticket, stage and thesis</div></div>
+      <div class="crow" role="row"><div role="rowheader">What they see first</div><div class="old" role="cell">A subject line</div><div class="new" role="cell">Why you match</div></div>
+      <div class="crow" role="row"><div role="rowheader">Who starts it</div><div class="old" role="cell">One side, hoping</div><div class="new" role="cell">Both sides, by opting in</div></div>
+      <div class="crow" role="row"><div role="rowheader">Getting to a call</div><div class="old" role="cell">Email ping-pong over days</div><div class="new" role="cell">One tap, in a slot you share</div></div>
+      <div class="crow" role="row"><div role="rowheader">A pass</div><div class="old" role="cell">Silence, or a polite no</div><div class="new" role="cell">Private — nobody is told</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PILOT ================= -->
+<section class="sec pilot" id="pilot">
+  <div class="wrap pilot-grid">
+    <div class="rv">
+      <span class="eyebrow">The pilot</span>
+      <h2 style="margin-top:16px">Starting narrow, <em class="hl" style="color:var(--coral-hot)">on purpose.</em></h2>
+      <p class="lede" style="margin-top:18px">Our first cohort pairs seed-stage startups with business angels and micro VCs in one coherent segment. We run selection, matching, double opt-in and booking ourselves, alongside the product — and measure what actually happened.</p>
+      <div class="measure">
+        <div><svg class="ic"><use href="#i-check"/></svg>Meetings held, against meetings booked</div>
+        <div><svg class="ic"><use href="#i-check"/></svg>Relevance of every call, rated by both sides</div>
+        <div><svg class="ic"><use href="#i-check"/></svg>Who comes back for a second match</div>
+      </div>
+      <div class="pilot-ctas">
+        <a class="btn btn-coral" href="#contact" data-intent="pilot" data-role="founder">Apply as a founder</a>
+        <a class="btn btn-ghost" href="#contact" data-intent="pilot" data-role="investor">Join as an investor</a>
+      </div>
+    </div>
+    <div class="nums rv">
+      <span class="eyebrow" style="grid-column:1/-1">Cohort one, by design</span>
+      <div class="num"><b>20</b><span>investors actively deploying</span></div>
+      <div class="num"><b>100</b><span>founders, selected by hand</span></div>
+      <div class="num"><b>30</b><span>days, with decision thresholds set in advance</span></div>
+      <div class="num"><b>20′</b><span>coffee chats, booked into both calendars</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section class="sec" id="contact">
+  <div class="wrap contact-grid">
+    <div class="rv">
+      <span class="eyebrow">Get in touch</span>
+      <h2 style="margin-top:16px">Book a demo, or ask for a call.</h2>
+      <p class="lede" style="margin-top:18px">Founder, investor, or thinking about backing Binder — tell us who you are and we'll walk you through the product live, in 20 minutes. Fittingly.</p>
+      <div class="direct">
+        <a id="bookDirect" href="#" target="_blank" rel="noopener" hidden><span class="ico"><svg class="ic"><use href="#i-cal"/></svg></span><span>Pick a time now<small>Opens our calendar in a new tab</small></span><svg class="ic go"><use href="#i-arrow"/></svg></a>
+        <a id="mailDirect" href="#" hidden><span class="ico"><svg class="ic"><use href="#i-mail"/></svg></span><span id="mailLabel">Email us<small>We reply within one working day</small></span><svg class="ic go"><use href="#i-arrow"/></svg></a>
+      </div>
+    </div>
+
+    <form class="card rv" id="contactForm" novalidate>
+      <div id="formBody">
+        <div class="f-grid">
+          <fieldset class="full">
+            <legend>I am</legend>
+            <div class="opts">
+              <label><input type="radio" name="role" value="founder" checked><span>A founder</span></label>
+              <label><input type="radio" name="role" value="investor"><span>An angel or VC</span></label>
+              <label><input type="radio" name="role" value="backer"><span>Interested in backing Binder</span></label>
+              <label><input type="radio" name="role" value="other"><span>Something else</span></label>
+            </div>
+          </fieldset>
+          <fieldset class="full">
+            <legend>I'd like</legend>
+            <div class="opts">
+              <label><input type="radio" name="intent" value="demo" checked><span>A live demo</span></label>
+              <label><input type="radio" name="intent" value="call"><span>A call with the founders</span></label>
+              <label><input type="radio" name="intent" value="pilot"><span>To join the pilot</span></label>
+            </div>
+          </fieldset>
+          <label class="f"><span>Name</span><input name="name" autocomplete="name" required maxlength="120"></label>
+          <label class="f"><span>Work email</span><input name="email" type="email" autocomplete="email" required maxlength="320" inputmode="email"></label>
+          <label class="f full"><span>Company or fund <span class="opt">(optional)</span></span><input name="company" autocomplete="organization" maxlength="160"></label>
+          <label class="f full"><span>Anything we should know? <span class="opt">(optional)</span></span><textarea name="message" maxlength="3000" placeholder="What you're raising or investing in, and good times for you."></textarea></label>
+          <label class="hp" aria-hidden="true">Website<input name="website" tabindex="-1" autocomplete="off"></label>
+        </div>
+        <div class="submit-row">
+          <button class="btn btn-coral" type="submit" id="submitBtn">Send request <svg class="ic"><use href="#i-send"/></svg></button>
+          <p class="form-msg" id="formMsg" role="status" aria-live="polite"></p>
+        </div>
+      </div>
+      <div class="form-done" id="formDone" hidden>
+        <span class="ico"><svg class="ic"><use href="#i-check"/></svg></span>
+        <h3 class="serif">Request received.</h3>
+        <p id="doneText">We'll reply within one working day with a few times that work.</p>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- ================= FAQ ================= -->
+<section class="sec" id="faq" style="padding-top:20px">
+  <div class="wrap">
+    <div class="sec-head rv" style="margin:0 auto;text-align:center">
+      <span class="eyebrow">FAQ</span>
+      <h2>Questions, answered.</h2>
+    </div>
+    <div class="faq">
+      <details><summary>Is Binder live?<svg class="ic"><use href="#i-plus"/></svg></summary><p>We're running a pilot with a founding cohort of founders and investors. The pilot follows the same flow you see above — stated intent, fit, double opt-in, a booked call — with our team reviewing every match. Book a demo to see where the product is today.</p></details>
+      <details><summary>Who can see my profile?<svg class="ic"><use href="#i-plus"/></svg></summary><p>Only people on the other side whose criteria you fit. A founder appears only to investors whose ticket, stage and thesis include them; an investor appears only to founders they could actually fund. Your deck is shared only after both of you opt in.</p></details>
+      <details><summary>Does anyone find out if I pass?<svg class="ic"><use href="#i-plus"/></svg></summary><p>No. A pass is private. The other side only ever hears about a mutual yes.</p></details>
+      <details><summary>How is this different from an investor database?<svg class="ic"><use href="#i-plus"/></svg></summary><p>A database gives you names and leaves the outreach to you. Binder only surfaces people who fit, only connects you when both sides say yes, and turns that yes straight into a meeting on both calendars.</p></details>
+      <details><summary>Which founders and investors is the pilot for?<svg class="ic"><use href="#i-plus"/></svg></summary><p>Seed-stage startups that are raising now, and business angels and micro VCs who are actively writing cheques. We keep the first cohort in one coherent segment so every match has a real chance of being relevant.</p></details>
+      <details><summary>How are profiles verified?<svg class="ic"><use href="#i-plus"/></svg></summary><p>During the pilot, our team reviews every founder and investor before their profile goes live. Investors confirm the ticket they write and that they're deploying now; founders confirm what they're raising.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FINAL CTA ================= -->
+<section class="sec final" style="padding-top:40px">
+  <div class="wrap rv">
+    <h2>Stop pitching strangers. <br><em class="hl">Meet your match.</em></h2>
+    <p class="lede">Twenty minutes is all it takes to see how Binder works — and we'll book it the way Binder would.</p>
+    <div class="hero-ctas">
+      <a class="btn btn-coral" href="#contact" data-intent="demo" data-book>Book a demo <svg class="ic"><use href="#i-arrow"/></svg></a>
+      <a class="btn btn-ghost" href="#contact" data-intent="call">Ask for a call</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <a class="brand" href="#top" style="font-size:21px"><img src="/assets/binder-mark.svg" alt="" width="28" height="28" style="width:28px;height:28px">Binder</a>
+    <nav aria-label="Footer"><a href="#how">How it works</a><a href="#pilot">Pilot</a><a href="#faq">FAQ</a><a href="#contact">Contact</a></nav>
+    <span>© 2026 Binder</span>
+  </div>
+</footer>
+
+<script>
+// ---- Site configuration -------------------------------------------------
+// BOOKING_URL: a Cal.com / Calendly / Google appointment page. When set, every
+//   "Book a demo" button opens it directly; when empty they scroll to the form,
+//   which is the path that always works.
+// CONTACT_EMAIL: shown as a direct option and used as the fallback when the
+//   form backend is not configured. Empty hides both.
+const SITE = {
+  BOOKING_URL: '',
+  CONTACT_EMAIL: '',
+};
+
+(() => {
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Status bars are identical on every screen; stamping them from one template
+  // keeps seven copies of the same SVG markup out of the HTML.
+  const sbTpl = $('#statusbar');
+  $$('[data-sb]').forEach((el) => el.replaceWith(sbTpl.content.cloneNode(true)));
+
+  // Nav border appears only once content scrolls under it.
+  const nav = $('#nav');
+  const onScroll = () => nav.classList.toggle('scrolled', scrollY > 8);
+  addEventListener('scroll', onScroll, { passive: true }); onScroll();
+
+  // ---- Reveal on scroll ----
+  const rvIO = new IntersectionObserver((es) => es.forEach((e) => {
+    if (e.isIntersecting) { e.target.classList.add('in'); rvIO.unobserve(e.target); }
+  }), { rootMargin: '0px 0px -8% 0px' });
+  $$('.rv').forEach((el) => rvIO.observe(el));
+
+  // ---- Hero: swipe video, then the match, then loop ----
+  // Two exports from the Figma prototype played back to back tell the whole
+  // story (swipe → mutual yes) in nine seconds without a heavier single file.
+  const vS = $('#vSwipe'), vM = $('#vMatch');
+  let heroVisible = true, holdTimer = 0;
+  const safePlay = (v) => { const p = v.play(); if (p && p.catch) p.catch(() => {}); };
+  function playSwipe() {
+    vM.classList.add('hidden'); vS.classList.remove('hidden');
+    vS.currentTime = 0; if (heroVisible) safePlay(vS);
+  }
+  vS.addEventListener('ended', () => {
+    vM.currentTime = 0; vM.classList.remove('hidden'); vS.classList.add('hidden');
+    if (heroVisible) safePlay(vM);
+  });
+  vM.addEventListener('ended', () => { holdTimer = setTimeout(playSwipe, 2600); });
+  if (!reduced) {
+    new IntersectionObserver(([e]) => {
+      heroVisible = e.isIntersecting;
+      const active = vM.classList.contains('hidden') ? vS : vM;
+      if (heroVisible) safePlay(active); else active.pause();
+    }, { threshold: 0.25 }).observe($('#heroVp'));
+    safePlay(vS);
+  }
+
+  // ---- How it works: mode toggle + step-driven phone ----
+  const how = $('#how');
+  const steps = $$('.step', how);
+  const dots = $$('#dots button');
+  let current = 0;
+
+  function show(i) {
+    current = i;
+    steps.forEach((s, k) => s.classList.toggle('on', k === i));
+    dots.forEach((d, k) => { d.classList.toggle('on', k === i); d.setAttribute('aria-selected', k === i); });
+    const mode = how.dataset.mode;
+    $$('.scr', how).forEach((s) => {
+      const wrongSide = (mode === 'founder' && s.classList.contains('i-only')) || (mode === 'investor' && s.classList.contains('f-only'));
+      s.classList.toggle('on', +s.dataset.screen === i && !wrongSide);
+    });
+  }
+
+  $$('.toggle button', how).forEach((b) => b.addEventListener('click', () => {
+    how.dataset.mode = b.dataset.mode;
+    $$('.toggle button', how).forEach((x) => x.setAttribute('aria-pressed', x === b));
+    show(current);
+  }));
+
+  // Desktop: the step nearest the viewport centre drives the phone.
+  // Mobile: steps are a horizontal snap row, so the observer's root is the row.
+  const stepsEl = $('#steps');
+  const wide = matchMedia('(min-width: 961px)');
+  let stepIO;
+  function observeSteps() {
+    if (stepIO) stepIO.disconnect();
+    stepIO = new IntersectionObserver((es) => {
+      es.forEach((e) => { if (e.isIntersecting) show(+e.target.dataset.step); });
+    }, wide.matches
+      ? { rootMargin: '-48% 0px -48% 0px' }
+      : { root: stepsEl, threshold: 0.6 });
+    steps.forEach((s) => stepIO.observe(s));
+  }
+  observeSteps();
+  wide.addEventListener('change', observeSteps);
+
+  dots.forEach((d, i) => d.addEventListener('click', () => {
+    const s = steps[i];
+    if (wide.matches) s.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'center' });
+    else stepsEl.scrollTo({ left: s.offsetLeft - stepsEl.offsetLeft - (stepsEl.clientWidth - s.clientWidth) / 2, behavior: reduced ? 'auto' : 'smooth' });
+    show(i);
+  }));
+
+  // ---- CTAs: preselect what the visitor clicked, or open the calendar ----
+  const form = $('#contactForm');
+  function preset(intent, role) {
+    if (intent) { const r = form.querySelector(`input[name=intent][value=${intent}]`); if (r) r.checked = true; }
+    if (role) { const r = form.querySelector(`input[name=role][value=${role}]`); if (r) r.checked = true; }
+  }
+  $$('a[data-intent]').forEach((a) => a.addEventListener('click', (ev) => {
+    if (SITE.BOOKING_URL && a.hasAttribute('data-book')) {
+      ev.preventDefault(); window.open(SITE.BOOKING_URL, '_blank', 'noopener'); return;
+    }
+    preset(a.dataset.intent, a.dataset.role);
+    setTimeout(() => form.querySelector('input[name=name]').focus({ preventScroll: true }), reduced ? 0 : 650);
+  }));
+
+  if (SITE.BOOKING_URL) { const b = $('#bookDirect'); b.href = SITE.BOOKING_URL; b.hidden = false; }
+  if (SITE.CONTACT_EMAIL) {
+    const m = $('#mailDirect'); m.href = 'mailto:' + SITE.CONTACT_EMAIL; m.hidden = false;
+    $('#mailLabel').firstChild.textContent = SITE.CONTACT_EMAIL;
+  }
+
+  // ---- Contact form ----
+  const msg = $('#formMsg'), btn = $('#submitBtn');
+  const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+  const startedAt = Date.now();
+
+  function say(text, isErr) { msg.textContent = text; msg.classList.toggle('err', !!isErr); }
+
+  function mailtoFallback(data) {
+    if (!SITE.CONTACT_EMAIL) return null;
+    const body = `Name: ${data.name}\nRole: ${data.role}\nRequest: ${data.intent}\nCompany: ${data.company || '-'}\n\n${data.message || ''}`;
+    return `mailto:${SITE.CONTACT_EMAIL}?subject=${encodeURIComponent('Binder — ' + data.intent + ' request')}&body=${encodeURIComponent(body)}`;
+  }
+
+  form.addEventListener('submit', async (ev) => {
+    ev.preventDefault();
+    const data = Object.fromEntries(new FormData(form));
+    const nameEl = form.elements.name, emailEl = form.elements.email;
+    nameEl.setAttribute('aria-invalid', !data.name.trim());
+    emailEl.setAttribute('aria-invalid', !EMAIL_RE.test(data.email.trim()));
+    if (!data.name.trim()) { say('Please add your name so we know who to reply to.', true); nameEl.focus(); return; }
+    if (!EMAIL_RE.test(data.email.trim())) { say('That email address looks incomplete — check for a typo.', true); emailEl.focus(); return; }
+
+    btn.disabled = true; say('Sending…');
+    data.elapsed_ms = Date.now() - startedAt;
+    data.page = location.href;
+    try {
+      const r = await fetch('/api/contact', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
+      const out = await r.json().catch(() => ({}));
+      if (r.ok && out.ok) {
+        $('#formBody').hidden = true; $('#formDone').hidden = false;
+        if (data.intent === 'pilot') $('#doneText').textContent = "Thanks for applying. We'll review your profile and reply within one working day.";
+        return;
+      }
+      const fallback = mailtoFallback(data);
+      const reasons = {
+        invalid_email: 'That email address was rejected — check for a typo.',
+        rate_limited: 'Too many requests from this connection. Wait a minute and try again.',
+        not_configured: 'Our form is not connected yet.',
+      };
+      let text = reasons[out.error] || 'We could not send your request right now.';
+      if (fallback && out.error !== 'invalid_email') { text += ' Opening your email app with the details filled in instead.'; setTimeout(() => { location.href = fallback; }, 900); }
+      else if (out.error !== 'invalid_email') text += ' Please try again in a minute.';
+      say(text, true);
+    } catch (e) {
+      const fallback = mailtoFallback(data);
+      say('No connection to our server. ' + (fallback ? 'Opening your email app instead.' : 'Check your connection and try again.'), true);
+      if (fallback) setTimeout(() => { location.href = fallback; }, 900);
+    } finally {
+      btn.disabled = false;
+    }
+  });
+})();
+</script>
+</body>
+</html>
