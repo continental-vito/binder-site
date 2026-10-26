@@ -5,3 +5,11 @@ Makefile
 README.md
 CLAUDE.md
 .github
+
+# Legal pages are held back until the company details replace their
+# [[PLACEHOLDERS]]. Remove these four lines (and restore the footer links,
+# sitemap entries and form note) to publish them — see CLAUDE.md.
+privacy.html
+cookies.html
+terms.html
+legal.html

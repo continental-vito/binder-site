@@ -18,7 +18,11 @@ const problems = [];
 // Public pages: every top-level .html except the 404. vercel.json's cleanUrls
 // serves investor-list.html at /investor-list, so links use the clean form.
 const SITE = 'https://binder.red';
-const PAGES = readdirSync(root).filter((f) => f.endsWith('.html') && f !== '404.html').sort();
+// Pages listed in .vercelignore exist in the repo but are not deployed (the
+// legal pages, until the company details are filled in). They are not public
+// pages, and a deployed page linking to one would be a live 404.
+const HELD_BACK = new Set(readFileSync(join(root, '.vercelignore'), 'utf8').split('\n').map((l) => l.trim()).filter((l) => l.endsWith('.html')));
+const PAGES = readdirSync(root).filter((f) => f.endsWith('.html') && f !== '404.html' && !HELD_BACK.has(f)).sort();
 const urlFor = (f) => (f === 'index.html' ? `${SITE}/` : `${SITE}/${f.replace(/\.html$/, '')}`);
 const resolveLocal = (ref) => {
   const clean = ref.replace(/\/$/, '') || '/';
@@ -34,7 +38,9 @@ const resolveLocal = (ref) => {
 for (const f of [...PAGES, '404.html']) {
   const doc = readFileSync(join(root, f), 'utf8');
   for (const m of doc.matchAll(/\b(?:src|href|poster|content)="(\/[^"#?]*)/g)) {
-    if (!resolveLocal(m[1])) problems.push(`${f} references ${m[1]}, which does not exist`);
+    const target = resolveLocal(m[1]);
+    if (!target) problems.push(`${f} references ${m[1]}, which does not exist`);
+    else if (HELD_BACK.has(target)) problems.push(`${f} links to ${m[1]}, which is held back in .vercelignore — a 404 once deployed`);
   }
 }
 

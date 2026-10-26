@@ -37,6 +37,10 @@ how the app works and to collect demo and call requests.
   `llms.txt`, the index FAQ and the Organization JSON-LD — consistent entity
   descriptions are what AI answers latch onto.
 - Legal pages: never publish with `[[PLACEHOLDERS]]` (`make publish-check`).
+  Until the details exist they are listed in `.vercelignore` (not deployed),
+  unlinked from every footer and the form, and out of the sitemap; check-site
+  fails if a deployed page links to one. To publish: fill the placeholders,
+  drop them from `.vercelignore`, restore the links and sitemap entries.
   They were drafted from how the site actually works (no cookies, no
   analytics, Vercel + Resend as processors) — if that changes, update
   privacy.html and cookies.html in the same commit. Drafts, not legal advice:

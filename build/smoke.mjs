@@ -208,7 +208,10 @@ try {
   }
 
   // 3. Guide and legal pages: render without errors and fit a phone screen.
-  for (const g of ['investor-list', 'meet-investors', 'capital-raise', 'founder-list', 'privacy', 'cookies', 'terms', 'legal']) {
+  // Pages held back in .vercelignore aren't deployed, so --base runs skip them.
+  const heldBack = (await readFile(join(root, '.vercelignore'), 'utf8')).split('\n').map((l) => l.trim().replace(/\.html$/, ''));
+  const pages = ['investor-list', 'meet-investors', 'capital-raise', 'founder-list', 'privacy', 'cookies', 'terms', 'legal'];
+  for (const g of pages.filter((g) => baseArg < 0 || !heldBack.includes(g))) {
     for (const [w, h, label] of [[1440, 900, 'desktop'], [390, 844, 'mobile']]) {
       await open(`${base}/${g}`, w, h);
       const r = await evaluate(`({ h1: document.querySelectorAll('h1').length, css: getComputedStyle(document.body).fontFamily.includes('apple-system'), over: document.documentElement.scrollWidth - innerWidth })`);
