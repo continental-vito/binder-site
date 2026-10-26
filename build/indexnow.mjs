@@ -17,7 +17,14 @@ const urls = [...readFileSync(join(root, 'sitemap.xml'), 'utf8').matchAll(/<loc>
 // fail with the reason rather than letting the engine reject us silently.
 const keyUrl = `https://${host}/${key}.txt`;
 const live = await fetch(keyUrl).then(async (r) => (r.ok ? (await r.text()).trim() : `HTTP ${r.status}`)).catch((e) => e.message);
-if (live !== key) { console.error(`indexnow: ${keyUrl} does not serve the key (${live}) — publish first`); process.exit(1); }
+if (live !== key) {
+  // "fetch failed" means this machine could not reach the site at all — often
+  // local or VPN DNS that has not picked up the domain yet — not that the key
+  // is missing. Say which, so nobody republishes to fix a DNS cache.
+  const why = /^HTTP /.test(live) ? `the site answered ${live} — is the key file published?` : `could not reach it from this machine (${live}) — check local/VPN DNS with: dig +short ${host}`;
+  console.error(`indexnow: ${keyUrl}: ${why}`);
+  process.exit(1);
+}
 
 const r = await fetch('https://api.indexnow.org/indexnow', {
   method: 'POST',
