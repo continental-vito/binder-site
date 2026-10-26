@@ -1,0 +1,87 @@
+/* Shared by the guide pages (/investor-list, /meet-investors, /capital-raise,
+   /founder-list). Same tokens as index.html, which keeps its own inline CSS so
+   the landing page stays a single request. */
+:root{
+  --bg:#FFFFFF; --bg-2:#F5F5F7;
+  --ink:#1D1D1F; --ink-2:#515154; --muted:#86868B; --line:#E5E5EA;
+  --coral:#D95440; --coral-hover:#C4472F; --coral-soft:#FFF1ED; --coral-ink:#A93C2A;
+  --font:-apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Inter", "Helvetica Neue", Arial, sans-serif;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);font-size:18px;line-height:1.65;-webkit-font-smoothing:antialiased;letter-spacing:-.011em}
+a{color:var(--coral-ink)}
+a:hover{color:var(--coral)}
+:focus-visible{outline:2.5px solid var(--coral);outline-offset:3px;border-radius:6px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+@media (max-width:600px){.wrap{padding:0 16px}body{font-size:17px}}
+
+.nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.85);backdrop-filter:saturate(1.8) blur(20px);-webkit-backdrop-filter:saturate(1.8) blur(20px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px;gap:16px}
+.brand{font-size:27px;font-weight:700;letter-spacing:-.05em;text-decoration:none;color:var(--ink);line-height:1}
+.nav-links{display:flex;gap:26px;font-size:15px;font-weight:500}
+.nav-links a{text-decoration:none;color:var(--ink-2)}
+.nav-links a:hover,.nav-links a[aria-current="page"]{color:var(--ink)}
+@media (max-width:880px){.nav-links{display:none}}
+.btn{display:inline-flex;align-items:center;justify-content:center;height:46px;padding:0 22px;border-radius:999px;font-weight:600;font-size:16px;text-decoration:none;white-space:nowrap;letter-spacing:-.01em}
+.btn-coral{background:var(--coral);color:#fff}
+.btn-coral:hover{background:var(--coral-hover);color:#fff}
+.btn-ghost{color:var(--coral);box-shadow:inset 0 0 0 1.5px var(--line)}
+.btn-ghost:hover{box-shadow:inset 0 0 0 1.5px var(--coral)}
+.btn-sm{height:40px;padding:0 18px;font-size:15px}
+
+.crumbs{font-size:14px;color:var(--muted);padding-top:36px}
+.crumbs a{color:var(--muted);text-decoration:none}
+.crumbs a:hover{color:var(--ink)}
+article{max-width:740px;margin:0 auto;padding:0 24px 40px}
+@media (max-width:600px){article{padding:0 16px 32px}}
+.eyebrow{display:block;font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--coral);margin-top:28px}
+h1,h2,h3{font-weight:700;letter-spacing:-.03em;line-height:1.1;text-wrap:balance}
+h1{font-size:clamp(36px,5.4vw,56px);margin:12px 0 0;letter-spacing:-.04em;line-height:1.02}
+.lede{font-size:clamp(19px,2vw,22px);color:var(--ink-2);margin:20px 0 0;line-height:1.5}
+.meta{font-size:14px;color:var(--muted);margin-top:18px}
+h2{font-size:clamp(26px,3vw,32px);margin:56px 0 0}
+h3{font-size:21px;margin:32px 0 0;letter-spacing:-.02em}
+p{margin:16px 0 0}
+ul,ol{margin:16px 0 0;padding-left:24px}
+li{margin-top:8px}
+li::marker{color:var(--coral)}
+strong{font-weight:650}
+.toc{margin-top:36px;padding:22px 26px;border-radius:20px;background:var(--bg-2);font-size:16px}
+.toc b{display:block;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.toc ol{margin-top:10px}
+.callout{margin-top:28px;padding:22px 24px;border-radius:20px;background:var(--coral-soft);border-left:4px solid var(--coral)}
+.callout p:first-child{margin-top:0}
+table{width:100%;border-collapse:collapse;margin-top:20px;font-size:16px}
+th,td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600}
+td:first-child{font-weight:600}
+@media (max-width:600px){table{font-size:14.5px}th,td{padding:10px 8px}}
+.table-scroll{overflow-x:auto}
+.cta{margin:56px 0 0;padding:32px;border-radius:28px;background:var(--coral);color:#fff}
+.cta h2{margin:0;color:#fff;font-size:clamp(24px,3vw,30px)}
+.cta p{color:rgba(255,255,255,.9)}
+.cta .row{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px}
+.cta .btn-white{background:#fff;color:var(--coral-ink)}
+.cta .btn-white:hover{background:var(--coral-soft)}
+.cta .btn-line{color:#fff;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.6)}
+.cta .btn-line:hover{box-shadow:inset 0 0 0 1.5px #fff;color:#fff}
+.faq details{border-top:1px solid var(--line)}
+.faq details:last-child{border-bottom:1px solid var(--line)}
+.faq summary{cursor:pointer;padding:18px 0;font-weight:600;font-size:18px;list-style:none}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";float:right;color:var(--coral);font-weight:500}
+.faq details[open] summary::after{content:"–"}
+.faq details p{margin:0 0 18px;color:var(--ink-2)}
+.related{margin-top:56px}
+.related ul{list-style:none;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.related li{margin:0}
+.related a{display:block;padding:18px 20px;border-radius:18px;background:var(--bg-2);text-decoration:none;color:var(--ink);font-weight:600}
+.related a:hover{box-shadow:0 0 0 1.5px var(--coral)}
+.related small{display:block;color:var(--ink-2);font-weight:400;font-size:14.5px;margin-top:4px}
+@media (max-width:600px){.related ul{grid-template-columns:1fr}}
+footer{padding:36px 0 48px;font-size:14.5px;color:var(--ink-2);background:var(--bg-2);border-top:1px solid var(--line);margin-top:40px}
+footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
+footer nav{display:flex;gap:22px;flex-wrap:wrap}
+footer a{text-decoration:none;color:var(--ink-2)}
+footer a:hover{color:var(--ink)}

@@ -1,0 +1,26 @@
+# Binder
+
+> Binder is a founder–investor matchmaking app. Founders state what they are raising; investors state their ticket size, stages, sectors and geography. Each side only sees the other where those criteria overlap, a connection requires both sides to say yes, and Binder then books a 20-minute coffee chat into both calendars.
+
+Key facts:
+
+- Website: https://binder.red
+- For: seed-stage startups raising capital, and the business angels and micro VCs who back them.
+- How matching works: founders and investors are matched on sector, stage, ticket size and geography. Every profile card explains why the two sides match.
+- Mutual interest only: founders cannot cold-pitch investors. A pass is private; the other side is only told about a mutual yes.
+- Meetings: once both sides say yes, Binder shows the time slots both have free and books a 20-minute call (Google Meet) with an agenda drawn from both profiles.
+- Status: Binder is running a pilot with a founding cohort. The cohort is planned at 20 actively investing investors and up to 100 hand-selected founders over 30 days; these are design targets, not results.
+- Contact and demos: https://binder.red/#contact
+
+## Product
+
+- [How Binder works for founders](https://binder.red/#founders): set your round, discover investors who fit, connect on mutual interest, message, book a call.
+- [How Binder works for investors](https://binder.red/#investors): set ticket and thesis, choose what reaches you, swipe on founders that fit, meet on mutual interest.
+- [Interactive demo](https://binder.red/demo): the working app prototype. Profiles and photos in it are illustrative.
+
+## Guides
+
+- [Investor list for startups](https://binder.red/investor-list): the fields that decide investor fit, where to find investors, how to qualify them.
+- [How to meet investors](https://binder.red/meet-investors): channels compared, warm introductions, and running a 20-minute first meeting.
+- [Capital raise playbook](https://binder.red/capital-raise): how much to raise, instruments, preparation, running and closing a seed round.
+- [Founder list and deal flow for investors](https://binder.red/founder-list): what to capture for each startup and how to qualify founders fast.

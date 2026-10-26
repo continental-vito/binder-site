@@ -71,6 +71,25 @@ At the top of the `<script>` in `index.html`:
 | `BOOKING_URL` | Cal.com / Calendly / Google appointment link. When set, "Book a demo" opens it directly and a "Pick a time now" card appears. Empty → buttons scroll to the form. |
 | `CONTACT_EMAIL` | Shown as a direct contact, and used to open a prefilled email if the form backend fails. Empty → hidden. |
 
+## Search and AI answers (SEO / GEO)
+
+| File | Purpose |
+|---|---|
+| `investor-list.html`, `meet-investors.html`, `capital-raise.html`, `founder-list.html` | One guide per search intent, served at `/investor-list` etc. |
+| `sitemap.xml` | Every public page; `make ci` fails if a page is missing from it |
+| `robots.txt` | Everything allowed except `/api/`; AI crawlers named explicitly; points to the sitemap |
+| `llms.txt` | Plain-text summary of what Binder is, for AI assistants and their crawlers |
+| `<key>.txt` + `make indexnow` | IndexNow: pushes the sitemap's URLs to Bing (which feeds ChatGPT search), Yandex and others |
+| JSON-LD in each page | Organization, WebSite/Article, Breadcrumbs, FAQPage |
+| `404.html` | Served by Vercel for unknown paths |
+
+Every page's `FAQPage` structured data mirrors its visible FAQ exactly — `make ci`
+fails if they drift, because answers the page doesn't show are against Google's
+guidelines. Titles must be unique and under ~60 characters, descriptions
+120–160, one `<h1>` per page, canonical = the page's own clean URL.
+
+After publishing changes to pages: `make indexnow`.
+
 ## The demo
 
 Every phone on the page is the real prototype from the mock export

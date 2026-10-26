@@ -1,7 +1,7 @@
 # One interface for every task. `make ci` is what GitHub Actions runs too.
 MOCK ?=
 
-.PHONY: ci serve dev import shots live icons
+.PHONY: ci serve dev import shots live indexnow icons
 
 ci:
 	@build/ci.sh
@@ -26,6 +26,12 @@ shots:
 LIVE ?= https://binder.red
 live:
 	node build/smoke.mjs --base $(LIVE)
+
+# Tell Bing (and through it ChatGPT search), Yandex and other IndexNow engines
+# that pages changed. Run after a publish; the key file must already be live.
+INDEXNOW_KEY := d13c8612c4cea135e2f53811185d83b9
+indexnow:
+	node build/indexnow.mjs $(INDEXNOW_KEY)
 
 # Render the social card and PNG icons from build/*.html with headless Chrome.
 icons:

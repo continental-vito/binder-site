@@ -192,6 +192,19 @@ try {
     if (overflow > 0) failures.push(`landing ${label}: page scrolls sideways by ${overflow}px`);
     takeLogs(`landing ${label}`);
   }
+
+  // 3. Guide pages: render without errors and fit a phone screen.
+  for (const g of ['investor-list', 'meet-investors', 'capital-raise', 'founder-list']) {
+    for (const [w, h, label] of [[1440, 900, 'desktop'], [390, 844, 'mobile']]) {
+      await open(`${base}/${g}`, w, h);
+      const r = await evaluate(`({ h1: document.querySelectorAll('h1').length, css: getComputedStyle(document.body).fontFamily.includes('apple-system'), over: document.documentElement.scrollWidth - innerWidth })`);
+      if (r.h1 !== 1) failures.push(`/${g} ${label}: page did not render (h1 count ${r.h1})`);
+      if (!r.css) failures.push(`/${g} ${label}: guide.css did not apply`);
+      if (r.over > 0) failures.push(`/${g} ${label}: page scrolls sideways by ${r.over}px`);
+      takeLogs(`/${g} ${label}`);
+      await shot(`guide-${g}-${label}`);
+    }
+  }
 } catch (e) {
   failures.push(e.message);
 }

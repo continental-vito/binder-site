@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>binder. — Meet the capital that actually fits</title>
-<meta name="description" content="Binder matches founders with investors on sector, stage, ticket and geography. Swipe on fit, connect on mutual interest, and book a 20-minute coffee chat on both calendars.">
+<title>Binder — Meet Investors Who Fit Your Capital Raise</title>
+<meta name="description" content="Skip the cold investor list. Binder matches founders raising capital with angels and VCs who fit, and books a 20-minute call when both say yes.">
 <meta name="theme-color" content="#FFFFFF">
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="/assets/favicon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <meta property="og:type" content="website">
-<meta property="og:title" content="binder. — Meet the capital that actually fits">
+<meta property="og:title" content="Binder — Meet investors who fit your capital raise">
 <meta property="og:description" content="Founder ↔ investor matchmaking. Swipe on fit, mutual interest only, 20-minute coffee chats booked on both calendars.">
 <!-- Absolute: link previews (LinkedIn, X, Slack) ignore relative og:image URLs. -->
 <link rel="canonical" href="https://binder.red/">
@@ -19,6 +19,14 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+ {"@type":"Organization","@id":"https://binder.red/#org","name":"Binder","url":"https://binder.red/","logo":"https://binder.red/assets/apple-touch-icon.png","description":"Binder is a founder–investor matchmaking app. Founders and investors are matched on sector, stage, ticket size and geography; when both sides say yes, Binder books a 20-minute coffee chat into both calendars."},
+ {"@type":"WebSite","@id":"https://binder.red/#site","url":"https://binder.red/","name":"Binder","inLanguage":"en","publisher":{"@id":"https://binder.red/#org"}},
+ {"@type":"WebPage","@id":"https://binder.red/#page","url":"https://binder.red/","name":"Binder — Meet investors who fit your capital raise","isPartOf":{"@id":"https://binder.red/#site"},"about":{"@id":"https://binder.red/#org"},"inLanguage":"en"},
+ {"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is Binder?","acceptedAnswer":{"@type":"Answer","text":"Binder is a founder–investor matchmaking app. Founders state what they are raising; investors state their ticket, stage, sectors and geography. Each side only sees the other where those overlap, a connection needs both sides to say yes, and Binder then books a 20-minute coffee chat into both calendars."}},{"@type":"Question","name":"Is Binder live?","acceptedAnswer":{"@type":"Answer","text":"We're running a pilot with a founding cohort of founders and investors. The pilot follows the same flow you see above — stated intent, fit, mutual interest, a booked call — with our team reviewing every match. Book a demo to see where the product is today."}},{"@type":"Question","name":"Can I try it?","acceptedAnswer":{"@type":"Answer","text":"Yes — the phones on this page run the actual prototype. Swipe, connect, book a slot, edit a profile. Nothing you do there is sent anywhere. Open it full screen; it works best on a phone."}},{"@type":"Question","name":"Who can see my profile?","acceptedAnswer":{"@type":"Answer","text":"Only people on the other side whose criteria you fit, and you choose the visibility: relevant matches, connections only, or paused. Founders appear only to investors whose ticket, stage and thesis include them."}},{"@type":"Question","name":"Does anyone find out if I pass?","acceptedAnswer":{"@type":"Answer","text":"No. A pass is private. The other side only ever hears about a mutual yes."}},{"@type":"Question","name":"How is this different from an investor database?","acceptedAnswer":{"@type":"Answer","text":"A database gives you names and leaves the outreach to you. Binder only surfaces people who fit, only connects you when both sides say yes, and turns that yes straight into a meeting on both calendars."}},{"@type":"Question","name":"Which founders and investors is the pilot for?","acceptedAnswer":{"@type":"Answer","text":"Seed-stage startups that are raising now, and business angels and micro VCs who are actively writing cheques. We keep the first cohort in one coherent segment so every match has a real chance of being relevant."}},{"@type":"Question","name":"How are profiles verified?","acceptedAnswer":{"@type":"Answer","text":"During the pilot, our team reviews every founder and investor before their profile goes live. Investors confirm the ticket they write and that they're deploying now; founders confirm what they're raising."}}]}
+]}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <!-- Apple devices use the system font, as the app does; Inter stands in elsewhere. -->
@@ -272,6 +280,16 @@ legend{font-size:14px;font-weight:600;margin-bottom:9px;padding:0}
 .form-done p{color:var(--ink-2);margin-top:10px}
 @media (max-width:960px){.contact-grid{grid-template-columns:1fr;gap:36px}}
 
+/* Guides */
+.guide-grid{list-style:none;margin:44px 0 0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.guide-grid a{display:flex;flex-direction:column;gap:8px;height:100%;padding:24px;border-radius:var(--radius);background:var(--bg-2);text-decoration:none;transition:box-shadow .15s}
+.guide-grid a:hover{box-shadow:0 0 0 1.5px var(--coral)}
+.guide-grid .k{font-size:12.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--coral)}
+.guide-grid b{font-size:19px;letter-spacing:-.02em;line-height:1.25}
+.guide-grid span:last-child{color:var(--ink-2);font-size:15px}
+@media (max-width:960px){.guide-grid{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.guide-grid{grid-template-columns:1fr}}
+
 /* FAQ */
 .faq{max-width:820px;margin:44px auto 0}
 .faq details{border-top:1px solid var(--line);padding:4px 0}
@@ -341,7 +359,7 @@ footer a:hover{color:var(--ink)}
     <div>
       <a class="pill-tag" href="#pilot"><b>Pilot</b> Founding cohort now forming</a>
       <h1>Meet the capital that <span class="accent">actually fits.</span></h1>
-      <p class="lede">Binder matches founders with investors on sector, stage, ticket and geography. Swipe on fit, connect only on mutual interest, and book a 20-minute coffee chat that lands on both calendars.</p>
+      <p class="lede">Binder matches founders raising capital with investors who fit — on sector, stage, ticket and geography. Swipe on fit, meet investors only on mutual interest, and book a 20-minute coffee chat that lands on both calendars.</p>
       <div class="hero-ctas">
         <a class="btn btn-coral" href="#contact" data-intent="demo" data-book>Book a 20-min demo <svg class="ic"><use href="#i-arrow"/></svg></a>
         <a class="btn btn-ghost" href="#founders">See how it works</a>
@@ -459,7 +477,7 @@ footer a:hover{color:var(--ink)}
     <div class="sec-head m-only rv">
       <span class="eyebrow">For investors</span>
       <h2>Deal flow inside your thesis — and nothing else.</h2>
-      <p class="lede">The same app from the other side of the table. The phone is the investor app.</p>
+      <p class="lede">Meet founders inside your thesis, from the other side of the same app. The phone is the investor app.</p>
     </div>
     <div class="how-grid">
       <ol class="steps">
@@ -467,7 +485,7 @@ footer a:hover{color:var(--ink)}
           <div class="sec-head d-only">
             <span class="eyebrow">For investors</span>
             <h2>Deal flow inside your thesis — and nothing else.</h2>
-            <p class="lede">The same app from the other side of the table. The phone is the investor app.</p>
+            <p class="lede">Meet founders inside your thesis, from the other side of the same app. The phone is the investor app.</p>
           </div>
           <span class="n">01</span>
           <h3>Set your ticket and fund.</h3>
@@ -635,6 +653,23 @@ footer a:hover{color:var(--ink)}
   </div>
 </section>
 
+<!-- ================= GUIDES ================= -->
+<section class="sec guides" id="guides" style="padding-bottom:40px">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="eyebrow">Guides</span>
+      <h2>Fundraising, without the guesswork.</h2>
+      <p class="lede">Practical guides for founders raising capital and for the investors backing them.</p>
+    </div>
+    <ul class="guide-grid">
+      <li class="rv"><a href="/investor-list"><span class="k">Founders</span><b>Build an investor list that fits</b><span>The fields that decide fit, where to find investors, and how to qualify them.</span></a></li>
+      <li class="rv"><a href="/meet-investors"><span class="k">Founders</span><b>How to meet investors</b><span>Channels that work, warm intros, and the 20-minute first meeting.</span></a></li>
+      <li class="rv"><a href="/capital-raise"><span class="k">Founders</span><b>Capital raise playbook</b><span>How much to raise, which instrument, and how to run and close the round.</span></a></li>
+      <li class="rv"><a href="/founder-list"><span class="k">Investors</span><b>A founder list filtered by your thesis</b><span>Where good deal flow comes from and how to qualify founders fast.</span></a></li>
+    </ul>
+  </div>
+</section>
+
 <!-- ================= FAQ ================= -->
 <section class="sec" id="faq" style="padding-top:24px">
   <div class="wrap">
@@ -643,6 +678,7 @@ footer a:hover{color:var(--ink)}
       <h2>Questions, answered.</h2>
     </div>
     <div class="faq">
+      <details open><summary>What is Binder?<svg class="ic"><use href="#i-plus"/></svg></summary><p>Binder is a founder–investor matchmaking app. Founders state what they are raising; investors state their ticket, stage, sectors and geography. Each side only sees the other where those overlap, a connection needs both sides to say yes, and Binder then books a 20-minute coffee chat into both calendars.</p></details>
       <details><summary>Is Binder live?<svg class="ic"><use href="#i-plus"/></svg></summary><p>We're running a pilot with a founding cohort of founders and investors. The pilot follows the same flow you see above — stated intent, fit, mutual interest, a booked call — with our team reviewing every match. Book a demo to see where the product is today.</p></details>
       <details><summary>Can I try it?<svg class="ic"><use href="#i-plus"/></svg></summary><p>Yes — the phones on this page run the actual prototype. Swipe, connect, book a slot, edit a profile. Nothing you do there is sent anywhere. <a href="/demo">Open it full screen</a>; it works best on a phone.</p></details>
       <details><summary>Who can see my profile?<svg class="ic"><use href="#i-plus"/></svg></summary><p>Only people on the other side whose criteria you fit, and you choose the visibility: relevant matches, connections only, or paused. Founders appear only to investors whose ticket, stage and thesis include them.</p></details>
@@ -671,7 +707,7 @@ footer a:hover{color:var(--ink)}
 <footer>
   <div class="wrap">
     <a class="brand wordmark" href="#top" style="font-size:22px">binder.</a>
-    <nav aria-label="Footer"><a href="#founders">For founders</a><a href="#investors">For investors</a><a href="/demo">Live demo</a><a href="#pilot">Pilot</a><a href="#faq">FAQ</a><a href="#contact">Contact</a></nav>
+    <nav aria-label="Footer"><a href="#founders">For founders</a><a href="#investors">For investors</a><a href="/demo">Live demo</a><a href="/investor-list">Investor list</a><a href="/meet-investors">Meet investors</a><a href="/capital-raise">Capital raise</a><a href="/founder-list">Founder list</a><a href="#contact">Contact</a></nav>
     <span>© 2026 Binder</span>
   </div>
 </footer>
