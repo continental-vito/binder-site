@@ -141,6 +141,20 @@ try {
     }
   }
 
+  // 1b. Full-screen demo on a desktop: the phone keeps one height on every
+  //     screen. It used to follow the content, so it seemed to resize.
+  await open(`${base}/demo?role=founder`, 1440, 1000);
+  const heights = new Set();
+  for (const role of ['founder', 'vc']) {
+    for (const page of DEMO_PAGES) {
+      await evaluate(`binderGo(${JSON.stringify({ role, page, index: 0, matchTab: 'new', activeContact: 'marco', activeMeeting: 'demo-1' })})`);
+      await sleep(60);
+      heights.add(await evaluate(`Math.round(document.querySelector('#binder-color .phone').getBoundingClientRect().height)`));
+    }
+  }
+  if (heights.size !== 1) failures.push(`/demo on desktop: the phone changes height between screens (${[...heights].join(', ')} px)`);
+  takeLogs('/demo standalone');
+
   // 2. Landing page: no errors, and each step puts the phone on its screen.
   for (const [w, h, label] of [[1440, 900, 'desktop'], [390, 844, 'mobile']]) {
     await open(`${base}/`, w, h);
@@ -193,8 +207,8 @@ try {
     takeLogs(`landing ${label}`);
   }
 
-  // 3. Guide pages: render without errors and fit a phone screen.
-  for (const g of ['investor-list', 'meet-investors', 'capital-raise', 'founder-list']) {
+  // 3. Guide and legal pages: render without errors and fit a phone screen.
+  for (const g of ['investor-list', 'meet-investors', 'capital-raise', 'founder-list', 'privacy', 'cookies', 'terms', 'legal']) {
     for (const [w, h, label] of [[1440, 900, 'desktop'], [390, 844, 'mobile']]) {
       await open(`${base}/${g}`, w, h);
       const r = await evaluate(`({ h1: document.querySelectorAll('h1').length, css: getComputedStyle(document.body).fontFamily.includes('apple-system'), over: document.documentElement.scrollWidth - innerWidth })`);

@@ -29,12 +29,18 @@ how the app works and to collect demo and call requests.
   Northlight) are illustrative — the portraits are AI-generated — and the page
   says so under the phone and on `/demo/`.
 - The form must never claim success for a request that was not delivered.
-- Guide pages are advice, not data: no statistics, percentages or "studies
-  show" unless sourced and linked. AI assistants quote these pages verbatim,
+- Statistics only from a primary or authoritative source, cited and linked on
+  the page (the problem section cites Gompers et al. via NBER and DocSend).
+  Never from SEO blogs that quote each other. Guide pages stay advice, not data. AI assistants quote these pages verbatim,
   so an invented number would be repeated as fact.
 - Keep "Binder is a founder–investor matchmaking app…" worded the same in
   `llms.txt`, the index FAQ and the Organization JSON-LD — consistent entity
   descriptions are what AI answers latch onto.
+- Legal pages: never publish with `[[PLACEHOLDERS]]` (`make publish-check`).
+  They were drafted from how the site actually works (no cookies, no
+  analytics, Vercel + Resend as processors) — if that changes, update
+  privacy.html and cookies.html in the same commit. Drafts, not legal advice:
+  the user should have an Italian lawyer review them.
 - Only the hero phone is a free demo. The "For founders" / "For investors"
   phones stay locked to their side (`?lock`); smoke.mjs fails if one switches.
 - Visual design follows the app mock: system font (Inter elsewhere), coral

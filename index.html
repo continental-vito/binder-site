@@ -27,11 +27,12 @@
  {"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is Binder?","acceptedAnswer":{"@type":"Answer","text":"Binder is a founder–investor matchmaking app. Founders state what they are raising; investors state their ticket, stage, sectors and geography. Each side only sees the other where those overlap, a connection needs both sides to say yes, and Binder then books a 20-minute coffee chat into both calendars."}},{"@type":"Question","name":"Is Binder live?","acceptedAnswer":{"@type":"Answer","text":"We're running a pilot with a founding cohort of founders and investors. The pilot follows the same flow you see above — stated intent, fit, mutual interest, a booked call — with our team reviewing every match. Book a demo to see where the product is today."}},{"@type":"Question","name":"Can I try it?","acceptedAnswer":{"@type":"Answer","text":"Yes — the phones on this page run the actual prototype. Swipe, connect, book a slot, edit a profile. Nothing you do there is sent anywhere. Open it full screen; it works best on a phone."}},{"@type":"Question","name":"Who can see my profile?","acceptedAnswer":{"@type":"Answer","text":"Only people on the other side whose criteria you fit, and you choose the visibility: relevant matches, connections only, or paused. Founders appear only to investors whose ticket, stage and thesis include them."}},{"@type":"Question","name":"Does anyone find out if I pass?","acceptedAnswer":{"@type":"Answer","text":"No. A pass is private. The other side only ever hears about a mutual yes."}},{"@type":"Question","name":"How is this different from an investor database?","acceptedAnswer":{"@type":"Answer","text":"A database gives you names and leaves the outreach to you. Binder only surfaces people who fit, only connects you when both sides say yes, and turns that yes straight into a meeting on both calendars."}},{"@type":"Question","name":"Which founders and investors is the pilot for?","acceptedAnswer":{"@type":"Answer","text":"Seed-stage startups that are raising now, and business angels and micro VCs who are actively writing cheques. We keep the first cohort in one coherent segment so every match has a real chance of being relevant."}},{"@type":"Question","name":"How are profiles verified?","acceptedAnswer":{"@type":"Answer","text":"During the pilot, our team reviews every founder and investor before their profile goes live. Investors confirm the ticket they write and that they're deploying now; founders confirm what they're raising."}}]}
 ]}
 </script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<!-- Apple devices use the system font, as the app does; Inter stands in elsewhere. -->
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
+/* Inter is self-hosted: loading it from Google Fonts sent every visitor's IP
+   address to Google, which EU courts have held needs consent. Apple devices
+   still use the system font first, as the app does. */
+@font-face{font-family:"Inter";font-style:normal;font-weight:400 700;font-display:swap;src:url(/assets/fonts/inter-latin.woff2) format("woff2");unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:"Inter";font-style:normal;font-weight:400 700;font-display:swap;src:url(/assets/fonts/inter-latin-ext.woff2) format("woff2");unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF}
 :root{
   --bg:#FFFFFF; --bg-2:#F5F5F7; --bg-3:#FBFBFD;
   --ink:#1D1D1F; --ink-2:#515154; --muted:#86868B; --line:#E5E5EA;
@@ -94,6 +95,9 @@ p{margin:0}
 .hero h1{font-size:clamp(48px,6.8vw,86px);line-height:.98;letter-spacing:-.045em}
 .hero .lede{margin-top:24px;max-width:540px}
 .hero-ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:34px}
+.how-links{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:18px;font-size:15px;color:var(--ink-2)}
+.how-links a{display:inline-flex;align-items:center;gap:6px;height:40px;padding:0 16px;border-radius:999px;background:#fff;box-shadow:inset 0 0 0 1.5px var(--line);color:var(--coral);font-weight:600;text-decoration:none;transition:box-shadow .15s}
+.how-links a:hover{box-shadow:inset 0 0 0 1.5px var(--coral)}
 .trust{display:flex;align-items:center;gap:8px;margin-top:22px;font-size:14.5px;color:var(--ink-2)}
 .trust .ic{color:var(--coral);font-size:18px}
 .pill-tag{display:inline-flex;align-items:center;gap:8px;padding:5px 14px 5px 6px;border-radius:999px;background:var(--bg-2);font-size:14px;font-weight:500;color:var(--ink-2);margin-bottom:26px;text-decoration:none}
@@ -138,26 +142,34 @@ section{position:relative;scroll-margin-top:64px}
 .problem{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:56px}
 .pcell{background:var(--bg-2);border-radius:var(--radius);padding:30px}
 .pcell .k{font-size:13px;font-weight:600;color:var(--coral);text-transform:uppercase;letter-spacing:.08em}
+.pcell .stat{display:block;font-size:clamp(52px,5.4vw,68px);font-weight:700;letter-spacing:-.05em;line-height:1;color:var(--coral);margin-top:16px}
 .pcell h3{margin-top:12px}
 .pcell p{color:var(--ink-2);margin-top:10px;font-size:16px}
 @media (max-width:880px){.problem{grid-template-columns:1fr}}
+.sources{margin-top:22px;font-size:13px;color:var(--muted);line-height:1.6}
+.sources a{color:var(--muted)}
+.sources a:hover{color:var(--ink)}
 
 /* Founder / investor walkthroughs. Each has its own phone, locked to its side,
    so a visitor reading "For investors" can only ever see the investor app. */
 .how{background:var(--bg-2)}
 .how.alt{background:var(--bg)}
-/* Desktop is a split screen: copy on the left, the phone on the right, both
-   centred on the viewport below the nav. Every step is one screen tall with
-   its text centred, so the step being read always sits level with the phone.
-   The section heading opens step 01 (.d-only) so it shares the first screen
-   with the phone instead of pushing the phone below the fold. */
+/* Desktop is a split screen: copy on the left, the phone on the right. The
+   phone is centred under the nav; the step being read passes the same centre
+   line, so the two meet as you scroll. The section heading opens step 01
+   (.d-only), aligned with the top of the phone, so heading and phone arrive
+   together. Steps were a full screen tall at first; with centred text that
+   left half a screen of nothing around each one and a near-empty screen
+   between the two sections, so they are 62vh, and only step 01 is sized to
+   the phone. */
 .how{--nav:64px}
-.how.sec{padding:0}
-.how-grid{display:grid;grid-template-columns:1fr 380px;gap:72px}
+.how.sec{padding:0 0 40px}
+.how-grid{--pw:330;--gap:calc((100vh - var(--nav) - (var(--pw) * 2.1641px + 20px)) / 2);display:grid;grid-template-columns:1fr 380px;gap:72px}
 .how .d-only{margin-bottom:48px}
 .how .m-only{display:none}
 .steps{list-style:none;margin:0;padding:0}
-.step{min-height:calc(100vh - var(--nav));display:flex;flex-direction:column;justify-content:center;padding:48px 0;opacity:.3;transition:opacity .4s ease}
+.step{min-height:62vh;display:flex;flex-direction:column;justify-content:center;padding:40px 0;opacity:.3;transition:opacity .4s ease}
+.step[data-step="0"]{min-height:calc(var(--pw) * 2.1641px + 20px + var(--gap));justify-content:flex-start;padding-top:var(--gap)}
 .step.on{opacity:1}
 .step .n{font-weight:700;color:var(--coral);font-size:15px;letter-spacing:.04em}
 .step h3{font-size:clamp(30px,3.3vw,42px);margin-top:10px;line-height:1.06;letter-spacing:-.035em}
@@ -170,12 +182,12 @@ section{position:relative;scroll-margin-top:64px}
    otherwise the bottom of each screen, where the CTAs are, is never seen. */
 /* No bottom margin: the dots and note below the phone use the space the
    centring leaves, so the phone stays centred through the last step too. */
-.stick{--pw:330;--gap:calc((100vh - var(--nav) - (var(--pw) * 2.1641px + 20px)) / 2);position:sticky;top:calc(var(--nav) + var(--gap));height:max-content;display:flex;flex-direction:column;align-items:center;gap:16px;align-self:start;margin-top:var(--gap)}
+.stick{position:sticky;top:calc(var(--nav) + var(--gap));height:max-content;display:flex;flex-direction:column;align-items:center;gap:16px;align-self:start;margin-top:var(--gap)}
 .stick .device{--pw:inherit}
-@media (min-width:961px) and (max-height:940px){.stick{--pw:300}}
-@media (min-width:961px) and (max-height:860px){.stick{--pw:270}}
-@media (min-width:961px) and (max-height:770px){.stick{--pw:240}}
-@media (min-width:961px) and (max-height:720px){.stick{--pw:215}}
+@media (min-width:961px) and (max-height:940px){.how-grid{--pw:300}}
+@media (min-width:961px) and (max-height:860px){.how-grid{--pw:270}}
+@media (min-width:961px) and (max-height:770px){.how-grid{--pw:240}}
+@media (min-width:961px) and (max-height:720px){.how-grid{--pw:215}}
 .dots{display:flex;gap:8px}
 .dots button{width:8px;height:8px;border-radius:4px;border:0;background:#D2D2D7;padding:0;cursor:pointer;transition:width .3s,background .3s}
 .dots button.on{width:24px;background:var(--coral)}
@@ -185,6 +197,7 @@ section{position:relative;scroll-margin-top:64px}
   .how .m-only{display:block}
   .how .d-only{display:none}
   .how-grid{grid-template-columns:1fr;gap:24px;margin-top:32px}
+  .step[data-step="0"]{min-height:0;padding-top:24px}
   .stick{position:relative;top:auto;order:-1;margin:0;--pw:250}
   /* Below the two-column breakpoint the steps become a swipeable row under
      the phone — a sticky phone would cover most of a small screen. */
@@ -205,23 +218,6 @@ section{position:relative;scroll-margin-top:64px}
 .rule p{color:var(--ink-2);margin-top:10px;font-size:16px}
 @media (max-width:880px){.rules{grid-template-columns:1fr}}
 
-/* Compare */
-.compare{margin-top:20px;border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);background:#fff}
-.crow{display:grid;grid-template-columns:1fr 1.2fr 1.2fr}
-.crow > div{padding:18px 24px;border-top:1px solid var(--line);font-size:15.5px}
-.crow:first-child > div{border-top:0;font-weight:600;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding-top:22px}
-.crow > div:first-child{font-weight:600}
-.crow .old{color:var(--ink-2)}
-.crow .new{background:var(--coral-soft)}
-.crow:first-child .new{color:var(--coral-ink)}
-@media (max-width:700px){
-  .crow{grid-template-columns:1fr 1fr}
-  .crow > div:first-child{grid-column:1/-1;padding-bottom:0;border-top:1px solid var(--line)}
-  .crow > div:not(:first-child){border-top:0;font-size:14.5px;padding-top:8px}
-  .crow:first-child > div:first-child{display:none}
-  .crow:first-child > div{padding-top:20px}
-}
-
 /* Pilot: a flat coral block. Everything on it is white or a white tint, so
    the section reads as one surface rather than a gradient with cards on it. */
 .pilot{background:var(--coral);color:#fff}
@@ -233,14 +229,18 @@ section{position:relative;scroll-margin-top:64px}
 .num{background:rgba(255,255,255,.14);border-radius:22px;padding:24px}
 .num b{font-weight:700;font-size:50px;line-height:1;display:block;letter-spacing:-.04em}
 .num span{color:rgba(255,255,255,.88);font-size:14.5px;display:block;margin-top:8px}
-.measure{margin-top:30px;display:flex;flex-direction:column;gap:12px}
-.measure div{display:flex;gap:12px;align-items:flex-start;font-size:16px}
-.measure .ic{margin-top:5px;stroke-width:2.6}
+.measure-k{margin-top:30px;font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.78)}
+.measure{margin-top:12px;display:flex;flex-direction:column;gap:10px}
+.measure div{display:grid;grid-template-columns:130px 1fr;gap:16px;align-items:baseline;padding:12px 0;border-top:1px solid rgba(255,255,255,.25);font-size:16px}
+.measure b{font-weight:700}
+.measure span{color:rgba(255,255,255,.9)}
+@media (max-width:600px){.measure div{grid-template-columns:1fr;gap:2px}}
 .pilot-ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:34px}
 .pilot .btn-white{background:#fff;color:var(--coral-ink)}
 .pilot .btn-white:hover{background:var(--coral-soft)}
-.pilot .btn-ghost{color:#fff;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.6)}
-.pilot .btn-ghost:hover{box-shadow:inset 0 0 0 1.5px #fff}
+/* An outline button disappeared into the coral; solid ink reads as clearly as the white one. */
+.pilot .btn-dark{background:var(--ink);color:#fff}
+.pilot .btn-dark:hover{background:#000}
 @media (max-width:960px){.pilot-grid{grid-template-columns:1fr;gap:40px}}
 
 /* Contact */
@@ -272,6 +272,8 @@ legend{font-size:14px;font-weight:600;margin-bottom:9px;padding:0}
 .opts input:focus-visible + span{outline:2.5px solid var(--coral);outline-offset:2px}
 .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
 .submit-row{display:flex;align-items:center;gap:16px;margin-top:24px;flex-wrap:wrap}
+.form-note{margin-top:16px;font-size:13.5px;color:var(--muted)}
+.form-note a{color:var(--muted)}
 .form-msg{font-size:15px;color:var(--ink-2);flex:1;min-width:200px}
 .form-msg.err{color:var(--coral-ink)}
 .form-done{text-align:center;padding:40px 10px}
@@ -310,6 +312,7 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:2
 footer nav{display:flex;gap:24px;flex-wrap:wrap}
 footer a{text-decoration:none}
 footer a:hover{color:var(--ink)}
+footer .legal-row{margin-top:18px;padding-top:18px;border-top:1px solid var(--line);font-size:13.5px;color:var(--muted)}
 
 /* Reveal on scroll */
 .rv{opacity:0;transform:translateY(18px);transition:opacity .7s ease, transform .7s cubic-bezier(.2,.8,.2,1)}
@@ -362,7 +365,11 @@ footer a:hover{color:var(--ink)}
       <p class="lede">Binder matches founders raising capital with investors who fit — on sector, stage, ticket and geography. Swipe on fit, meet investors only on mutual interest, and book a 20-minute coffee chat that lands on both calendars.</p>
       <div class="hero-ctas">
         <a class="btn btn-coral" href="#contact" data-intent="demo" data-book>Book a 20-min demo <svg class="ic"><use href="#i-arrow"/></svg></a>
-        <a class="btn btn-ghost" href="#founders">See how it works</a>
+      </div>
+      <div class="how-links">
+        <span>See how it works for</span>
+        <a href="#founders">Founders <svg class="ic"><use href="#i-arrow"/></svg></a>
+        <a href="#investors">Investors <svg class="ic"><use href="#i-arrow"/></svg></a>
       </div>
       <p class="trust"><svg class="ic"><use href="#i-badge"/></svg> Verified profiles · mutual interest only · no cold outreach</p>
     </div>
@@ -387,10 +394,11 @@ footer a:hover{color:var(--ink)}
       <p class="lede">The information that decides whether a meeting is worth having — ticket, stage, sector, geography, timing — is the last thing either side finds out.</p>
     </div>
     <div class="problem">
-      <div class="pcell rv"><div class="k">Founders</div><h3>Hundreds of emails to find the few who write your cheque.</h3><p>Lists give you names, not intent. You learn an investor doesn't do your stage after the third follow-up.</p></div>
-      <div class="pcell rv"><div class="k">Investors</div><h3>An inbox of decks outside the thesis.</h3><p>Sourcing means filtering noise. The companies that do fit arrive late, through whoever happened to forward them.</p></div>
-      <div class="pcell rv"><div class="k">Both sides</div><h3>Days of back-and-forth for a 20-minute call.</h3><p>Even when interest is mutual, the scheduling, the intro and the agenda are all done by hand.</p></div>
+      <div class="pcell rv"><div class="k">Founders</div><span class="stat">10%</span><h3>of VC deals start with a founder reaching out.</h3><p>Over 30% come through investors' professional networks. Without a warm intro, a founder is going after one deal in ten.<sup>1</sup></p></div>
+      <div class="pcell rv"><div class="k">Investors</div><span class="stat">100</span><h3>deals reviewed for every one funded.</h3><p>That's the median VC firm. Sourcing is mostly saying no — to companies outside the thesis, the stage or the ticket.<sup>1</sup></p></div>
+      <div class="pcell rv"><div class="k">Both sides</div><span class="stat">&lt;3 min</span><h3>spent reviewing a pitch deck.</h3><p>Weeks of outreach to get a deck opened, and fit is judged in less time than it takes to book the call.<sup>2</sup></p></div>
     </div>
+    <p class="sources rv">Sources: <sup>1</sup> Gompers, Gornall, Kaplan &amp; Strebulaev, “How Do Venture Capitalists Make Decisions?”, <i>Journal of Financial Economics</i> (2020), survey of 889 VCs — <a href="https://www.nber.org/digest/dec16/how-do-venture-capitalists-make-decisions" rel="noopener" target="_blank">NBER summary</a>. <sup>2</sup> Dropbox DocSend pitch deck research (2025) — <a href="https://www.dropbox.com/resources/docsend-pitch-deck-research" rel="noopener" target="_blank">source</a>.</p>
   </div>
 </section>
 
@@ -401,59 +409,59 @@ footer a:hover{color:var(--ink)}
   <div class="wrap">
     <div class="sec-head m-only rv">
       <span class="eyebrow">For founders</span>
-      <h2>Raise from investors who actually write your cheque.</h2>
-      <p class="lede">From profile to coffee chat in five steps. The phone is the founder app — tap around.</p>
+      <h2>Raise from investors who <span class="accent">actually write your cheque.</span></h2>
+      <p class="lede">From profile to coffee chat in one swipe. The phone is the founder app — tap around.</p>
     </div>
     <div class="how-grid">
       <ol class="steps">
         <li class="step on" data-step="0">
           <div class="sec-head d-only">
             <span class="eyebrow">For founders</span>
-            <h2>Raise from investors who actually write your cheque.</h2>
-            <p class="lede">From profile to coffee chat in five steps. The phone is the founder app — tap around.</p>
+            <h2>Raise from investors who <span class="accent">actually write your cheque.</span></h2>
+            <p class="lede">From profile to coffee chat in one swipe. The phone is the founder app — tap around.</p>
           </div>
           <span class="n">01</span>
           <h3>Show what you're raising.</h3>
-          <p>Target round, capital committed, ARR, growth and team size — the numbers investors filter on, in one place. Specific beats impressive.</p>
+          <p>Target round, capital committed, ARR, monthly growth and team size: the numbers investors filter on first.</p>
           <ul>
-            <li><svg class="ic"><use href="#i-check"/></svg>Edit any time; your matches update with it</li>
-            <li><svg class="ic"><use href="#i-check"/></svg>Choose who sees you: relevant matches, connections only, or paused</li>
+            <li><svg class="ic"><use href="#i-check"/></svg><span>Investors see them on your card before any pitch</span></li>
+            <li><svg class="ic"><use href="#i-check"/></svg><span>Visible to relevant investors, connections only, or paused</span></li>
           </ul>
         </li>
         <li class="step" data-step="1">
           <span class="n">02</span>
           <h3>See who actually invests in you.</h3>
-          <p>Every investor card leads with <b>why you match</b> — shared focus, your stage, your market — next to ticket, role, companies backed and fund size. Drag right to connect, left to pass.</p>
+          <p>Only investors whose ticket, stage and markets include your round. Each card shows their ticket, lead or co-lead, companies backed and fund size.</p>
           <ul>
-            <li><svg class="ic"><use href="#i-check"/></svg>Only investors whose ticket and thesis include you</li>
-            <li><svg class="ic"><use href="#i-check"/></svg>Verified profiles</li>
+            <li><svg class="ic"><use href="#i-check"/></svg><span><b>Why you match</b> lists the overlap: sector, stage, market</span></li>
+            <li><svg class="ic"><use href="#i-check"/></svg><span>Connect, pass or save. Investors never see your passes</span></li>
           </ul>
         </li>
         <li class="step" data-step="2">
           <span class="n">03</span>
           <h3>Mutual interest only.</h3>
-          <p>You're connected only when the investor said yes too. No cold emails, no ignored intros — and a pass stays private.</p>
+          <p>You're matched when an investor you connected with says yes too. Until then, neither side can message the other.</p>
           <ul>
-            <li><svg class="ic"><use href="#i-check"/></svg>Book a 20-minute coffee chat in one tap</li>
-            <li><svg class="ic"><use href="#i-check"/></svg>Or send a message first</li>
+            <li><svg class="ic"><use href="#i-check"/></svg><span>Book a 20-minute call straight from the match</span></li>
+            <li><svg class="ic"><use href="#i-check"/></svg><span>Or send a message first</span></li>
           </ul>
         </li>
         <li class="step" data-step="3">
           <span class="n">04</span>
-          <h3>Say hello before you meet.</h3>
-          <p>The conversation opens with the connection. Answer the first question, add context, and arrive at the call already warm.</p>
+          <h3>Talk before you meet.</h3>
+          <p>Every match opens a thread. Answer the investor's first question and share context before the call.</p>
           <ul>
-            <li><svg class="ic"><use href="#i-check"/></svg>One thread per connection</li>
-            <li><svg class="ic"><use href="#i-check"/></svg>Schedule the meeting straight from the chat</li>
+            <li><svg class="ic"><use href="#i-check"/></svg><span>One thread per match, next to the meeting</span></li>
+            <li><svg class="ic"><use href="#i-check"/></svg><span>Schedule the call from the conversation</span></li>
           </ul>
         </li>
         <li class="step" data-step="4">
           <span class="n">05</span>
-          <h3>Pick a time that works for both.</h3>
-          <p>Binder shows only the slots you both have free, with an agenda drawn from both profiles. Confirm, and it's on both calendars.</p>
+          <h3>Book a slot you both have free.</h3>
+          <p>Binder compares both calendars and shows only the slots you share. Pick one and the call lands in both calendars.</p>
           <ul>
-            <li><svg class="ic"><use href="#i-check"/></svg>Google Meet link and agenda included</li>
-            <li><svg class="ic"><use href="#i-check"/></svg>Reschedule in a tap</li>
+            <li><svg class="ic"><use href="#i-check"/></svg><span>20-minute call on Google Meet</span></li>
+            <li><svg class="ic"><use href="#i-check"/></svg><span>Agenda from both profiles: traction, thesis fit, next steps</span></li>
           </ul>
         </li>
       </ol>
@@ -476,59 +484,59 @@ footer a:hover{color:var(--ink)}
   <div class="wrap">
     <div class="sec-head m-only rv">
       <span class="eyebrow">For investors</span>
-      <h2>Deal flow inside your thesis — and nothing else.</h2>
-      <p class="lede">Meet founders inside your thesis, from the other side of the same app. The phone is the investor app.</p>
+      <h2>Deal flow inside your thesis — <span class="accent">and nothing else.</span></h2>
+      <p class="lede">From thesis to coffee chat in one swipe. The phone is the investor app — tap around.</p>
     </div>
     <div class="how-grid">
       <ol class="steps">
         <li class="step on" data-step="0">
           <div class="sec-head d-only">
             <span class="eyebrow">For investors</span>
-            <h2>Deal flow inside your thesis — and nothing else.</h2>
-            <p class="lede">Meet founders inside your thesis, from the other side of the same app. The phone is the investor app.</p>
+            <h2>Deal flow inside your thesis — <span class="accent">and nothing else.</span></h2>
+            <p class="lede">From thesis to coffee chat in one swipe. The phone is the investor app — tap around.</p>
           </div>
           <span class="n">01</span>
           <h3>Set your ticket and fund.</h3>
-          <p>Ticket range, investment role, fund size and number of investments. Founders see exactly what you write — and only those who fit reach you.</p>
+          <p>Ticket range, lead or co-lead, fund size and number of investments. Founders see exactly this on your card.</p>
           <ul>
-            <li><svg class="ic"><use href="#i-check"/></svg>Lead, co-lead or follow</li>
-            <li><svg class="ic"><use href="#i-check"/></svg>Change it whenever your fund does</li>
+            <li><svg class="ic"><use href="#i-check"/></svg><span>Founders whose round can't take your ticket never see you</span></li>
+            <li><svg class="ic"><use href="#i-check"/></svg><span>Update it when your fund's strategy changes</span></li>
           </ul>
         </li>
         <li class="step" data-step="1">
           <span class="n">02</span>
           <h3>Decide what reaches you.</h3>
-          <p>The sectors, stages and markets you invest in, and what matters most. That's the filter between you and an inbox full of decks.</p>
+          <p>Sectors, stages and markets you invest in, plus what matters most when matches are ranked.</p>
           <ul>
-            <li><svg class="ic"><use href="#i-check"/></svg>Balanced fit, or weight what matters most to you</li>
-            <li><svg class="ic"><use href="#i-check"/></svg>Pause discovery when you're not deploying</li>
+            <li><svg class="ic"><use href="#i-check"/></svg><span>Founders outside these filters never appear in your feed</span></li>
+            <li><svg class="ic"><use href="#i-check"/></svg><span>Pause discovery while you're not deploying</span></li>
           </ul>
         </li>
         <li class="step" data-step="2">
           <span class="n">03</span>
           <h3>Swipe on founders that fit.</h3>
-          <p>Each card shows round size, committed capital, ARR and growth next to <b>why you match</b>. Decide on fit in seconds; read the deck after.</p>
+          <p>Each card shows round size, capital committed, ARR and growth, with the overlap with your thesis spelled out.</p>
           <ul>
-            <li><svg class="ic"><use href="#i-check"/></svg>Shared focus, stage and geography, checked for you</li>
-            <li><svg class="ic"><use href="#i-check"/></svg>Verified founders</li>
+            <li><svg class="ic"><use href="#i-check"/></svg><span>Decide on fit in seconds; the deck comes after the match</span></li>
+            <li><svg class="ic"><use href="#i-check"/></svg><span>Founders you pass are never told</span></li>
           </ul>
         </li>
         <li class="step" data-step="3">
           <span class="n">04</span>
-          <h3>Meet only when both say yes.</h3>
-          <p>A connection needs your yes and theirs. Founders you pass never find out, and nobody can cold-pitch you.</p>
+          <h3>Meet only on mutual interest.</h3>
+          <p>A founder reaches your matches only after you both said yes. There's no inbound pitching outside a match.</p>
           <ul>
-            <li><svg class="ic"><use href="#i-check"/></svg>Intros unlock only on mutual interest</li>
-            <li><svg class="ic"><use href="#i-check"/></svg>Message first, or book straight away</li>
+            <li><svg class="ic"><use href="#i-check"/></svg><span>Message first, or book straight from the match</span></li>
+            <li><svg class="ic"><use href="#i-check"/></svg><span>Every match states why it fits</span></li>
           </ul>
         </li>
         <li class="step" data-step="4">
           <span class="n">05</span>
           <h3>Your calendar, handled.</h3>
-          <p>Binder overlays both calendars and offers only shared slots, in your time zone and call length. One tap books it for both.</p>
+          <p>Connect your calendar once and set your hours, call length and buffer. Founders only see slots where you're actually free.</p>
           <ul>
-            <li><svg class="ic"><use href="#i-check"/></svg>Calendar sync, buffers and call length set once</li>
-            <li><svg class="ic"><use href="#i-check"/></svg>Agenda drawn from both profiles</li>
+            <li><svg class="ic"><use href="#i-check"/></svg><span>Bookings land in your calendar with a Google Meet link</span></li>
+            <li><svg class="ic"><use href="#i-check"/></svg><span>Agenda from both profiles: traction, thesis fit, next steps</span></li>
           </ul>
         </li>
       </ol>
@@ -560,15 +568,6 @@ footer a:hover{color:var(--ink)}
       <div class="rule rv"><span class="ico"><svg class="ic"><use href="#i-sparkles"/></svg></span><h3>Fit before pitch.</h3><p>Every card leads with why you match. You decide on the criteria that would have ended the conversation anyway.</p></div>
       <div class="rule rv"><span class="ico"><svg class="ic"><use href="#i-handshake"/></svg></span><h3>Yes means a meeting.</h3><p>Two yeses unlock the connection and put a call on both calendars. The goal is a meeting actually held, not another message.</p></div>
     </div>
-    <div style="height:56px"></div>
-    <div class="compare rv" role="table" aria-label="Cold outreach compared with Binder">
-      <div class="crow" role="row"><div role="columnheader"></div><div role="columnheader">Cold outreach</div><div class="new" role="columnheader">Binder</div></div>
-      <div class="crow" role="row"><div role="rowheader">Who you reach</div><div class="old" role="cell">Whoever is on the list</div><div class="new" role="cell">Only people inside your ticket, stage and thesis</div></div>
-      <div class="crow" role="row"><div role="rowheader">What they see first</div><div class="old" role="cell">A subject line</div><div class="new" role="cell">Why you match</div></div>
-      <div class="crow" role="row"><div role="rowheader">Who starts it</div><div class="old" role="cell">One side, hoping</div><div class="new" role="cell">Both sides, by saying yes</div></div>
-      <div class="crow" role="row"><div role="rowheader">Getting to a call</div><div class="old" role="cell">Email ping-pong over days</div><div class="new" role="cell">One tap, in a slot you share</div></div>
-      <div class="crow" role="row"><div role="rowheader">A pass</div><div class="old" role="cell">Silence, or a polite no</div><div class="new" role="cell">Private — nobody is told</div></div>
-    </div>
   </div>
 </section>
 
@@ -579,20 +578,21 @@ footer a:hover{color:var(--ink)}
       <span class="eyebrow">The pilot</span>
       <h2 style="margin-top:14px">Starting narrow, on purpose.</h2>
       <p class="lede" style="margin-top:18px">Our first cohort pairs seed-stage startups with business angels and micro VCs in one coherent segment. We run selection, matching and booking ourselves, alongside the product — and measure what actually happened.</p>
+      <p class="measure-k">How we'll judge it</p>
       <div class="measure">
-        <div><svg class="ic"><use href="#i-check"/></svg>Meetings held, against meetings booked</div>
-        <div><svg class="ic"><use href="#i-check"/></svg>Relevance of every call, rated by both sides</div>
-        <div><svg class="ic"><use href="#i-check"/></svg>Who comes back for a second match</div>
+        <div><b>Show-up rate</b><span>Of the calls booked, how many actually happen. It shows both sides really wanted the meeting.</span></div>
+        <div><b>Relevance</b><span>After every call, founder and investor each say whether it was worth their time.</span></div>
+        <div><b>Return rate</b><span>Who asks for another match after their first call.</span></div>
       </div>
       <div class="pilot-ctas">
         <a class="btn btn-white" href="#contact" data-intent="pilot" data-role="founder">Apply as a founder</a>
-        <a class="btn btn-ghost" href="#contact" data-intent="pilot" data-role="investor">Join as an investor</a>
+        <a class="btn btn-dark" href="#contact" data-intent="pilot" data-role="investor">Join as an investor</a>
       </div>
     </div>
     <div class="nums rv">
       <span class="eyebrow">Cohort one, by design</span>
       <div class="num"><b>20</b><span>investors actively deploying</span></div>
-      <div class="num"><b>100</b><span>founders, selected by hand</span></div>
+      <div class="num"><b>100</b><span>founders at most, selected by hand</span></div>
       <div class="num"><b>30</b><span>days, with decision thresholds set in advance</span></div>
       <div class="num"><b>20′</b><span>coffee chats, on both calendars</span></div>
     </div>
@@ -605,7 +605,7 @@ footer a:hover{color:var(--ink)}
     <div class="rv">
       <span class="eyebrow">Get in touch</span>
       <h2 style="margin-top:14px">Book a demo, or ask for a call.</h2>
-      <p class="lede" style="margin-top:18px">Founder, investor, or thinking about backing Binder — tell us who you are and we'll walk you through the product live, in 20 minutes. Fittingly.</p>
+      <p class="lede" style="margin-top:18px">Founder or investor — tell us who you are and we'll walk you through the product live, in 20 minutes.</p>
       <div class="direct">
         <a id="bookDirect" href="#" target="_blank" rel="noopener" hidden><span class="ico"><svg class="ic"><use href="#i-cal"/></svg></span><span>Pick a time now<small>Opens our calendar in a new tab</small></span><svg class="ic go"><use href="#i-arrow"/></svg></a>
         <a id="mailDirect" href="#" hidden><span class="ico"><svg class="ic"><use href="#i-mail"/></svg></span><span id="mailLabel">Email us<small>We reply within one working day</small></span><svg class="ic go"><use href="#i-arrow"/></svg></a>
@@ -621,8 +621,6 @@ footer a:hover{color:var(--ink)}
             <div class="opts">
               <label><input type="radio" name="role" value="founder" checked><span>A founder</span></label>
               <label><input type="radio" name="role" value="investor"><span>An angel or VC</span></label>
-              <label><input type="radio" name="role" value="backer"><span>Interested in backing Binder</span></label>
-              <label><input type="radio" name="role" value="other"><span>Something else</span></label>
             </div>
           </fieldset>
           <fieldset class="full">
@@ -643,6 +641,7 @@ footer a:hover{color:var(--ink)}
           <button class="btn btn-coral" type="submit" id="submitBtn">Send request <svg class="ic"><use href="#i-send"/></svg></button>
           <p class="form-msg" id="formMsg" role="status" aria-live="polite"></p>
         </div>
+        <p class="form-note">We use these details only to reply to your request. See the <a href="/privacy">Privacy Policy</a>.</p>
       </div>
       <div class="form-done" id="formDone" hidden>
         <span class="ico"><svg class="ic"><use href="#i-check"/></svg></span>
@@ -710,6 +709,7 @@ footer a:hover{color:var(--ink)}
     <nav aria-label="Footer"><a href="#founders">For founders</a><a href="#investors">For investors</a><a href="/demo">Live demo</a><a href="/investor-list">Investor list</a><a href="/meet-investors">Meet investors</a><a href="/capital-raise">Capital raise</a><a href="/founder-list">Founder list</a><a href="#contact">Contact</a></nav>
     <span>© 2026 Binder</span>
   </div>
+  <div class="wrap legal-row"><nav aria-label="Legal"><a href="/privacy">Privacy</a><a href="/cookies">Cookies</a><a href="/terms">Terms</a><a href="/legal">Legal notice</a></nav><span>Binder is not a financial intermediary and does not provide investment advice.</span></div>
 </footer>
 
 <script>

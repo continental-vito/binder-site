@@ -43,6 +43,12 @@ const og = html.match(/property="og:image" content="([^"]+)"/);
 if (!og || !og[1].startsWith('https://binder.red/')) problems.push('og:image must be an absolute https://binder.red/ URL — link previews drop relative ones');
 else if (!existsSync(join(root, og[1].replace('https://binder.red/', '')))) problems.push(`og:image ${og[1]} has no matching file in the repo`);
 
+// 1c. No request to Google Fonts: it hands each visitor's IP to Google, which
+//     the privacy policy says we don't do. The font is self-hosted.
+for (const f of [...PAGES, '404.html', 'demo/index.html', 'assets/guide.css']) {
+  if (/fonts\.(googleapis|gstatic)\.com/.test(readFileSync(join(root, f), 'utf8'))) problems.push(`${f} loads Google Fonts — use /assets/fonts (privacy policy promises no third parties)`);
+}
+
 // 2. No third-party scripts. Fonts come from Google Fonts as a stylesheet;
 //    anything executable is inline so the page has no runtime dependency.
 for (const m of html.matchAll(/<script[^>]*\bsrc="([^"]+)"/g)) {
@@ -143,6 +149,19 @@ for (const m of llms.matchAll(/\]\((https:\/\/binder\.red[^)#]*)/g)) {
 
 // 5. vercel.json parses.
 try { JSON.parse(readFileSync(join(root, 'vercel.json'), 'utf8')); } catch (e) { problems.push(`vercel.json: ${e.message}`); }
+
+// 7. Legal pages carry [[PLACEHOLDERS]] until the company details exist.
+//    Listed on every run; fatal with PUBLISH=1, which is set before publishing,
+//    because a live privacy policy without a data controller is not compliant.
+const placeholders = new Map();
+for (const f of [...PAGES, '404.html']) {
+  for (const m of readFileSync(join(root, f), 'utf8').matchAll(/\[\[([A-Z ()]+)\]\]/g)) placeholders.set(m[1], [...(placeholders.get(m[1]) || []), f]);
+}
+if (placeholders.size) {
+  const list = [...placeholders].map(([k, fs]) => `${k} (${[...new Set(fs)].join(', ')})`).join('\n    ');
+  if (process.env.PUBLISH === '1') problems.push(`legal placeholders still to fill:\n    ${list}`);
+  else console.warn(`check-site: WARNING — ${placeholders.size} legal placeholder(s) to fill before publishing:\n    ${list}`);
+}
 
 if (problems.length) {
   console.error(`check-site: ${problems.length} problem(s)\n  - ` + problems.join('\n  - '));

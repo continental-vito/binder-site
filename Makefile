@@ -1,7 +1,7 @@
 # One interface for every task. `make ci` is what GitHub Actions runs too.
 MOCK ?=
 
-.PHONY: ci serve dev import shots live indexnow icons
+.PHONY: ci serve dev import shots live indexnow publish-check icons
 
 ci:
 	@build/ci.sh
@@ -32,6 +32,10 @@ live:
 INDEXNOW_KEY := d13c8612c4cea135e2f53811185d83b9
 indexnow:
 	node build/indexnow.mjs $(INDEXNOW_KEY)
+
+# Run before merging dev → main: like ci, but unfilled legal [[PLACEHOLDERS]] fail.
+publish-check:
+	PUBLISH=1 node build/check-site.mjs
 
 # Render the social card and PNG icons from build/*.html with headless Chrome.
 icons:

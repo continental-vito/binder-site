@@ -82,11 +82,17 @@ At the top of the `<script>` in `index.html`:
 | `<key>.txt` + `make indexnow` | IndexNow: pushes the sitemap's URLs to Bing (which feeds ChatGPT search), Yandex and others |
 | JSON-LD in each page | Organization, WebSite/Article, Breadcrumbs, FAQPage |
 | `404.html` | Served by Vercel for unknown paths |
+| `privacy.html`, `cookies.html`, `terms.html`, `legal.html` | GDPR privacy notice, cookie policy (no cookies), terms with financial-intermediary disclaimers, company legal notice |
+| `assets/fonts/` | Self-hosted Inter (+ OFL licence). No request goes to Google Fonts — the privacy policy promises no third parties |
 
 Every page's `FAQPage` structured data mirrors its visible FAQ exactly — `make ci`
 fails if they drift, because answers the page doesn't show are against Google's
 guidelines. Titles must be unique and under ~60 characters, descriptions
 120–160, one `<h1>` per page, canonical = the page's own clean URL.
+
+The legal pages contain `[[PLACEHOLDERS]]` for company details until they
+exist. `make ci` lists them; `make publish-check` fails on them — run it
+before merging to `main`.
 
 After publishing changes to pages: `make indexnow`.
 
