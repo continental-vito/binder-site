@@ -43,15 +43,15 @@ footer .brand svg{height:36px;margin-left:-5px}
 .menu summary:hover,.menu[open] summary{color:var(--ink)}
 .menu .chev{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:transform .2s}
 .menu[open] .chev{transform:rotate(180deg)}
-.menu-panel{position:absolute;top:calc(100% + 18px);right:-16px;width:340px;padding:8px;background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:0 18px 40px -16px rgba(29,29,31,.25);z-index:60}
-.menu-panel a{display:block;padding:12px 14px;border-radius:12px;text-decoration:none;color:var(--ink)}
+/* Titles only, every row the same fixed height. */
+.menu-panel{position:absolute;top:calc(100% + 18px);right:-16px;width:220px;padding:8px;background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:0 18px 40px -16px rgba(29,29,31,.25);z-index:60}
+.menu-panel a{display:flex;align-items:center;height:44px;padding:0 14px;border-radius:12px;text-decoration:none;color:var(--ink)}
 .menu-panel a:hover,.menu-panel a[aria-current="page"]{background:var(--bg-2)}
-.menu-panel b{display:block;font-size:15px;font-weight:600}
-.menu-panel span{display:block;font-size:13.5px;color:var(--ink-2);margin-top:2px;font-weight:400}
+.menu-panel b{font-size:15px;font-weight:600}
 @media (max-width:880px){
   .nav-links{display:flex!important}
   .nav-links > a{display:none}
-  .menu-panel{position:fixed;top:64px;left:16px;right:16px;width:auto}
+  .menu-panel{position:fixed;top:64px;right:16px;left:auto;width:220px}
 }
 .btn{display:inline-flex;align-items:center;justify-content:center;height:46px;padding:0 22px;border-radius:999px;font-weight:600;font-size:16px;text-decoration:none;white-space:nowrap;letter-spacing:-.01em}
 .btn-coral{background:var(--coral);color:#fff}
