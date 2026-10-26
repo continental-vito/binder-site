@@ -1,6 +1,6 @@
 // Imports the interactive prototype from a Binder mock export into demo/.
 //
-//   node build/import-mock.mjs [path/to/Binder-Export-mock-vN]   (default ../Binder-Export-mock-v2)
+//   node build/import-mock.mjs [path/to/mock-export]   (default ~/Claude/Binder/3 - Marketing/1 - Mock/v2 - 25102026 Binder-Export-mock)
 //
 // The prototype is used as-is so the site always shows exactly what was
 // approved in the mock. Two things change on the way in:
@@ -16,7 +16,8 @@ import { fileURLToPath } from 'node:url';
 import { createRequire } from 'node:module';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
-const src = resolve(process.argv[2] || join(root, '..', 'Binder-Export-mock-v2'));
+// The repo lives in Binder/4 - Operations/0.1 - Live product/; mocks in Binder/3 - Marketing/1 - Mock/.
+const src = resolve(process.argv[2] || join(root, '..', '..', '..', '3 - Marketing', '1 - Mock', 'v2 - 25102026 Binder-Export-mock'));
 const out = join(root, 'demo');
 const die = (msg) => { console.error(`import-mock: ${msg}`); process.exit(1); };
 

@@ -5,7 +5,7 @@
 #   make export DEST=~/Claude/Binder/website
 #
 #   repo/         git clone from GitHub (main = what is live on binder.red)
-#   logos/        "b." mark (SVG + PNG) and the "binder." wordmark (PNG)
+#   logos/        the official brand kit (SVG, PNG, favicons, app icons)
 #   social/       link-preview image
 #   articles/     the four guides as Markdown
 #   legal/        privacy, cookies, terms, legal notice as Markdown drafts
@@ -17,6 +17,9 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 DEST="${1:?usage: build/export.sh <destination folder>}"
+# The brand kit is the logo source of truth; the export copies it as-is.
+KIT="${KIT:-../../../3 - Marketing/0 - Logo/Binder-Brand-Kit}"
+[ -f "$KIT/LEGGIMI.md" ] || { echo "export: brand kit not found at $KIT — set KIT=/path/to/Binder-Brand-Kit"; exit 1; }
 REPO_URL="https://github.com/continental-vito/binder-site.git"
 mkdir -p "$DEST"
 DEST="$(cd "$DEST" && pwd)"
@@ -33,8 +36,10 @@ echo "  $(git -C "$DEST/repo" log --oneline -1)"
 # Generated folders are rebuilt from scratch so removed files don't linger.
 for d in logos social articles legal screenshots fonts; do rm -rf "${DEST:?}/$d"; mkdir -p "$DEST/$d"; done
 
-echo "▸ logos/"
-node build/export-logos.mjs "$DEST/logos" | sed 's/^/ /'
+echo "▸ logos/ (brand kit)"
+cp -R "$KIT"/. "$DEST/logos/"
+find "$DEST/logos" -name .DS_Store -delete
+echo "  $(find "$DEST/logos" -type f | wc -l | tr -d ' ') files"
 
 echo "▸ social/"
 cp assets/og-image.png "$DEST/social/link-preview-1200x630.png"

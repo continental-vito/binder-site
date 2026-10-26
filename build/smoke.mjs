@@ -121,7 +121,7 @@ try {
   await send('Runtime.enable'); await send('Page.enable');
 
   // 1. Every prototype screen, both roles, renders with all its icons.
-  await open(`${base}/demo?embed`, 390, 844, 2);
+  await open(`${base}/demo?embed`, 402, 874, 3);
   if (!(await evaluate('typeof window.binderGo === "function"'))) failures.push('demo: boot.js did not load (window.binderGo missing)');
   if (!(await evaluate('typeof window.lucide === "object"'))) failures.push('demo: icons.js did not load (window.lucide missing)');
   if ((await evaluate(`getComputedStyle(document.getElementById('binder-color')).paddingTop`)) !== '0px') failures.push('demo: embed.css did not apply (prototype still has its own frame padding)');
@@ -156,7 +156,7 @@ try {
   takeLogs('/demo standalone');
 
   // 2. Landing page: no errors, and each step puts the phone on its screen.
-  for (const [w, h, label] of [[1440, 900, 'desktop'], [390, 844, 'mobile']]) {
+  for (const [w, h, label] of [[1440, 900, 'desktop'], [402, 874, 'mobile']]) {
     await open(`${base}/`, w, h);
     takeLogs(`landing ${label} load`);
     await shot(`landing-${label}-top`);
@@ -212,7 +212,7 @@ try {
   const heldBack = (await readFile(join(root, '.vercelignore'), 'utf8')).split('\n').map((l) => l.trim().replace(/\.html$/, ''));
   const pages = ['investor-list', 'meet-investors', 'capital-raise', 'founder-list', 'privacy', 'cookies', 'terms', 'legal'];
   for (const g of pages.filter((g) => baseArg < 0 || !heldBack.includes(g))) {
-    for (const [w, h, label] of [[1440, 900, 'desktop'], [390, 844, 'mobile']]) {
+    for (const [w, h, label] of [[1440, 900, 'desktop'], [402, 874, 'mobile']]) {
       await open(`${base}/${g}`, w, h);
       const r = await evaluate(`({ h1: document.querySelectorAll('h1').length, css: getComputedStyle(document.body).fontFamily.includes('apple-system'), over: document.documentElement.scrollWidth - innerWidth })`);
       if (r.h1 !== 1) failures.push(`/${g} ${label}: page did not render (h1 count ${r.h1})`);

@@ -1,7 +1,7 @@
 /* Layer over the untouched prototype CSS.
    Embedded (?embed): the landing page draws the phone bezel, so the prototype
    drops its own frame and fills the iframe; content scrolls inside while the
-   tab bar stays pinned, as in the 390×844 mock exports. */
+   tab bar stays pinned. The frame is 402×874, the iPhone 17 screen. */
 html.embed, html.embed body { height: 100%; margin: 0; overflow: hidden; background: #fff; }
 html.embed #binder-color { padding: 0; height: 100%; background: #fff; }
 html.embed #binder-color .phone { max-width: none; height: 100%; min-height: 0; border: 0; border-radius: 0; box-shadow: none; display: flex; flex-direction: column; }
@@ -14,21 +14,21 @@ html.embed #binder-color nav { flex: none; }
 html.locked #binder-color header select { pointer-events: none; appearance: none; -webkit-appearance: none; padding-right: 12px; }
 
 /* Standalone (/demo, e.g. opened from a phone): a thin bar saying what this is. */
-.demo-bar { display: flex; justify-content: space-between; gap: 12px; align-items: center; max-width: 390px; margin: 14px auto -10px; padding: 0 12px;
+.demo-bar { display: flex; justify-content: space-between; gap: 12px; align-items: center; max-width: 402px; margin: 14px auto -10px; padding: 0 12px;
   font: 500 13px/1.3 -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif; color: #515154; }
 .demo-bar a { color: #1d1d1f; font-weight: 700; letter-spacing: -.3px; text-decoration: none; font-size: 15px; }
 /* Standalone on a wide screen: the prototype's phone is as tall as the
    current screen's content (min 820 px), so moving between screens made the
-   phone visibly change size. Fix it at the mock's 844 px; content scrolls
+   phone visibly change size. Fix it at the iPhone 17's 402×874; content scrolls
    inside and the tab bar stays put, as in the embedded phones. */
 @media (min-width: 431px) {
-  html:not(.embed) #binder-color .phone { height: 844px; min-height: 0; display: flex; flex-direction: column; }
+  html:not(.embed) #binder-color .phone { max-width: 402px; height: 874px; min-height: 0; display: flex; flex-direction: column; }
   html:not(.embed) #binder-color main { flex: 1 1 auto; min-height: 0; overflow-y: auto; overscroll-behavior: contain; scrollbar-width: none; }
   html:not(.embed) #binder-color main::-webkit-scrollbar { display: none; }
   html:not(.embed) #binder-color nav { flex: none; }
 }
 
-/* Scoped to standalone: the embedded iframe is itself 390 px wide and would
+/* Scoped to standalone: the embedded iframe is itself 402 px wide and would
    otherwise pick these up too. */
 @media (max-width: 430px) {
   html:not(.embed) .demo-bar { margin: 10px 16px 0; padding: 0; }

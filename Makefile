@@ -14,7 +14,7 @@ serve:
 dev:
 	npx vercel dev
 
-# Pull the interactive prototype from a mock export into demo/ (default ../Binder-Export-mock-v2).
+# Pull the interactive prototype from a mock export into demo/ (default: Binder/3 - Marketing/1 - Mock/v2 - 25102026 Binder-Export-mock).
 import:
 	node build/import-mock.mjs $(MOCK)
 
@@ -39,9 +39,9 @@ publish-check:
 
 # Browsable copy of the site outside the repo: clone + logos, articles, legal,
 # screenshots, fonts. Re-run to refresh.
-DEST ?= ../website
+DEST ?= ../../0 - website
 export:
-	build/export.sh $(DEST)
+	build/export.sh "$(DEST)"
 
 # Render the social card and PNG icons from build/*.html with headless Chrome.
 icons:

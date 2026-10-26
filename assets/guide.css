@@ -21,11 +21,38 @@ a:hover{color:var(--coral)}
 
 .nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.85);backdrop-filter:saturate(1.8) blur(20px);-webkit-backdrop-filter:saturate(1.8) blur(20px);border-bottom:1px solid var(--line)}
 .nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px;gap:16px}
-.brand{font-size:27px;font-weight:700;letter-spacing:-.05em;text-decoration:none;color:var(--ink);line-height:1}
 .nav-links{display:flex;gap:26px;font-size:15px;font-weight:500}
 .nav-links a{text-decoration:none;color:var(--ink-2)}
 .nav-links a:hover,.nav-links a[aria-current="page"]{color:var(--ink)}
 @media (max-width:880px){.nav-links{display:none}}
+/* Logo from the brand kit (web/logo-home-link.html): word in currentColor,
+   dot fixed coral; the whole logo turns coral on hover and keyboard focus.
+   The SVG carries its own clear space (16 of 327 units on the left), so it is
+   pulled left by that much to line the "b" up with the page content. */
+.brand{display:inline-flex;align-items:center;color:var(--ink);text-decoration:none;border-radius:4px;transition:color .15s ease;line-height:0}
+.brand svg{display:block;height:44px;width:auto;margin-left:-6px}
+footer .brand svg{height:36px;margin-left:-5px}
+@media (hover:hover){.brand:hover{color:var(--coral)}}
+.brand:focus-visible{color:var(--coral);outline:2px solid var(--coral);outline-offset:5px}
+@media (prefers-reduced-motion:reduce){.brand{transition:none}}
+/* Guides menu. On phones the other section links are hidden but this stays,
+   so the guides are reachable from the header at every width. */
+.menu{position:relative}
+.menu summary{list-style:none;cursor:pointer;display:inline-flex;align-items:center;gap:4px;color:var(--ink-2);font-weight:500;border-radius:6px}
+.menu summary::-webkit-details-marker{display:none}
+.menu summary:hover,.menu[open] summary{color:var(--ink)}
+.menu .chev{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:transform .2s}
+.menu[open] .chev{transform:rotate(180deg)}
+.menu-panel{position:absolute;top:calc(100% + 18px);right:-16px;width:340px;padding:8px;background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:0 18px 40px -16px rgba(29,29,31,.25);z-index:60}
+.menu-panel a{display:block;padding:12px 14px;border-radius:12px;text-decoration:none;color:var(--ink)}
+.menu-panel a:hover,.menu-panel a[aria-current="page"]{background:var(--bg-2)}
+.menu-panel b{display:block;font-size:15px;font-weight:600}
+.menu-panel span{display:block;font-size:13.5px;color:var(--ink-2);margin-top:2px;font-weight:400}
+@media (max-width:880px){
+  .nav-links{display:flex!important}
+  .nav-links > a{display:none}
+  .menu-panel{position:fixed;top:64px;left:16px;right:16px;width:auto}
+}
 .btn{display:inline-flex;align-items:center;justify-content:center;height:46px;padding:0 22px;border-radius:999px;font-weight:600;font-size:16px;text-decoration:none;white-space:nowrap;letter-spacing:-.01em}
 .btn-coral{background:var(--coral);color:#fff}
 .btn-coral:hover{background:var(--coral-hover);color:#fff}

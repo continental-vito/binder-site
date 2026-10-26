@@ -52,10 +52,18 @@ how the app works and to collect demo and call requests.
   lowercase `binder.` wordmark.
 - Page + assets + demo stay under the 1 MB budget the check enforces.
 
+## Where things live
+
+This repo: `~/Claude/Binder/4 - Operations/0.1 - Live product/binder-site`.
+The export (`make export`): `~/Claude/Binder/4 - Operations/0 - website`.
+
 ## Source material (outside the repo, in `~/Claude/Binder/`)
 
-- `Binder-Export-mock-v2/` — **current** mock: 42 screenshots, SVGs, and the
+- `3 - Marketing/1 - Mock/v2 - 25102026 Binder-Export-mock/` — **current** mock: 42 screenshots, SVGs, and the
   interactive prototype the site embeds (`LEGGIMI-FIGMA.md` describes it)
-- `Figma mock.png`, `Binder_0*.mp4` — the superseded v1 mock
-- `Binder_Decision_Memo.pdf` — internal memo (Italian); do not publish it
+- `3 - Marketing/0 - Logo/Binder-Brand-Kit/` — **logo source of truth**: SVG
+  masters, PNGs, favicons, `web/logo-home-link.html` (the header logo
+  component the site uses). Never redraw or re-render the logo; take it from here.
+- `3 - Marketing/1 - Mock/v1 - 24102026 /`, `_old/Figma mock.png` — the superseded v1 mock
+- `0 - Admin/Binder_Decision_Memo.pdf` — internal memo (Italian); do not publish it
 - Figma file key `u5rxsOYi5t6d8QW90QqIWl`, prototype start node `19:228`

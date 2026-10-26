@@ -134,7 +134,9 @@ for (const f of PAGES) {
   try { graph = ld ? JSON.parse(ld[1])['@graph'] || [] : []; } catch (e) { problems.push(`${f}: JSON-LD does not parse: ${e.message}`); }
   if (!ld) problems.push(`${f}: no JSON-LD structured data`);
   const faq = graph.find((n) => n['@type'] === 'FAQPage');
-  const visible = [...doc.matchAll(/<details[^>]*><summary>([\s\S]*?)<\/summary><p>([\s\S]*?)<\/p><\/details>/g)].map((m) => [strip(m[1]), strip(m[2])]);
+  // The header's Guides menu is a <details> too, so a question may not span
+  // across another </summary>, or the menu and the first FAQ entry merge.
+  const visible = [...doc.matchAll(/<details[^>]*><summary>((?:(?!<\/summary>)[\s\S])*?)<\/summary><p>([\s\S]*?)<\/p><\/details>/g)].map((m) => [strip(m[1]), strip(m[2])]);
   if (faq) {
     const claimed = faq.mainEntity.map((q) => [q.name, q.acceptedAnswer.text]);
     if (JSON.stringify(claimed) !== JSON.stringify(visible)) problems.push(`${f}: FAQPage JSON-LD does not match the visible FAQ — regenerate it from the page`);
