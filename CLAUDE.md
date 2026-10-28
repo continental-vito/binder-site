@@ -56,6 +56,8 @@ how the app works and to collect demo and call requests.
 
 This repo: `~/Claude/Binder/4 - Operations/0.1 - Live product/binder-site`.
 The export (`make export`): `~/Claude/Binder/4 - Operations/0 - website`.
+The offline demo (`make demo-export`): `~/Claude/Binder/4 - Operations/0.2 - Live demo` —
+refresh it after any demo change (re-import, logo, boot.js, embed.css).
 
 ## Source material (outside the repo, in `~/Claude/Binder/`)
 

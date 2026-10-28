@@ -30,6 +30,7 @@ make serve   # static preview on http://localhost:8000 (form returns an error: n
 make dev     # full Vercel runtime incl. /api/contact — needs `npx vercel link` once
 make ci      # what GitHub Actions runs on every push (needs Chrome for the smoke test)
 make shots   # the smoke test, saving a screenshot of every screen to .shots/
+make demo-export  # the live demo as a folder that opens from disk: Binder/4 - Operations/0.2 - Live demo
 make export  # browsable copy in Binder/4 - Operations/0 - website: clone + logos, articles, legal, screenshots, fonts
 ```
 

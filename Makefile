@@ -1,7 +1,7 @@
 # One interface for every task. `make ci` is what GitHub Actions runs too.
 MOCK ?=
 
-.PHONY: ci serve dev import shots live indexnow publish-check export icons
+.PHONY: ci serve dev import shots live indexnow publish-check export demo-export icons
 
 ci:
 	@build/ci.sh
@@ -42,6 +42,11 @@ publish-check:
 DEST ?= ../../0 - website
 export:
 	build/export.sh "$(DEST)"
+
+# The live demo as a folder that opens from disk (double-click index.html).
+DEMO_DEST ?= ../../0.2 - Live demo
+demo-export:
+	build/export-demo.sh "$(DEMO_DEST)"
 
 # Render the social card and PNG icons from build/*.html with headless Chrome.
 icons:
