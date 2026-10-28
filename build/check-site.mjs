@@ -72,6 +72,7 @@ for (const f of ['boot.js', 'embed.css', 'icons.js']) {
   if (demo && !demo.includes(`"/demo/${f}"`)) problems.push(`demo/index.html does not load /demo/${f} — rerun build/import-mock.mjs`);
 }
 if (demo.includes('lucide.js')) problems.push('demo/index.html still loads the full lucide.js bundle');
+if (!demo.includes('<span class="brand" role="img" aria-label="binder."><svg')) problems.push('demo/index.html still has the typed "binder." logo — rerun build/import-mock.mjs');
 if (!/BINDER_STATE_VERSION=\d+/.test(demo)) problems.push('demo/index.html has no BINDER_STATE_VERSION — boot.js cannot drive it');
 if (!/id="heroFrame" src="\/demo\?embed&amp;role=/.test(html)) problems.push('#heroFrame must load /demo?embed&role=…');
 // The section phones must be locked, or "For investors" can be flipped to the founder app.

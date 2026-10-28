@@ -54,7 +54,7 @@
     document.addEventListener('DOMContentLoaded', function () {
       var bar = document.createElement('div');
       bar.className = 'demo-bar';
-      bar.innerHTML = '<a href="/">← binder.</a><span>Interactive demo · profiles are illustrative</span>';
+      bar.innerHTML = '<a href="/" aria-label="Back to binder.red">← <img src="/assets/brand/binder-wordmark-primary.svg" alt="" height="30"></a><span>Interactive demo · profiles are illustrative</span>';
       document.body.insertBefore(bar, document.body.firstChild);
     });
   }

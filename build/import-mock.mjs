@@ -43,6 +43,12 @@ html = replaceOnce(html, '<script src="../assets/lucide.js"></script>',
   // trailing slash), where a relative "boot.js" would resolve to /boot.js.
   `<link rel="stylesheet" href="/demo/embed.css"><script>window.BINDER_STATE_VERSION=${ver[1]}</script><script src="/demo/boot.js"></script><script src="/demo/icons.js"></script>`,
   'Lucide script tag');
+// The prototype types its logo as text ("binder." in a bold system font).
+// Swap in the brand kit's wordmark — black word, coral dot — so the app
+// inside the phones matches the site. Inline, so the demo needs no extra file.
+const wordmark = readFileSync(join(root, 'assets', 'brand', 'binder-wordmark-primary.svg'), 'utf8')
+  .trim().replace(/ width="\d+" height="\d+"/, '').replace('<svg ', '<svg aria-hidden="true" focusable="false" ');
+html = replaceOnce(html, '<span class="brand">binder.</span>', `<span class="brand" role="img" aria-label="binder.">${wordmark}</span>`, 'header logo');
 html = replaceOnce(html, '<title>Binder</title>', '<title>Binder — interactive demo</title><meta name="robots" content="noindex">', 'title');
 
 // --- Lucide subset --------------------------------------------------------
