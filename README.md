@@ -57,9 +57,17 @@ Routing comes from `vercel.json`: `cleanUrls` + `trailingSlash: false` serve
 | `CONTACT_TO` | yes | inbox that receives requests; comma-separate several |
 | `CONTACT_FROM` | no | e.g. `Binder <hello@yourdomain>` once the domain is verified in Resend |
 
+**Current setup (31 Oct 2026):** `CONTACT_TO=hello@binder.red`,
+`CONTACT_FROM=Binder website <form@mail.binder.red>`. The sending domain is
+the subdomain `mail.binder.red`, verified in Resend (DKIM TXT at
+`resend._domainkey.mail`, CNAMEs `send.mail` and `rsend.mail`, added to
+Vercel DNS by Resend's auto-configure). A subdomain keeps the form's sending
+reputation apart from binder.red itself, whose mail — hello@binder.red —
+runs on Fastmail (MX `messagingengine.com`, DKIM `fm1–3._domainkey`). Don't
+touch those records when changing the form's email.
+
 Without `CONTACT_FROM`, mail is sent from Resend's shared `onboarding@resend.dev`
 sender, which **only delivers to the address that owns the Resend account**.
-Set `CONTACT_TO` to that address until a domain is verified.
 
 Until the key and recipient are set, the route answers `503 not_configured`.
 The page never shows "received" for a request that was not sent.
