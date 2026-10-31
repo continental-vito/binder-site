@@ -167,6 +167,29 @@ try {
       const after = await evaluate(`document.getElementById('heroFrame').contentDocument.getElementById('binder-color').dataset.page`);
       if (after !== 'match') failures.push(`landing hero: Connect in the live demo led to "${after}", expected "match"`);
     }
+    // Contact form, desktop pass only: with no email backend configured the
+    // server says not_configured. The page must say so, offer the configured
+    // address instead, and never show the success state. fetch is stubbed so
+    // nothing is sent; the mailto redirect is cancelled by reloading.
+    if (label === 'desktop') {
+      const r = await evaluate(`(async () => {
+        const mail = document.getElementById('mailDirect');
+        const f = document.getElementById('contactForm');
+        window.fetch = async () => ({ ok: false, status: 503, json: async () => ({ ok: false, error: 'not_configured' }) });
+        f.elements.name.value = 'Smoke test'; f.elements.email.value = 'smoke@example.com';
+        f.requestSubmit();
+        await new Promise((res) => setTimeout(res, 250));
+        return { email: SITE.CONTACT_EMAIL, cardShown: !mail.hidden, cardHref: mail.getAttribute('href'),
+                 msg: document.getElementById('formMsg').textContent, done: !document.getElementById('formDone').hidden };
+      })()`);
+      if (r.done) failures.push('contact form: showed "You\'re all set" for a request the server refused');
+      if (!/not connected/.test(r.msg)) failures.push(`contact form: not_configured gave "${r.msg}"`);
+      if (r.email) {
+        if (!r.cardShown || r.cardHref !== 'mailto:' + r.email) failures.push(`contact form: "Email us" card should link to ${r.email}, got ${r.cardHref} (shown: ${r.cardShown})`);
+        if (!/email app/.test(r.msg)) failures.push('contact form: CONTACT_EMAIL is set but the failure message offers no email fallback');
+      }
+      await send('Page.reload', {}); await sleep(1200);
+    }
     for (const w of WALKTHROUGHS) {
       const frameJs = `document.getElementById('${w.frame}')`;
       // The section phones are lazy-loaded; bring each on screen as a visitor would.
